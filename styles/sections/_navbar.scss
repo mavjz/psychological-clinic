@@ -1,0 +1,27 @@
+.navbar {
+    height: 5vh;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    background-color: $white;
+    box-shadow: 0 2px 15px 2px opacify($color: $green-light, $amount: 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    &-desktop {
+        width: 100%;
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+        &__items {
+            display: grid;
+            grid-auto-flow: column;
+            place-content: center;
+            column-gap: 3vw;
+            :hover {
+                transition: color 0.3s ease-in-out;
+                color: $green-light;
+            }
+        }
+    }
+}

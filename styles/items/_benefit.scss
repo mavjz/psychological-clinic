@@ -1,0 +1,23 @@
+.benefit {
+    display: grid;
+    grid-auto-flow: row;
+    place-items: center;
+    max-width: 10vw;
+    row-gap: 1vh;
+    &-icon {
+        &__border {
+            border-radius: 100%;
+            border: solid 5px $green-dark;
+            height: 8vw;
+            width: 8vw; 
+            background-color: $green-light;
+            display: grid;
+            place-items: center;
+            &--image {
+                color: $green-dark;
+                height: 5vw;
+                width: 5vw;
+            }
+        }
+    }
+}

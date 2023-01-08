@@ -1,0 +1,12 @@
+.benefits {
+    display: grid;
+    row-gap: 5vh;
+    margin: 6vh;
+    &-items {
+        display: grid;
+        grid-template-columns: 33.33% 33.33% 33.34%;
+        row-gap: 3vh;
+        column-gap: 5vw;
+        width: 100%;
+    }
+}

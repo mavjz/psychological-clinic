@@ -1,0 +1,116 @@
+@import "./mixins";
+@import "./variables.scss";
+
+@import "./items/counter";
+@import "./items/paragraph";
+@import "./items/benefit";
+@import "./items/profile";
+
+@import "./wrappers/wrapperWidth";
+
+@import "./sections/navbar";
+@import "./sections/welcome";
+@import "./sections/counters";
+@import "./sections/article";
+@import "./sections/benefits";
+@import "./sections/CEOProfile";
+@import "./sections/benefitsindetail";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "NotoSans";
+}
+
+body {
+    background-color: $white-creamy;
+}
+@font-face {
+    font-family: "NotoSans";
+    src: url(./fonts/Noto_Sans/NotoSans-Regular.ttf);
+}
+
+a, p, h1, h2, h3, h4, h5, h6 {
+    background-color: transparent;
+    user-select: none;
+}
+
+// TEXT COLORS
+
+.textwhite {
+    color: $white-creamy;
+}
+
+.textgreen {
+    color: $green;
+}
+
+.textgreendark {
+    color: $green-dark;
+}
+
+.textgreenlight {
+    color: $green-light;
+}
+
+// TEXT ALIGN
+
+.textleft {
+    text-align: left;
+}
+
+.textright {
+    text-align: right;
+}
+
+.textcenter {
+    text-align: center;
+}
+
+.textjustify {
+    text-align: justify;
+}
+
+.capslock {
+    text-transform: uppercase;
+}
+
+// h1 {
+//     font-size: ;
+//     @media screen and (max-width: $width-tablet) {
+//         font-size: ;
+//     }
+// }
+
+// h2 {
+//     font-size: ;
+//     @media screen and (max-width: $width-tablet) {
+//         font-size: ;
+//     }
+// }
+
+// h3 {
+//     font-size: ;
+//     @media screen and (max-width: $width-tablet) {
+//         font-size: ;
+//     }
+// }
+
+// h4 {
+//     font-size: ;
+//     @media screen and (max-width: $width-tablet) {
+//         font-size: ;
+//     }
+// }
+
+// h5 {
+//     font-size: ;
+//     @media screen and (max-width: $width-tablet) {
+//         font-size: ;
+//     }
+// }
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}

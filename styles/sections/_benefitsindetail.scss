@@ -1,0 +1,6 @@
+.benefitsindetail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 20% 80%;
+    place-items: center;
+}

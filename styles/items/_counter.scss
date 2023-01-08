@@ -1,0 +1,28 @@
+.counter {
+    display: grid;
+    grid-auto-flow: row;
+    height: fit-content;
+    row-gap: 2vh;
+    &-text {
+        margin-left: 4vw;
+    }
+    &-headline {
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: 0.5vw;
+        &__text {
+            color: $green-dark;
+            font-size: 30px;
+            text-align: left;
+            width: 100%;
+        }
+        &__placeholder {
+            height: 3vw;
+            width: 3vw;
+            position: relative;
+            &--image {
+                @include icon;
+            }
+        }
+    }
+}

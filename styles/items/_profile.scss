@@ -1,0 +1,33 @@
+.profile {
+    position: relative;
+    &-placeholder {
+        width: 15vw;
+        height: 15vw;
+        position: relative;
+        border: solid 5px $green;
+        &__image {
+            @include image;
+        }
+    }
+    &-hover {
+        opacity: 0;
+        background-color: #3c493fa4;
+        position: absolute;
+        width: 15vw;
+        height: 15vw;
+        top: 0;
+        margin-top: 5px;
+        margin-left: 5px;
+        transition: opacity 0.3s ease-in-out;
+        &__text {
+            margin: 30% 20px;
+            display: grid;
+            grid-auto-flow: row;
+            row-gap: 1vh;
+        }
+        &:hover {
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+    }
+}

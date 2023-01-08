@@ -1,0 +1,27 @@
+.welcome {
+    margin-bottom: 4vh;
+    width: 100%;
+    &-placeholder {
+        position: relative;
+        height: 60vh;
+        width: 100%;
+    }
+    &-gradient {
+        background: $green-dark;
+        opacity: 0.6;
+        height: 60vh;
+        width: 100%;
+        margin-top: -60vh;
+    }
+    &-text {
+        position: absolute;
+        margin-top: -30vh;
+        margin-left: 2vw;
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 3vh;
+        h1 {
+            font-size: 50px;
+        }
+    }
+}
