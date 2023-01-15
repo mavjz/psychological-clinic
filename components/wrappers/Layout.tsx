@@ -21,6 +21,10 @@ const Layout = ({children}: WrapperType) => {
                         link: "/contact"
                     },
                     {
+                        name: "Jak pracujemy?",
+                        link: "/plan"
+                    },
+                    {
                         name: "Źródła",
                         link: "/sources"
                     }
