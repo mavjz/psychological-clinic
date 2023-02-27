@@ -9,27 +9,25 @@ const Navbar = ({sites}: NavbarType) => {
     return (
         <div className="navbar">
             {!isWide && 
-                <WrapperWidth>
-                    <div className="navbar-desktop">
-                        <ButtonHeadline
-                            h3
-                            text="HumanHealth.com"
-                            link="/"
-                            color="textgreendark"
-                        />
-                        <div className="navbar-desktop__items">
-                            {sites.map((site, index) =>
-                                <ButtonHeadline
-                                    h4
-                                    color="textgreendark"
-                                    key={index}
-                                    text={site?.name}
-                                    link={site?.link}
-                                />
-                            )}
-                        </div>
+                <div className="navbar-desktop">
+                    <ButtonHeadline
+                        h3
+                        text="HumanHealth.com"
+                        link="/"
+                        color="textgreendark"
+                    />
+                    <div className="navbar-desktop__items">
+                        {sites.map((site, index) =>
+                            <ButtonHeadline
+                                h4
+                                color="textgreendark"
+                                key={index}
+                                text={site?.name}
+                                link={site?.link}
+                            />
+                        )}
                     </div>
-                </WrapperWidth>
+                </div>
             }
             {isWide &&
                 <WrapperWidth>
