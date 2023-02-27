@@ -1,15 +1,11 @@
 .counter {
-    display: grid;
-    grid-auto-flow: row;
+    @include grid(row, 2vh);
     height: fit-content;
-    row-gap: 2vh;
     &-text {
         margin-left: 4vw;
     }
     &-headline {
-        display: grid;
-        grid-auto-flow: column;
-        column-gap: 0.5vw;
+        @include grid(column, $column-gap: 0.5vw);
         &__text {
             color: $green-dark;
             font-size: 30px;
@@ -17,8 +13,7 @@
             width: 100%;
         }
         &__placeholder {
-            height: 3vw;
-            width: 3vw;
+            @include sizes(3vw, 3vw);
             position: relative;
             &--image {
                 @include icon;

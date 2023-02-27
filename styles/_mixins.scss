@@ -9,3 +9,19 @@
     object-fit: cover;
     box-sizing: border-box;
 }
+
+@mixin sizes ($width: inherit, $height: inherit, $max-width: inherit, $max-height: inherit) {
+    width: $width;
+    height: $height;
+    max-width: $max-width;
+    max-height: $max-height;
+}
+
+@mixin grid ($flow: inherit, $row-gap: inherit, $column-gap: inherit, $place-items: inherit, $justify-content: inherit) {
+    display: grid;
+    grid-auto-flow: $flow;
+    row-gap: $row-gap;
+    column-gap: $column-gap;
+    place-items: $place-content;
+    justify-content: $justify-content;
+}

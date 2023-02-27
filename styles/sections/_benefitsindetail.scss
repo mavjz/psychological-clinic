@@ -1,6 +1,4 @@
 .benefitsindetail {
-    display: grid;
-    grid-auto-flow: column;
+    @include grid(column, $place-items: center);
     grid-template-columns: 20% 80%;
-    place-items: center;
 }

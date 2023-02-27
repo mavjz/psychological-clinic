@@ -1,22 +1,16 @@
 .benefit {
-    display: grid;
-    grid-auto-flow: row;
-    place-items: center;
+    @include grid(row, 1vh, $place-items: center);
     max-width: 15vw;
-    row-gap: 1vh;
     &-icon {
         &__border {
+            @include grid($place-items: center);
+            @include sizes(8vw, 8vw);
             border-radius: 100%;
-            border: solid 5px $green-dark;
-            height: 8vw;
-            width: 8vw; 
+            border: solid 5px $green-dark; 
             background-color: $green-light;
-            display: grid;
-            place-items: center;
             &--image {
+                @include sizes(5vw, 5vw);
                 color: $green-dark;
-                height: 5vw;
-                width: 5vw;
             }
         }
     }

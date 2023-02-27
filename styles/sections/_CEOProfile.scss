@@ -1,12 +1,9 @@
 .CEOProfile {
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 0;
+    @include grid(column, $column-gap: 0);
     margin: 6vh 0;
     &-placeholder {
+        @include sizes(25vw, 25vw);
         position: relative;
-        height: 25vw;
-        width: 25vw;
         border: solid 5px $green-light;
         &__image {
             @include image;

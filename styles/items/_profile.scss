@@ -1,8 +1,7 @@
 .profile {
     position: relative;
     &-placeholder {
-        width: 15vw;
-        height: 15vw;
+        @include sizes(15vw, 15vw);
         position: relative;
         border: solid 5px $green;
         &__image {
@@ -10,20 +9,17 @@
         }
     }
     &-hover {
+        @include sizes(15vw, 15vw);
         opacity: 0;
         background-color: #3c493fa4;
         position: absolute;
-        width: 15vw;
-        height: 15vw;
         top: 0;
         margin-top: 5px;
         margin-left: 5px;
         transition: opacity 0.3s ease-in-out;
         &__text {
+            @include grid(row, 1vh);
             margin: 30% 20px;
-            display: grid;
-            grid-auto-flow: row;
-            row-gap: 1vh;
         }
         &:hover {
             opacity: 1;
@@ -33,8 +29,7 @@
     &big {
         position: relative;
         &-placeholder {
-            width: 30vw;
-            height: 30vw;
+            @include sizes(30vw, 30vw);
             position: relative;
             border: solid 5px $green;
             &__image {
@@ -42,20 +37,17 @@
             }
         }
         &-hover {
+            @include sizes(30vw, 30vw);
             opacity: 0;
             background-color: #3c493fa4;
             position: absolute;
-            width: 30vw;
-            height: 30vw;
             top: 0;
             margin-top: 5px;
             margin-left: 5px;
             transition: opacity 0.3s ease-in-out;
             &__text {
                 margin: 30% 20px;
-                display: grid;
-                grid-auto-flow: row;
-                row-gap: 1vh;
+                @include grid(row, 1vh);
             }
             &:hover {
                 opacity: 1;

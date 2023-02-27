@@ -1,8 +1,5 @@
 .counters {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    column-gap: 1vw;
+    @include grid(column, $column-gap: 1vw, $justify-content: space-between);
     margin: 6vh 0;
     box-sizing: border-box;
     max-width: 100%;

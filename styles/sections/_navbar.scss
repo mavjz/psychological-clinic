@@ -1,6 +1,5 @@
 .navbar {
-    height: 5vh;
-    width: 100%;
+    @include sizes(100%, 5vh);
     display: grid;
     place-content: center;
     background-color: $white;
@@ -9,15 +8,11 @@
     top: 0;
     z-index: 1;
     &-desktop {
+        @include grid(column, $justify-content: space-between);
         width: 100%;
-        display: grid;
-        grid-auto-flow: column;
-        justify-content: space-between;
         &__items {
-            display: grid;
-            grid-auto-flow: column;
+            @include grid(column, $column-gap: 3vw);
             place-content: center;
-            column-gap: 3vw;
             :hover {
                 transition: color 0.3s ease-in-out;
                 color: $green-light;

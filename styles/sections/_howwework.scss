@@ -1,6 +1,5 @@
 .howwework {
+    @include grid(column);
     margin-bottom: 10vh;
-    display: grid;
-    grid-auto-flow: column;
     grid-template-columns: 50% 50%;
 }

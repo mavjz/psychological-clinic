@@ -1,12 +1,9 @@
 .benefits {
-    display: grid;
-    row-gap: 5vh;
+    @include grid($row-gap: 5vh);
     margin: 6vh;
     &-items {
-        display: grid;
+        @include grid($row-gap: 3vh, $column-gap: 5vw);
         grid-template-columns: 33.33% 33.33% 33.34%;
-        row-gap: 3vh;
-        column-gap: 5vw;
         width: 100%;
     }
 }
