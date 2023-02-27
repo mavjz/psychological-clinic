@@ -9,9 +9,9 @@
     top: 0;
     z-index: 1;
     &-desktop {
-        padding: 0 3rem;
+        margin: 0 3rem;
         @include grid(column);
-        width: 100vw;
+        width: calc(100vw - 6rem);
         box-sizing: border-box;
         justify-content: space-between;
         &__items {
@@ -21,5 +21,12 @@
                 color: $green-light;
             }
         }
+    }
+    &-mobile {
+        margin: 0 3rem;
+        @include grid(column);
+        width: calc(100vw - 6rem);
+        box-sizing: border-box;
+        justify-content: space-between;
     }
 }

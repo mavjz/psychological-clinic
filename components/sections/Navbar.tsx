@@ -32,7 +32,6 @@ const Navbar = ({sites}: NavbarType) => {
             {isWide &&
                 <WrapperWidth>
                     <div className="navbar-mobile">
-                
                     </div>
                 </WrapperWidth>
             }

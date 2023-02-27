@@ -3,7 +3,7 @@
     width: 100%;
     &-placeholder {
         position: relative;
-        
+        @include sizes(100%, 60vh);
     }
     &-gradient {
         @include sizes(100%, 60vh);
