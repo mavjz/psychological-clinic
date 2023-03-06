@@ -1,4 +1,5 @@
 import React from 'react'
+import { HeadlineType } from 'types/items/headline'
 
 const Headline = ({h1, h2, h3, h4, h5, h6, text, place="textleft", color="textgreen", isUppercase}: HeadlineType) => {
     return (
@@ -14,16 +15,3 @@ const Headline = ({h1, h2, h3, h4, h5, h6, text, place="textleft", color="textgr
 }
 
 export default Headline
-
-type HeadlineType = {
-    h1?: boolean,
-    h2?: boolean,
-    h3?: boolean,
-    h4?: boolean,
-    h5?: boolean,
-    h6?: boolean,
-    text: string,
-    place?: string,
-    color?: string,
-    isUppercase?: boolean
-}
