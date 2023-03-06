@@ -1,7 +1,7 @@
 import React from 'react'
 import { HeadlineType } from 'types/items/headline'
 
-const Headline = ({h1, h2, h3, h4, h5, h6, text, place="textleft", color="textgreen", isUppercase}: HeadlineType) => {
+const Headline = ({h1, h2, h3, h4, h5, h6, text, place="left", color="green", isUppercase}: HeadlineType) => {
     color = "text".concat(color.toLowerCase());
     place = "text".concat(place.toLowerCase());
     const classes = color.concat(" "+place);

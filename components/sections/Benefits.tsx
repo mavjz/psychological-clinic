@@ -10,8 +10,8 @@ const Benefits = ({items, headline}: BenefitsType) => {
             <div className='benefits'>
                 <Headline
                     h1
-                    place='textcenter'
-                    color='textgreendark'
+                    place='center'
+                    color='greendark'
                     text={headline || ""}
                     isUppercase
                 />

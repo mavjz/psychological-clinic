@@ -14,13 +14,13 @@ const Navbar = ({sites}: NavbarType) => {
                         h3
                         text="HumanHealth.com"
                         link="/"
-                        color="textgreendark"
+                        color="greendark"
                     />
                     <div className="navbar-desktop__items">
                         {sites.map((site, index) =>
                             <ButtonHeadline
                                 h4
-                                color="textgreendark"
+                                color="greendark"
                                 key={index}
                                 text={site?.name}
                                 link={site?.link}

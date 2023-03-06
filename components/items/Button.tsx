@@ -4,7 +4,7 @@ import React from 'react'
 import { HeadlineType } from 'types/items/headline'
 import Headline from './Headline'
 
-const Button = ({h1, h2, h3, h4, h5, h6, text, color="textgreen", place="center", link, isUppercase, isLink, isImage, className, image}: ButtonType) => {
+const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", link, isUppercase, isLink, isImage, className, image}: ButtonType) => {
     return (
         <React.Fragment>
             {isLink ? 
@@ -30,7 +30,7 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="textgreen", place="center"
                                     h5={h5}
                                     h6={h6}
                                     text={text}
-                                    place="textcenter"
+                                    place="center"
                                     color={color}
                                     isUppercase={isUppercase}
                                 /> 

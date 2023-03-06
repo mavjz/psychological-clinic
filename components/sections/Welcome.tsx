@@ -22,13 +22,13 @@ const Welcome = ({image, headline, text}: WelcomeType) => {
                 <div className="welcome-text">
                     <Headline
                         text={headline}
-                        color="textwhite"
+                        color="white"
                         h1
                     />
                     <Paragraph
                         text={text}
                         big
-                        color="textwhite"
+                        color="white"
                     />
                 </div>
             </WrapperWidth>

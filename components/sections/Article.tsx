@@ -9,8 +9,8 @@ const Article = ({headline, texts}: ArticleType) => {
             <Headline
                 h2
                 text={headline}
-                color="textgreendark"
-                place='textcenter'
+                color="greendark"
+                place='center'
                 isUppercase
             />
             <div className='article-text'>
@@ -19,7 +19,7 @@ const Article = ({headline, texts}: ArticleType) => {
                         key={index}
                         text={text?.text}
                         medium
-                        place='textleft'
+                        place='left'
                     />
                 )}
             </div>

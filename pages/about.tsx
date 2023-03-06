@@ -20,8 +20,8 @@ const About = () => {
             <Headline
                 text='Nasz zespół'
                 isUppercase
-                color='textgreendark'
-                place="textcenter"
+                color='greendark'
+                place="center"
                 h1
             />
             <CEOProfile

@@ -48,13 +48,13 @@ const Benefit = ({isCouple, isLoupe, isAnalized, isPerson, isLove, isLovePrice, 
             </div>
             <Headline
                 h2
-                place="textcenter"
+                place="center"
                 text={headline}
-                color="textgreendark"
+                color="greendark"
             />
             <Paragraph
                 small
-                place="textcenter"
+                place="center"
                 text={text || ""}
             />
         </div>

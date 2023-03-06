@@ -21,14 +21,14 @@ const Profile = ({image, name, text, isBig}: ProfileType) => {
                         text={name}
                         h3={isBig ? false : true}
                         h1={isBig ? true : false}
-                        place="textcenter"
-                        color="textwhite"
+                        place="center"
+                        color="white"
                     />
                     <Paragraph
                         text={text || ""}
                         small
-                        color="textwhite"
-                        place="textcenter"
+                        color="white"
+                        place="center"
                     />
                 </div>
             </div>

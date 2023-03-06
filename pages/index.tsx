@@ -57,7 +57,7 @@ export default function Home() {
           h1
           text='Nasze wartości'
           isUppercase
-          color='textgreendark'
+          color='greendark'
         />
         <Benefits
           items={[
@@ -98,7 +98,7 @@ export default function Home() {
           h1
           text='Poznajcie nas'
           isUppercase
-          color='textgreendark'
+          color='greendark'
         />
         <CEOProfile
             photo="/images/therapist-her.jpg" 
