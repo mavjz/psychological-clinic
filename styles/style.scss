@@ -38,38 +38,18 @@ a, p, h1, h2, h3, h4, h5, h6 {
 
 // TEXT COLORS
 
-.textwhite {
-    color: $white-creamy;
-}
-
-.textgreen {
-    color: $green;
-}
-
-.textgreendark {
-    color: $green-dark;
-}
-
-.textgreenlight {
-    color: $green-light;
+@each $name, $color in $colors {
+    .text#{$name} {
+        color: $color;
+    }
 }
 
 // TEXT ALIGN
 
-.textleft {
-    text-align: left;
-}
-
-.textright {
-    text-align: right;
-}
-
-.textcenter {
-    text-align: center;
-}
-
-.textjustify {
-    text-align: justify;
+@each $side in $sides {
+    .text#{$side} {
+        text-align: $side;
+    }
 }
 
 .capslock {
