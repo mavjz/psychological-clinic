@@ -9,10 +9,10 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
         <React.Fragment>
             {isLink ? 
                 isImage ? 
-                        <Link href={link} passHref legacyBehavior className={className}>
+                        <Link href={link || "/"} passHref legacyBehavior className={className}>
                             <figure className={`${className}-placeholder`}>
                                 <Image
-                                    src={image}
+                                    src={image || ""}
                                     alt="Image"
                                     fill
                                     className={`${className}-placeholder__image`}
@@ -20,8 +20,8 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
                             </figure>
                         </Link>
                     :
-                        <Link href={link} passHref legacyBehavior className={className}>
-                            <a className={`${className}-a`}>
+                        <Link href={link || "/"} passHref legacyBehavior className={className}>
+                            <a className={` text${color}`}>
                                 <Headline
                                     h1={h1}
                                     h2={h2}
@@ -42,7 +42,7 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
                            <button className={`${className}-button`}>
                                 <figure className={`${className}-button__placeholder`}>
                                     <Image
-                                        src={image}
+                                        src={image || ""}
                                         alt="Image"
                                         fill
                                         className={`${className}-button__placeholder--image`}
@@ -74,10 +74,9 @@ export default Button
 
 
 type ButtonType = {
-    image: string, 
-    link: string, 
-    isUppercase: boolean,
-    isLink: boolean, 
-    isImage: boolean, 
-    className: string, 
+    image?: string, 
+    link?: string,
+    isLink?: boolean, 
+    isImage?: boolean, 
+    className?: string, 
 } & HeadlineType

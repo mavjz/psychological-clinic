@@ -1,4 +1,4 @@
-import ButtonHeadline from "components/items/ButtonHeadline";
+import Button from "components/items/Button";
 import WrapperWidth from "components/wrappers/Wrapperwidth";
 import React from "react";
 import { SiteType } from "types/items/site";
@@ -10,15 +10,17 @@ const Navbar = ({sites}: NavbarType) => {
         <div className="navbar">
             {!isWide && 
                 <div className="navbar-desktop">
-                    <ButtonHeadline
-                        h3
-                        text="HumanHealth.com"
+                    <Button
+                        isLink
                         link="/"
+                        text="HumanHealth.com"
                         color="greendark"
+                        h3
                     />
                     <div className="navbar-desktop__items">
                         {sites.map((site, index) =>
-                            <ButtonHeadline
+                            <Button
+                                isLink
                                 h4
                                 color="greendark"
                                 key={index}

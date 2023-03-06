@@ -1,5 +1,4 @@
-import ButtonHeadline from 'components/items/ButtonHeadline'
-import Headline from 'components/items/Headline'
+import Button from 'components/items/Button'
 import Article from 'components/sections/Article'
 import Benefits from 'components/sections/Benefits'
 import CEOProfile from 'components/sections/CEOProfile'
@@ -52,7 +51,8 @@ export default function Home() {
             ]}
           />
         </WrapperWidth>
-        <ButtonHeadline
+        <Button
+          isLink
           link='/purposes'
           h1
           text='Nasze wartości'
@@ -93,7 +93,8 @@ export default function Home() {
             },
           ]}
         />
-        <ButtonHeadline
+        <Button
+          isLink
           link='/about'
           h1
           text='Poznajcie nas'

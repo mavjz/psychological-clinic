@@ -14,6 +14,12 @@
         width: calc(100vw - 6rem);
         box-sizing: border-box;
         justify-content: space-between;
+        &__mainpage {
+            color: $green-dark;
+            a {
+                width: fit-content;
+            }
+        }
         &__items {
             @include grid(column, $column-gap: 3vw);
             :hover {
