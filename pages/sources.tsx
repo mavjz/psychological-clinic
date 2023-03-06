@@ -10,6 +10,9 @@ const Sources = () => {
                 headline="Źródła"
                 texts={[
                     {
+                        text: "Dane poradni (adres, tel): https://www.bestrandoms.com/random-address-in-pl?quantity=6"
+                    },
+                    {
                         text: "Zdjęcia psychoterapeutów: This-Person-Does-not-Exist.com, 2022. "
                     },
                     {

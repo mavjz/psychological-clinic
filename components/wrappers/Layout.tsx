@@ -38,13 +38,17 @@ const Layout = ({children}: WrapperType) => {
                         link: "/purposes"
                     },
                     {
-                        name: "Kontakt",
-                        link: "/contact"
+                        name: "Cennik",
+                        link: "/prices"
+                    },
+                    {
+                        name: "Oferta",
+                        link: "/services"
                     },
                     {
                         name: "Źródła",
                         link: "/sources"
-                    }
+                    },
                 ]}
             />
         </React.Fragment>

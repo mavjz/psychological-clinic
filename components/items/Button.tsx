@@ -21,7 +21,7 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
                         </Link>
                     :
                         <Link href={link || "/"} passHref legacyBehavior className={className}>
-                            <a className={` text${color}`}>
+                            <a className={`${className}-a text${color}`}>
                                 <Headline
                                     h1={h1}
                                     h2={h2}
