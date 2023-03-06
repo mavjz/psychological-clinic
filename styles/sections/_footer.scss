@@ -1,0 +1,17 @@
+.footer {
+    @include sizes(100%, 35vh);
+    background-color: $green-dark-mid;
+    &-desktop {
+        @include sizes(100%, calc(35vh - 30px));
+        @include grid(column);
+        position: relative;
+        margin: {
+            top: 20px;
+            bottom: 10px;
+        };
+        &__bio {
+            @include sizes(25%, fit-content);
+            @include grid(row, 3vh);
+        }
+    }
+}

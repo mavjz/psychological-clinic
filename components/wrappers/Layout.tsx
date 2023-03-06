@@ -21,10 +21,6 @@ const Layout = ({children}: WrapperType) => {
                         link: "/contact"
                     },
                     {
-                        name: "Jak pracujemy?",
-                        link: "/plan"
-                    },
-                    {
                         name: "Źródła",
                         link: "/sources"
                     }
@@ -32,7 +28,24 @@ const Layout = ({children}: WrapperType) => {
             />
                 {children}
             <Footer
-            
+                sites={[
+                    {
+                        name: "O nas",
+                        link: "/about"
+                    },
+                    {
+                        name: "Nasze wartości",
+                        link: "/purposes"
+                    },
+                    {
+                        name: "Kontakt",
+                        link: "/contact"
+                    },
+                    {
+                        name: "Źródła",
+                        link: "/sources"
+                    }
+                ]}
             />
         </React.Fragment>
     )
