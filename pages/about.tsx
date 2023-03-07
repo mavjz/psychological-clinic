@@ -1,7 +1,5 @@
 // O nas, krótka historia założenia (inspiracja)
-
 import Headline from "components/items/Headline";
-import Profile from "components/items/Profile";
 import Article from "components/sections/Article";
 import CEOProfile from "components/sections/CEOProfile";
 import Profiles from "components/sections/Profiles";
