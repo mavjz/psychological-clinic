@@ -1,6 +1,9 @@
 .benefit {
     @include grid(row, 1vh, $place-items: center);
     max-width: 15vw;
+    @media screen and (max-width: $width-tablet) {
+        max-width: 100%;
+    }
     &-icon {
         &__border {
             @include grid($place-items: center);
@@ -8,9 +11,15 @@
             border-radius: 100%;
             border: solid 5px $green-dark; 
             background-color: $green-light;
+            @media screen and (max-width: $width-tablet) {
+                @include sizes(25vw, 25vw);
+            }
             &--image {
                 @include sizes(5vw, 5vw);
                 color: $green-dark;
+                @media screen and (max-width: $width-tablet) {
+                    @include sizes(18vw, 18vw);
+                }
             }
         }
     }

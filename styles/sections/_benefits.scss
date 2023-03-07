@@ -5,5 +5,9 @@
         @include grid($row-gap: 3vh, $column-gap: 5vw);
         grid-template-columns: 33.33% 33.33% 33.34%;
         width: 100%;
+        @media screen and (max-width: $width-tablet) {
+            @include grid (row, 2vh);
+            grid-template-columns: 100%;
+        }
     }
 }

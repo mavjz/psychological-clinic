@@ -3,9 +3,15 @@
     height: fit-content;
     &-text {
         margin-left: 4vw;
+        @media screen and (max-width: $width-tablet) {
+            margin-left: 21vw;
+        }
     }
     &-headline {
         @include grid(column, $column-gap: 0.5vw);
+        @media screen and (max-width: $width-tablet) {
+            @include grid(column, $column-gap: 5vw);
+        }
         &__text {
             color: $green-dark;
             font-size: 30px;
@@ -15,6 +21,9 @@
         &__placeholder {
             @include sizes(3vw, 3vw);
             position: relative;
+            @media screen and (max-width: $width-tablet) {
+                @include sizes(15vw, 15vw);
+            }
             &--image {
                 @include icon;
             }
