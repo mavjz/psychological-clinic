@@ -110,7 +110,7 @@ export default function Home() {
                     Większość mojego doświadczenia zdobyłam pracując w Poradni Złote serce przez 6 lat. `
                 },
                 {
-                    text: `Obecnie jestem założycielką Poradni HumanHealth.com, która zrewulocjonizwała dotychczasową formę spotkań psychoterapeutycznych w nurcie humanistycznym. 
+                    text: `Obecnie jestem założycielką Poradni HumanHealth.com, która zrewolucjonizowała dotychczasową formę spotkań psychoterapeutycznych w nurcie humanistycznym. 
                     Prowadzę warsztaty na których pracujemy z pacjentami nad pewnością siebie. Świadczymy także indywidualne sesje psychoterapeutyczne online.` 
                 },
                 {
