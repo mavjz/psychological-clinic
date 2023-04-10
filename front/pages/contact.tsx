@@ -1,6 +1,7 @@
 // jak działamy (godziny, liczba pacjentów)
 import Article from "components/sections/Article";
 import CEOProfile from "components/sections/CEOProfile";
+import ReservationPanel from "components/sections/ReservationPanel";
 import Welcome from "components/sections/Welcome";
 import WrapperWidth from "components/wrappers/Wrapperwidth";
 import React from "react";
@@ -41,6 +42,8 @@ const Contact = () => {
                     ]}
                 />
             </WrapperWidth>
+            <ReservationPanel
+            />
             <CEOProfile
                 photo="/images/meeting.jpg"
                 headline="Jak pracujemy?"
