@@ -1,0 +1,9 @@
+.appointment {
+    &-loading {
+        @include grid($justify-content: center);
+        margin: 5vh 0;
+    }
+    &-content {
+        
+    }
+}

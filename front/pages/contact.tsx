@@ -9,10 +9,7 @@ import React from "react";
 const Contact = () => {
     return (
         <React.Fragment>
-            <Appointment
-            
-            />
-            {/* <Welcome
+            <Welcome
                 image='/images/visit.jpg'
                 headline='Umów się na wizytę'
                 text='Bądź idealną wersją siebie już dziś'
@@ -45,6 +42,9 @@ const Contact = () => {
                     ]}
                 />
             </WrapperWidth>
+            <Appointment
+            
+            />
             <CEOProfile
                 photo="/images/meeting.jpg"
                 headline="Jak pracujemy?"
@@ -53,7 +53,7 @@ const Contact = () => {
                         text: `Od pierwszych sesji terapeutycznych nawiązujemy więź z klientem. Pozwalamy mu się otworzyć i obdarzamy go bezwarunkową akceptacją. Wysłuchujemy jego codziennie problemy jak i sukcesy. Wraz z czasem zagłębiamy się w coraz trudniejsze wątki życia klienta i tym razem z otwartością oraz bezpieczeństwem (wraz ze wsparciem terapeuty) przeżywamy je ostatecznie w pełni, tym razem z możliwością przyjęcia wszystkich towarzyszących emocji. Dzięki temu klient odkrywa swoje dotychczasowo zapomniane wrażliwe wnętrze, które jest otwarte na bogactwo jakie niesie w sobie każdy człowiek.`
                     }
                 ]}
-            /> */}
+            />
         </React.Fragment>
     )
 }
