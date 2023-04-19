@@ -1,20 +1,34 @@
 import WrapperWidth from "components/wrappers/Wrapperwidth";
+import { strapiAppointmentGet } from "lib/strapi/appointments/get";
 import { strapiGet } from "lib/strapi/strapiCRUD";
 import React, { useEffect, useState } from "react";
+import { DayPicker } from "react-day-picker";
 import { Grid } from "react-loader-spinner";
 
 const Appointment = () => {
     const therapist = "Bożena"
+    const filter = {
+        filters: {
+            therapist: {
+                first_name: {
+                    $eq: therapist,
+            },
+          },
+        },
+    }
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [appointments, setAppointents] = useState<Array<any>>();
     useEffect(() => {
-        strapiGet({req_url: `appointments?filters\[therapist\][first_name][$eq]=${therapist}`}).then((res) => {
+        strapiAppointmentGet(filter).then((res) => {
                 setAppointents(res.data.data);
                 setIsLoading(false);
             }
         );
     }, []);
     console.log(appointments);
+    // const dates = appointments?.map((item, index) => 
+
+    // )
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -39,7 +53,10 @@ const Appointment = () => {
                 </div>
                 <div className="appointment-content__data">
                     <div className="appointment-content__data--calendar">
+                        <DayPicker
 
+                        
+                        />
                     </div>
                     <div className="appointment-content__data--availabledates">
                         {
