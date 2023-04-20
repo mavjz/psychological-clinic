@@ -1,6 +1,8 @@
 @import "./mixins";
 @import "./variables.scss";
 
+@import 'react-day-picker/dist/style.css';
+
 @import "./items/counter";
 @import "./items/paragraph";
 @import "./items/benefit";

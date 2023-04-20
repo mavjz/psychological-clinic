@@ -3,7 +3,7 @@
     display: grid;
     place-content: center;
     &-child {
-        @include sizes(100vw, fit-content, 1280px);
+        @include sizes(calc(100vw - 2rem), fit-content, 1280px);
         box-sizing: border-box;
         padding: 0 2rem;
         @media screen and (max-width: $width-tablet) {

@@ -4,6 +4,19 @@
         margin: 5vh 0;
     }
     &-content {
-        
+        &__panel {
+
+        }
+        &__data {
+            &--calendar {
+                &-disabled {
+                    font-size: 75%;
+                    opacity: 80%;
+                } 
+            }
+            &--availableDates {
+
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 import WrapperWidth from "components/wrappers/Wrapperwidth";
+import { isSameDay } from "date-fns";
 import { strapiAppointmentGet } from "lib/strapi/appointments/get";
-import { strapiGet } from "lib/strapi/strapiCRUD";
 import React, { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { Grid } from "react-loader-spinner";
@@ -25,10 +25,6 @@ const Appointment = () => {
             }
         );
     }, []);
-    console.log(appointments);
-    // const dates = appointments?.map((item, index) => 
-
-    // )
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -45,6 +41,15 @@ const Appointment = () => {
             </WrapperWidth>
         );
     }
+    const allDates: string[] | undefined = appointments?.map(item => item.attributes.date);
+    const stringDate: string[] | undefined = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
+    const availableDate: Date[] | undefined = stringDate?.map(item => new Date(item));
+    console.log(availableDate);
+    function isDayDisabled(day: Date) {
+        return !availableDate?.some(disabledDay => 
+            isSameDay(day, disabledDay)
+        )
+    }
     return (
         <WrapperWidth>
             <div className="appointment-content">
@@ -54,8 +59,10 @@ const Appointment = () => {
                 <div className="appointment-content__data">
                     <div className="appointment-content__data--calendar">
                         <DayPicker
-
-                        
+                            disabled={isDayDisabled}
+                            modifiersClassNames={{
+                                disabled: 'appointment-content__data--calendar-disabled'
+                            }}
                         />
                     </div>
                     <div className="appointment-content__data--availabledates">
