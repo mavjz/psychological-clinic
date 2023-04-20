@@ -61,14 +61,16 @@ const Appointment = () => {
                         <DayPicker
                             disabled={isDayDisabled}
                             modifiersClassNames={{
-                                disabled: 'appointment-content__data--calendar-disabled'
+                                disabled: 'appointment-content__data--calendar-disabled',
+                                selected: 'appointment-content__data--calendar-selected',
+                                today: 'appointment-content__data--calendar-today',
                             }}
                         />
                     </div>
                     <div className="appointment-content__data--availabledates">
                         {
                             appointments?.map((item, index) => 
-                                <div key={index}>{item.attributes.date + "______" + item.attributes.time + item.attributes.name}</div>
+                                <div key={index}>{item.attributes.date + "______" + item.attributes.time}</div>
                             )
                         }
                     </div>
