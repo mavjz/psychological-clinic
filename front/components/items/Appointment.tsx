@@ -7,7 +7,8 @@ import { Grid } from "react-loader-spinner";
 
 const Appointment = () => {
     const therapist = "Bożena"
-    const filter = {
+    let [chosenDate, setChosenDate] = useState<Date>();
+    const filterTherapist = {
         filters: {
             therapist: {
                 first_name: {
@@ -16,15 +17,37 @@ const Appointment = () => {
           },
         },
     }
+    let filterDate = {
+        filters: {
+            date: {
+                $eq: chosenDate,
+            },
+            therapist: {
+                first_name: {
+                    $eq: therapist,
+                }
+            }
+        }
+    }
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [appointments, setAppointents] = useState<Array<any>>();
+    const [appointmentsTherapist, setAppointentsTherapist] = useState<Array<any>>();
+    const [appointmentsDate, setAppointentsDate] = useState<Array<any>>();
     useEffect(() => {
-        strapiAppointmentGet(filter).then((res) => {
-                setAppointents(res.data.data);
+        strapiAppointmentGet(filterTherapist).then((res) => {
+                setAppointentsTherapist(res.data.data);
                 setIsLoading(false);
             }
         );
-    }, []);
+        strapiAppointmentGet(filterDate).then((res) => {
+                setAppointentsDate(res.data.data);
+                setIsLoading(false);
+            }
+        );
+    }, [chosenDate]);
+    // TODO: aktualizowanie filtrów z nowymi zmiennymi
+    console.log(chosenDate)
+    console.log("-----------------------")
+    console.log(filterDate);
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -41,10 +64,14 @@ const Appointment = () => {
             </WrapperWidth>
         );
     }
-    const allDates: string[] | undefined = appointments?.map(item => item.attributes.date);
+    const allDates: string[] | undefined = appointmentsTherapist?.map(item => item.attributes.date);
     const stringDate: string[] | undefined = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
     const availableDate: Date[] | undefined = stringDate?.map(item => new Date(item));
-    console.log(availableDate);
+    let allHours: Date[] | undefined = appointmentsDate?.map(item => item.attributes.time);
+    let sortHours: Date[] | undefined = allHours?.sort(function (a, b) {
+        return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
+    });
+    let allHourswoSeconds: Date[] | String[] | undefined | any = sortHours?.map(item => item.toString().slice(0,5));
     function isDayDisabled(day: Date) {
         return !availableDate?.some(disabledDay => 
             isSameDay(day, disabledDay)
@@ -65,12 +92,17 @@ const Appointment = () => {
                                 selected: 'appointment-content__data--calendar-selected',
                                 today: 'appointment-content__data--calendar-today',
                             }}
+                            mode="single"
+                            selected={chosenDate}
+                            onSelect={setChosenDate}
                         />
                     </div>
                     <div className="appointment-content__data--availabledates">
                         {
-                            appointments?.map((item, index) => 
-                                <div key={index}>{item.attributes.date + "______" + item.attributes.time}</div>
+                            allHourswoSeconds?.map((item, index) => 
+                                <div key={index}> 
+                                    {item}
+                                </div>
                             )
                         }
                     </div>

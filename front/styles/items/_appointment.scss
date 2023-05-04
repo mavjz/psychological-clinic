@@ -8,6 +8,8 @@
 
         }
         &__data {
+            @include grid(column, $column-gap: 2vw);
+            position: relative;
             &--calendar {
                 &-disabled {
                     font-size: 75%;
@@ -15,17 +17,26 @@
                 } 
                 &-selected {
                     background-color: $green;
+                    color: $white;
                     border-radius: 100%;
                     border: 2px $green-dark solid;
+                    &:hover {
+                        color: $white;
+                        background-color: $green;
+                    }
                 }
                 &-today {
                     font-weight: 700;
                     font-size: 90%;
                 }
             }
-            &--availableDates {
-
+            &--availabledates {
+                @include grid(row, $place-items: center);
             }
         }
     }
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+    background-color: $green-light !important;
 }
