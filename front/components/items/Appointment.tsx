@@ -8,46 +8,33 @@ import { Grid } from "react-loader-spinner";
 const Appointment = () => {
     const therapist = "Bożena"
     let [chosenDate, setChosenDate] = useState<Date>();
-    const filterTherapist = {
-        filters: {
-            therapist: {
-                first_name: {
-                    $eq: therapist,
-            },
-          },
-        },
-    }
-    let filterDate = {
-        filters: {
-            date: {
-                $eq: chosenDate,
-            },
-            therapist: {
-                first_name: {
-                    $eq: therapist,
-                }
-            }
+    let filters: filters = {};
+    filters.therapist = {
+        first_name: {
+            $eq: therapist
         }
+    }
+    filters.date = {
+        $eq: chosenDate
     }
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [appointmentsTherapist, setAppointentsTherapist] = useState<Array<any>>();
     const [appointmentsDate, setAppointentsDate] = useState<Array<any>>();
     useEffect(() => {
-        strapiAppointmentGet(filterTherapist).then((res) => {
+        strapiAppointmentGet(filters.therapist).then((res) => {
                 setAppointentsTherapist(res.data.data);
                 setIsLoading(false);
             }
         );
-        strapiAppointmentGet(filterDate).then((res) => {
+        strapiAppointmentGet(filters.therapist.date).then((res) => {
                 setAppointentsDate(res.data.data);
                 setIsLoading(false);
             }
         );
     }, [chosenDate]);
     // TODO: aktualizowanie filtrów z nowymi zmiennymi
-    console.log(chosenDate)
-    console.log("-----------------------")
-    console.log(filterDate);
+    console.log(chosenDate);
+    console.log("-----------------------");
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -114,3 +101,7 @@ const Appointment = () => {
 }
 
 export default Appointment
+
+type filters = {
+    [Keys: string]: Object,
+}

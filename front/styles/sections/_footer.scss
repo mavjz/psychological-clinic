@@ -1,15 +1,23 @@
 .footer {
-    @include sizes(100%, 42vh);
+    @include sizes(100%, 45vh);
     background-color: $green-dark-mid;
+    @media screen and (max-width: $width-tablet) {
+        @include sizes(100%, fit-content);
+    }
     &-desktop {
-        @include sizes(calc(100% - 4vw), calc(42vh - 30px));
+        @include sizes(calc(100% - 4vw), calc(45vh - 30px));
         @include grid(column, $justify-content: space-between);
         position: relative;
         margin: {
             top: 20px;
-            bottom: 10px;
+            bottom: 0px;
             left: 2vw;
             right: 2vw;
+        }
+        @media screen and (max-width: $width-tablet) {
+            @include grid(row, 5vh);
+            @include sizes(calc(100% - 4vw), fit-content);
+            margin-bottom: 20px;
         }
         &__bio {
             @include sizes(25vw, fit-content);
@@ -27,6 +35,9 @@
                         transition: background-color 0.3s ease-in-out;
                     }
                 }
+            }
+            @media screen and (max-width: $width-tablet) {
+                display: none;
             }
         }
         &__contact {

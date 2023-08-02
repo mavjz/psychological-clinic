@@ -16,7 +16,7 @@ const Footer = ({sites}: FooterType) => {
     const isWide = useMedia({maxWidth: "768px"});
     return (
         <div className="footer">
-            {!isWide && 
+            {/* {!isWide &&  */}
                 <WrapperWidth>
                     <div className="footer-desktop">
                         <div className="footer-desktop__bio">
@@ -123,14 +123,14 @@ const Footer = ({sites}: FooterType) => {
                         </div>
                     </div>
                 </WrapperWidth>
-            }
-            {isWide &&
+            {/* } */}
+            {/* {isWide &&
                 <WrapperWidth>
                     <div className="footer-mobile">
                 
                     </div>
                 </WrapperWidth>
-            }
+            } */}
         </div>
     )
 }
