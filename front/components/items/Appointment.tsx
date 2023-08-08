@@ -7,7 +7,7 @@ import { Grid } from "react-loader-spinner";
 
 const Appointment = () => {
     const TEMPtherapist = "Bożena";
-    // const TEMPdate = new Date(2023, 7, 14);
+    const TEMPdate = new Date(2023, 7, 14);
     let [chosenDate, setChosenDate] = useState<Date>();
     // const queryChosenDate = chosenDate?.toDateString();
     // console.log(queryChosenDate);
@@ -24,7 +24,7 @@ const Appointment = () => {
     const [appointmentsTherapist, setAppointmentsTherapist] = useState<Array<any>>();
     const [appointmentsDate, setAppointmentsDate] = useState<Array<any>>();
     useEffect(() => {
-        strapiAppointmentGet({filters}).then((res) => {
+        strapiAppointmentGet(filters).then((res) => {
             console.log(res.data.data);
                 setAppointmentsTherapist(res.data.data);
                 setIsLoading(false);
