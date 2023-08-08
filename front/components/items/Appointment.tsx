@@ -6,29 +6,32 @@ import { DayPicker } from "react-day-picker";
 import { Grid } from "react-loader-spinner";
 
 const Appointment = () => {
-    const TEMPtherapist = "Bożena"
-    const TEMPdate = new Date(2023, 7, 14);
+    const TEMPtherapist = "Bożena";
+    // const TEMPdate = new Date(2023, 7, 14);
     let [chosenDate, setChosenDate] = useState<Date>();
-    let filters: filters = {};
+    // const queryChosenDate = chosenDate?.toDateString();
+    // console.log(queryChosenDate);
+    const filters: filters = {};
     filters.therapist = {
         first_name: {
             $eq: TEMPtherapist
         }
-    }
-    filters.date = {
-        $eq: TEMPdate
-    }
+    };
+    // filters.date = {
+    //     $eq: TEMPdate
+    // };
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [appointmentsTherapist, setAppointmentsTherapist] = useState<Array<any>>();
     const [appointmentsDate, setAppointmentsDate] = useState<Array<any>>();
     useEffect(() => {
-        strapiAppointmentGet(filters.therapist).then((res) => {
+        strapiAppointmentGet({filters}).then((res) => {
             console.log(res.data.data);
                 setAppointmentsTherapist(res.data.data);
                 setIsLoading(false);
             }
         );
-        // strapiAppointmentGet(filters.date).then((res) => {
+        // strapiAppointmentGet(filters.date && filters.therapist).then((res) => {
+        //         console.log(res.data.data);
         //         setAppointmentsDate(res.data.data);
         //         setIsLoading(false);
         //     }
@@ -91,13 +94,13 @@ const Appointment = () => {
                         />
                     </div>
                     <div className="appointment-content__data--availabledates">
-                        {
+                        {/* {
                             allHourswoSeconds?.map((item, index) => 
                                 <div key={index}> 
                                     {item}
                                 </div>
                             )
-                        }
+                        } */}
                     </div>
                 </div>
             </div>
