@@ -7,35 +7,33 @@ import { Grid } from "react-loader-spinner";
 
 const Appointment = () => {
     const TEMPtherapist = "Bożena";
-    const TEMPdate = new Date(2023, 7, 14);
+    const TEMPdate = new Date(2023, 7, 17);
     let [chosenDate, setChosenDate] = useState<Date>();
-    // const queryChosenDate = chosenDate?.toDateString();
-    // console.log(queryChosenDate);
+    const offset = chosenDate?.getTimezoneOffset();
+    let rightTime = new Date(chosenDate?.getTime() - (offset*60*1000));
+    let queryChosenDate: string | undefined = rightTime?.toISOString().slice(0, 10);
+    // TODO: make timezone right, resolve problem with undefined variables
     const filters: filters = {};
-    filters.therapist = {
-        first_name: {
-            $eq: TEMPtherapist
-        }
-    };
-    // filters.date = {
-    //     $eq: TEMPdate
+    // filters.therapist = {
+    //     first_name: {
+    //         $eq: TEMPtherapist
+    //     }
     // };
+    filters.date = {
+        $eq: queryChosenDate
+    };
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [appointmentsTherapist, setAppointmentsTherapist] = useState<Array<any>>();
     const [appointmentsDate, setAppointmentsDate] = useState<Array<any>>();
     useEffect(() => {
         strapiAppointmentGet(filters).then((res) => {
-            console.log(res.data.data);
+                console.log(res.data.data);
                 setAppointmentsTherapist(res.data.data);
+                // setAppointmentsDate(res.data.data);
                 setIsLoading(false);
+                console.log(queryChosenDate);
             }
         );
-        // strapiAppointmentGet(filters.date && filters.therapist).then((res) => {
-        //         console.log(res.data.data);
-        //         setAppointmentsDate(res.data.data);
-        //         setIsLoading(false);
-        //     }
-        // );
     }, [chosenDate]);
 
     if (isLoading) {
