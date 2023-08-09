@@ -22,11 +22,11 @@ const Appointment = () => {
             };
         }
     }, [chosenDate])
-    // filters.therapist = {
-    //     first_name: {
-    //         $eq: TEMPtherapist
-    //     }
-    // };
+    filters.therapist = {
+        first_name: {
+            $eq: TEMPtherapist
+        }
+    };
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [appointmentsTherapist, setAppointmentsTherapist] = useState<Array<any>>();
     const [appointmentsDate, setAppointmentsDate] = useState<Array<any>>();
