@@ -34,7 +34,7 @@ const Appointment = () => {
         strapiAppointmentGet(filters).then((res) => {
                 console.log(res.data.data);
                 setAppointmentsTherapist(res.data.data);
-                // setAppointmentsDate(res.data.data);
+                setAppointmentsDate(res.data.data);
                 setIsLoading(false);
             }
         );
@@ -68,7 +68,7 @@ const Appointment = () => {
     let sortHours: Date[] | undefined = allHours?.sort(function (a, b) {
         return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
     });
-    let allHourswoSeconds: Date[] | String[] | undefined | any = sortHours?.map(item => item.toString().slice(0,5));
+    let allHourswoSeconds: Date[] | String[] | undefined = sortHours?.map(item => item.toString().slice(0,5));
     function isDayDisabled(day: Date) {
         return !availableDate?.some(disabledDay => 
             isSameDay(day, disabledDay)
@@ -95,14 +95,14 @@ const Appointment = () => {
                             onSelect={setChosenDate}
                         />
                     </div>
-                    <div className="appointment-content__data--availabledates">
-                        {/* {
+                    <div className={chosenDate ? "appointment-content__data--availabledates": "hidden"}>
+                        {
                             allHourswoSeconds?.map((item, index) => 
                                 <div key={index}> 
                                     {item}
                                 </div>
                             )
-                        } */}
+                        }
                     </div>
                 </div>
             </div>
