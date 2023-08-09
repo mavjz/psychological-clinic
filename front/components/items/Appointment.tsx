@@ -21,7 +21,7 @@ const Appointment = () => {
                 $eq: queryChosenDate
             };
         }
-    }, [chosenDate])
+    }, [chosenDate]);
     filters.therapist = {
         first_name: {
             $eq: TEMPtherapist
@@ -39,7 +39,6 @@ const Appointment = () => {
             }
         );
     }, [chosenDate]);
-
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -79,7 +78,7 @@ const Appointment = () => {
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
-
+                    {/* TODO making panel to choose therapists */}
                 </div>
                 <div className="appointment-content__data">
                     <div className="appointment-content__data--calendar">
@@ -106,7 +105,6 @@ const Appointment = () => {
                     </div>
                 </div>
             </div>
-            
         </WrapperWidth>
     );
 }
