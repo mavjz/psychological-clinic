@@ -17,8 +17,8 @@ const Appointment = () => {
     };
     let [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
-    const [appointmentsTherapist, setAppointmentsTherapist] = useState<Array<any>>();
-    const [appointmentsDate, setAppointmentsDate] = useState<Array<any>>();
+    const [appointmentsTherapist, setAppointmentsTherapist] = useState<appointmentQueryType[]>();
+    const [appointmentsDate, setAppointmentsDate] = useState<appointmentQueryType[]>();
     useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
@@ -36,19 +36,19 @@ const Appointment = () => {
             }
         );
     }, [chosenDate]);
-    const allDates: string[] | undefined = appointmentsTherapist?.map(item => item.attributes.date);
+    const allDates = appointmentsTherapist?.map(item => item.attributes.date);
     // deleting repeated dates 
     /* indexOf is searching the first index numer of current item value and 
     then compering to the left elements. If they're same, value's true, 
     if they're reapeted value's false and won't stay in new array
     e.g "water" is 0, but also 3, 4, 5, so only "0 water" would stay, because 0 doesn't equal 3 */
-    const stringDate: string[] | undefined = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
+    const stringDate = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
     const availableDate = stringDate?.map(item => new Date(item));
-    let allHours: Date[] | undefined = appointmentsDate?.map(item => item.attributes.time);
-    let sortHours: Date[] | undefined = allHours?.sort(function (a, b) {
+    let allHours = appointmentsDate?.map(item => item.attributes.time);
+    let sortHours = allHours?.sort(function (a, b) {
         return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
     });
-    let allHourswoSeconds: String[] | undefined = sortHours?.map(item => item.toString().slice(0,5));
+    let allHourswoSeconds = sortHours?.map(item => item.slice(0,5));
     // ??? https://github.com/gpbl/react-day-picker/issues/768
     function isDayDisabled(day: Date) {
         return !availableDate?.some(disabledDay => 
@@ -110,4 +110,15 @@ export default Appointment
 
 type filters = {
     [Keys: string]: Object,
+}
+
+type appointmentQueryType = {
+    attributes: {
+        date: string, 
+        time: string, 
+        appointment_code?: number,
+        createdAt: string, 
+        updatedAt: string,
+        id: number,
+    }
 }
