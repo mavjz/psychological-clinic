@@ -7,38 +7,54 @@ import { Grid } from "react-loader-spinner";
 
 const Appointment = () => {
     const TEMPtherapist = "Bożena";
-    const filters: filters = {};
-    let [chosenDate, setChosenDate] = useState<Date>();
     let rightTime: Date;
     let queryChosenDate: string | undefined;
-    useEffect(() => {
-        if (chosenDate) {
-            rightTime = new Date(chosenDate?.getTime() - (-120*60*1000));    
-            // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            queryChosenDate = rightTime?.toISOString().slice(0, 10);
-            // changing format of date to YYYY-MM-DD
-            filters.date = {
-                $eq: queryChosenDate
-            };
-        }
-    }, [chosenDate]);
+    const filters: filters = {};
     filters.therapist = {
         first_name: {
             $eq: TEMPtherapist
         }
     };
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    let [chosenDate, setChosenDate] = useState<Date>();
+    const [isLoading, setIsLoading] = useState(true);
     const [appointmentsTherapist, setAppointmentsTherapist] = useState<Array<any>>();
     const [appointmentsDate, setAppointmentsDate] = useState<Array<any>>();
     useEffect(() => {
+        if (chosenDate) {
+            // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
+            rightTime = new Date(chosenDate?.getTime() - (-120*60*1000));    
+            // changing format of date to YYYY-MM-DD
+            queryChosenDate = rightTime?.toISOString().slice(0, 10);
+            filters.date = {
+                $eq: queryChosenDate
+            };
+        }
         strapiAppointmentGet(filters).then((res) => {
-                console.log(res.data.data);
                 setAppointmentsTherapist(res.data.data);
                 setAppointmentsDate(res.data.data);
                 setIsLoading(false);
             }
         );
     }, [chosenDate]);
+    const allDates: string[] | undefined = appointmentsTherapist?.map(item => item.attributes.date);
+    // deleting repeated dates 
+    /* indexOf is searching the first index numer of current item value and 
+    then compering to the left elements. If they're same, value's true, 
+    if they're reapeted value's false and won't stay in new array
+    e.g "water" is 0, but also 3, 4, 5, so only "0 water" would stay, because 0 doesn't equal 3 */
+    const stringDate: string[] | undefined = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
+    const availableDate = stringDate?.map(item => new Date(item));
+    let allHours: Date[] | undefined = appointmentsDate?.map(item => item.attributes.time);
+    let sortHours: Date[] | undefined = allHours?.sort(function (a, b) {
+        return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
+    });
+    let allHourswoSeconds: String[] | undefined = sortHours?.map(item => item.toString().slice(0,5));
+    // ??? https://github.com/gpbl/react-day-picker/issues/768
+    function isDayDisabled(day: Date) {
+        return !availableDate?.some(disabledDay => 
+            isSameDay(day, disabledDay)
+        )
+    }
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -55,25 +71,6 @@ const Appointment = () => {
             </WrapperWidth>
         );
     }
-    const allDates: string[] | undefined = appointmentsTherapist?.map(item => item.attributes.date);
-    const stringDate: string[] | undefined = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
-    // deleting repeated dates 
-    /* indexOf is searching the first index numer of current item value and 
-    then compering to the left elements. If they're same, value's true, 
-    if they're reapeted value's false and won't stay in new array
-    e.g "water" is 0, but also 3, 4, 5, so only "0 water" would stay, because 0 doesn't equal 3 */
-    const availableDate: Date[] | undefined = stringDate?.map(item => new Date(item));
-    let allHours: Date[] | undefined = appointmentsDate?.map(item => item.attributes.time);
-    let sortHours: Date[] | undefined = allHours?.sort(function (a, b) {
-        return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
-    });
-    let allHourswoSeconds: Date[] | String[] | undefined = sortHours?.map(item => item.toString().slice(0,5));
-    function isDayDisabled(day: Date) {
-        return !availableDate?.some(disabledDay => 
-            isSameDay(day, disabledDay)
-        )
-    }
-    // ??? https://github.com/gpbl/react-day-picker/issues/768
     return (
         <WrapperWidth>
             <div className="appointment-content">
