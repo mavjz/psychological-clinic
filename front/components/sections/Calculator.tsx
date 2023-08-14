@@ -15,7 +15,7 @@ const Calculator = () => {
         onSubmit: () => {
             console.log(formik.values)
         }
-    })
+    });
     return (
         <WrapperWidth>
             {/* If above 24 sessions, 15% discount
@@ -50,12 +50,12 @@ const Calculator = () => {
                     <div className='calculator-form__relatives'>
                         <label>Czy ktoś z Twoich bliskich korzystał z usług HumanHealth.com? (opcjonalne)</label>
                         <div className='calculator-form__relatives--answer'>
-                            {/* TODO: relative output */}
                             <div className='calculator-form__question'>
                                 <input 
                                     type='radio' 
                                     name='relative' 
-                                    value={formik.values.relative.yes}
+                                    value='true'
+                                    checked={formik.values.relative === 'true'}
                                     onChange={formik.handleChange}
                                 />
                                 <label htmlFor='relative'>Tak</label>
@@ -64,7 +64,8 @@ const Calculator = () => {
                                 <input 
                                     type='radio' 
                                     name='relative' 
-                                    value={formik.values.relative.no}
+                                    value='false'
+                                    checked={formik.values.relative === 'false'}
                                     onChange={formik.handleChange}
                                 />
                                 <label htmlFor='relative'>Nie</label>
@@ -84,7 +85,7 @@ const Calculator = () => {
                     <div className='calculator-form__question'>
                         <input 
                             type='checkbox' 
-                            name='workshops' 
+                            name='workshop' 
                             value={formik.values.workshop}
                             onChange={formik.handleChange}
                         />
