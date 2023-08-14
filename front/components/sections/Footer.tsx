@@ -115,7 +115,7 @@ const Footer = ({sites}: FooterType) => {
                                 <Button
                                     isLink
                                     h5
-                                    link="/"
+                                    link="/statue"
                                     text="Regulamin"
                                     color="white"
                                 />

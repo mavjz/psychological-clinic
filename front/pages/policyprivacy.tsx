@@ -1,10 +1,8 @@
-import Headline from 'components/items/Headline'
-import Paragraph from 'components/items/Paragraph'
 import Article from 'components/sections/Article'
 import WrapperWidth from 'components/wrappers/Wrapperwidth'
 import React from 'react'
 
-const policyprivacy = () => {
+const PolicyPrivacy = () => {
     return (
         <WrapperWidth>
             <Article
@@ -76,4 +74,4 @@ const policyprivacy = () => {
     )
 }
 
-export default policyprivacy
+export default PolicyPrivacy
