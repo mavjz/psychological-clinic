@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { HeadlineType } from 'types/items/headline'
 import Headline from './Headline'
-const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", link, isUppercase, isLink, isImage, className, image}: ButtonType) => {
+const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", link, isUppercase, isLink, isImage, className, image, type}: ButtonType) => {
     return (
         <React.Fragment>
             {isLink ? 
@@ -38,7 +38,7 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
                 :
                 isImage ? 
                         <div className={className}>
-                           <button className={`${className}-button`}>
+                           <button className={`${className}-button`} type={type}>
                                 <figure className={`${className}-button__placeholder`}>
                                     <Image
                                         src={image || ""}
@@ -50,7 +50,7 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
                             </button> 
                         </div>
                     :
-                        <button className={className}>
+                        <button className={className} type={type}>
                             <Headline
                                 h1={h1}
                                 h2={h2}
@@ -70,6 +70,7 @@ const Button = ({h1, h2, h3, h4, h5, h6, text, color="green", place="center", li
 }
 export default Button
 type ButtonType = {
+    type?: "button" | "submit" | "reset" | undefined,
     image?: string, 
     link?: string,
     isLink?: boolean, 
