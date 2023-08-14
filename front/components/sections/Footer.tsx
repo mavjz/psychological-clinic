@@ -103,7 +103,7 @@ const Footer = ({sites}: FooterType) => {
                                 <Button
                                     isLink
                                     h5
-                                    link="/"
+                                    link="/policyprivacy"
                                     text="Polityka prywatności"
                                     color="white"
                                 />
