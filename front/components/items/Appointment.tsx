@@ -1,6 +1,7 @@
 import WrapperWidth from "components/wrappers/Wrapperwidth";
 import { isSameDay } from "date-fns";
 import { strapiAppointmentGet } from "lib/strapi/appointments/get";
+import { strapiAppointmentQuery } from "lib/strapi/appointments/queryType";
 import React, { useEffect, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { Grid } from "react-loader-spinner";
@@ -17,8 +18,8 @@ const Appointment = () => {
     };
     let [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
-    const [appointmentsTherapist, setAppointmentsTherapist] = useState<appointmentQueryType[]>();
-    const [appointmentsDate, setAppointmentsDate] = useState<appointmentQueryType[]>();
+    const [appointmentsTherapist, setAppointmentsTherapist] = useState<strapiAppointmentQuery[]>();
+    const [appointmentsDate, setAppointmentsDate] = useState<strapiAppointmentQuery[]>();
     useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
@@ -45,10 +46,10 @@ const Appointment = () => {
     const stringDate = allDates?.filter((item, index) => {return allDates?.indexOf(item) === index});
     const availableDate = stringDate?.map(item => new Date(item));
     let allHours = appointmentsDate?.map(item => item.attributes.time);
-    let sortHours = allHours?.sort(function (a, b) {
+    let sortedHours = allHours?.sort(function (a, b) {
         return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
     });
-    let allHourswoSeconds = sortHours?.map(item => item.slice(0,5));
+    let allHourswoSeconds = sortedHours?.map(item => item.slice(0,5));
     // ??? https://github.com/gpbl/react-day-picker/issues/768
     function isDayDisabled(day: Date) {
         return !availableDate?.some(disabledDay => 
@@ -112,13 +113,3 @@ type filters = {
     [Keys: string]: Object,
 }
 
-type appointmentQueryType = {
-    attributes: {
-        date: string, 
-        time: string, 
-        appointment_code?: number,
-        createdAt: string, 
-        updatedAt: string,
-        id: number,
-    }
-}
