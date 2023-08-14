@@ -5,7 +5,7 @@
         padding: 1rem;
         border-radius: 0.5rem;
         background-color: $green-light;
-        @include sizes(50vw, fit-content);
+        @include sizes(calc(50vw - 2rem), fit-content);
         @include grid(row, 1rem);
         &__question {
             @include sizes(fit-content, fit-content);
