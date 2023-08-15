@@ -79,14 +79,15 @@ const Calculator = () => {
                         <label htmlFor='therapist'>Wybierz terapeutę</label>
                         {/*
                             TODO: types for therapists
-                            TODO: refresh fetched data in component
+                            TODO*: refresh fetched data in component
                         */}
+                        
                         <select onChange={formik.handleChange} name='therapist' defaultValue={'DEFAULT'}>
                             <option disabled hidden value={'DEFAULT'}>Kliknij by rozwinąć listę</option>
                             {
-                                therapistNameList?.map((item) => {
+                                therapistNameList?.map((item) => 
                                     <option value={formik.values.therapist.item}>{item}</option>
-                                });
+                                )
                             }
                             {/* <option value={formik.values.therapist.Jacek}>TEMPJacek</option>
                             <option value={formik.values.therapist.Bożena}>TEMPBożena</option> */}
