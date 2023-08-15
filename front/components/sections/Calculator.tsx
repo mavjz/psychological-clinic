@@ -3,6 +3,7 @@ import Paragraph from 'components/items/Paragraph'
 import WrapperWidth from 'components/wrappers/Wrapperwidth'
 import { useFormik } from 'formik'
 import { strapiTherapistGet } from 'lib/strapi/therapists/get'
+import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType'
 import React, {useEffect, useState} from 'react'
 
 const Calculator = () => {
@@ -24,20 +25,29 @@ const Calculator = () => {
             setIsSubmit(true);
         },
     });
-    const [therapist, setTherapist] = useState();
-    const TEMPtherapistName = 'Jacek';
-    let filters: filters = {};
-    filters.first_name = {
-        $eq: TEMPtherapistName
-    }
+    const [therapistList, setTherapistList] = useState<strapiTherapistQuery[]>();
     useEffect(() => {
-        strapiTherapistGet(filters).then((res) => {
-            setTherapist(res.data.data);
-            console.log(res.data.data)
-        }
-    );
-    }, [formik.handleChange])
+        strapiTherapistGet({}).then((res) => {
+            setTherapistList(res.data.data);
+            console.log(res.data.data);
+        });
+    }, []);
+    const therapistNameList = therapistList?.map(item => item.attributes.first_name);
+    console.log(therapistNameList);
+    // const [therapist, setTherapist] = useState();
+    // const TEMPtherapistName = 'Jacek';
+    // const filters: filters = {};
+    // filters.first_name = {
+    //     $eq: TEMPtherapistName
+    // }
+    // useEffect(() => {
+    //     strapiTherapistGet(filters).then((res) => {
+    //         setTherapist(res.data.data);
+    //         console.log(res.data.data);
+    //     });
+    // }, [formik.handleChange]);
     useEffect(() => {
+        
         // TODO: fetching cost and name from api 
         if (data?.therapist === 'TEMPJacek') {
             cost = 150 * Number(data.session);
@@ -67,13 +77,19 @@ const Calculator = () => {
                 <form className='calculator-form' onSubmit={formik.handleSubmit}>
                     <div className='calculator-form__question'>
                         <label htmlFor='therapist'>Wybierz terapeutę</label>
+                        {/*
+                            TODO: types for therapists
+                            TODO: refresh fetched data in component
+                        */}
                         <select onChange={formik.handleChange} name='therapist' defaultValue={'DEFAULT'}>
                             <option disabled hidden value={'DEFAULT'}>Kliknij by rozwinąć listę</option>
-                            {/* TODO: fetching name from api 
-                                TODO: types for therapists
-                            */}
-                            <option value={formik.values.therapist.Jacek}>TEMPJacek</option>
-                            <option value={formik.values.therapist.Bożena}>TEMPBożena</option>
+                            {
+                                therapistNameList?.map((item) => {
+                                    <option value={formik.values.therapist.item}>{item}</option>
+                                });
+                            }
+                            {/* <option value={formik.values.therapist.Jacek}>TEMPJacek</option>
+                            <option value={formik.values.therapist.Bożena}>TEMPBożena</option> */}
                         </select>
                     </div>
                     <div className='calculator-form__question'>
@@ -139,7 +155,7 @@ const Calculator = () => {
                     />
                 </form>
                 {isSubmit && 
-                // TODO: refresh data 
+                // TODO*: refresh fetched data 
                     <Paragraph
                         big
                         place='center'
