@@ -2,6 +2,7 @@ import Button from 'components/items/Button'
 import Paragraph from 'components/items/Paragraph'
 import WrapperWidth from 'components/wrappers/Wrapperwidth'
 import { useFormik } from 'formik'
+import { strapiTherapistGet } from 'lib/strapi/therapists/get'
 import React, {useEffect, useState} from 'react'
 
 const Calculator = () => {
@@ -23,7 +24,19 @@ const Calculator = () => {
             setIsSubmit(true);
         },
     });
-    let filter: filters = {};
+    const [therapist, setTherapist] = useState();
+    const TEMPtherapistName = 'Jacek';
+    let filters: filters = {};
+    filters.first_name = {
+        $eq: TEMPtherapistName
+    }
+    useEffect(() => {
+        strapiTherapistGet(filters).then((res) => {
+            setTherapist(res.data.data);
+            console.log(res.data.data)
+        }
+    );
+    }, [formik.handleChange])
     useEffect(() => {
         // TODO: fetching cost and name from api 
         if (data?.therapist === 'TEMPJacek') {

@@ -3,7 +3,7 @@ import qs from 'qs';
 
 const base_url = "http://localhost:1337/api/";
 
-export const strapiGet = async ({req_url, filter}: StrapiCRUDType) => await axios.get(base_url + req_url + "?" + qs.stringify(filter));
+export const strapiGet = async ({req_url, filters}: StrapiCRUDType) => await axios.get(base_url + req_url + "?" + qs.stringify({filters}));
 
 export const strapiPost = async ({req_url, req}: StrapiCRUDType) => await axios.post(base_url + req_url, req);
 
@@ -13,6 +13,6 @@ export const strapiDelete = async ({req_url}: StrapiCRUDType) => await axios.del
 
 type StrapiCRUDType = {
     req_url: string, 
-    filter?: Object,
+    filters?: Object,
     req?: Object,
 }
