@@ -1,21 +1,46 @@
 import Button from 'components/items/Button'
+import Paragraph from 'components/items/Paragraph'
 import WrapperWidth from 'components/wrappers/Wrapperwidth'
 import { useFormik } from 'formik'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 const Calculator = () => {
+    const [data, setData] = useState<formData>();
+    const [isSubmit, setIsSubmit] = useState(false);
+    // TODO: find proper type
+    let cost: Number = 0;
+    let discount: Number = 0;
     const formik = useFormik({
         initialValues: {
             therapist: '',
-            session: '',
+            session: undefined,
             relative: '',
-            relativesCode: '',
-            workshop: '',
+            relativesCode: undefined,
+            workshop: false,
         },
         onSubmit: () => {
-            console.log(formik.values)
-        }
+            setData(formik.values);
+            setIsSubmit(true);
+        },
     });
+    let filter: filters = {};
+    useEffect(() => {
+        // TODO: fetching cost and name from api 
+        if (data?.therapist === 'TEMPJacek') {
+            cost = 150 * Number(data.session);
+            if (Number(data.session) > 24) {
+                cost = cost * 0.9;
+                discount = cost * 0.1;
+            }
+        }
+        if (data?.therapist === 'TEMPBożena') {
+            cost = 200 * Number(data.session);
+            if (Number(data.session) > 24) {
+                cost = cost * 0.9;
+            }
+        }
+    }, [data])
+   
     return (
         <WrapperWidth>
             {/* If above 24 sessions, 15% discount
@@ -29,8 +54,9 @@ const Calculator = () => {
                 <form className='calculator-form' onSubmit={formik.handleSubmit}>
                     <div className='calculator-form__question'>
                         <label htmlFor='therapist'>Wybierz terapeutę</label>
-                        <select onChange={formik.handleChange} name='therapist'>
-                            {/* TODO: taking data from api 
+                        <select onChange={formik.handleChange} name='therapist' defaultValue={'DEFAULT'}>
+                            <option disabled hidden value={'DEFAULT'}>Kliknij by rozwinąć listę</option>
+                            {/* TODO: fetching name from api 
                                 TODO: types for therapists
                             */}
                             <option value={formik.values.therapist.Jacek}>TEMPJacek</option>
@@ -99,9 +125,30 @@ const Calculator = () => {
                         className='calculator-form__submit'
                     />
                 </form>
+                {isSubmit && 
+                // TODO: refresh data 
+                    <Paragraph
+                        big
+                        place='center'
+                        color='black'
+                        text={`Łączny koszt wynosi ${cost} złotych. Udało Ci się zaoszczędzić ${discount} złotych`}
+                    />
+                }
             </div>
         </WrapperWidth>
     )
 }
 
 export default Calculator
+
+type formData = {
+    therapist?: string, 
+    session: number | undefined,
+    relative?: string,
+    relativesCode?: number | undefined,
+    workshop?: boolean,
+}
+
+type filters = {
+    [Keys: string]: Object,
+}
