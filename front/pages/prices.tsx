@@ -3,9 +3,20 @@ import Article from "components/sections/Article";
 import Calculator from "components/sections/Calculator";
 import Welcome from "components/sections/Welcome";
 import WrapperElements from "components/wrappers/WrapperElements";
-import React from "react";
+import { strapiTherapistGet } from "lib/strapi/therapists/get";
+import { strapiTherapistQuery } from "lib/strapi/therapists/queryType";
+import React, { useEffect, useState } from "react";
 
 const Prices = () => {
+    // const [therapistList, setTherapistList] = useState<strapiTherapistQuery[]>();
+    // useEffect(() => {
+    //     strapiTherapistGet({}).then((res) => {
+    //         setTherapistList(res.data.data);
+    //     });
+    // }, []);
+    // const costs = therapistList?.map(item => 
+    //     `${item.attributes.first_name + " " + item.attributes.last_name} - koszt wizyty ${item.attributes.session_cost} złotych` 
+    // );
     return (
         <React.Fragment>
             <Welcome
@@ -41,20 +52,17 @@ const Prices = () => {
                         },
                     ]}
                 />
-                <Article
+                {/* <Article
                     headline="Cennik"
                     texts={[
                         {
                             text: 'Warsztaty "pewność siebie" - 1300zł'
                         },
                         {
-                            text: ''
-                        },
-                        {
-                            text: ''
-                        },
+                            text: costs
+                        }
                     ]}
-                />
+                /> */}
             </WrapperElements>
             
         </React.Fragment>

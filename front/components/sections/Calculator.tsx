@@ -9,8 +9,8 @@ import React, {useEffect, useState} from 'react'
 const Calculator = () => {
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
-    let cost: number = 0;
-    let discount: number = 0;
+    const [cost, setCost] = useState(0);
+    const [discount, setDiscount] = useState(0);
     const formik = useFormik({
         initialValues: {
             therapist: '',
@@ -36,29 +36,32 @@ const Calculator = () => {
             data.session = Number(data.session) -1;
         }
         therapistList?.map((item) => {
-                if (data?.therapist === item.attributes.first_name) {
-                    cost = item.attributes.session_cost * Number(data.session);
-                    if (data?.workshop === true) {
-                        if (Number(data.session)+1 >= 24) {
-                            cost = cost * 0.9;
-                            discount = cost * 0.1;
-                        }
-                    } else {
-                        if (Number(data.session) >= 24) {
-                            cost = cost * 0.9;
-                            discount = cost * 0.1;
-                        }
+            if (data?.therapist == item.attributes.first_name) {
+                setCost(item.attributes.session_cost * Number(data.session));
+                if (data?.workshop == true) {
+                    if (Number(data.session)+1 >= 24) {
+                        setDiscount(cost * 0.1);
+                        setCost(cost * 0.9);
+                        
                     }
+                } else {
+                    if (Number(data.session) >= 24) {
+                        setDiscount(cost * 0.1);
+                        setCost(cost * 0.9);
+                    }
+                }
             }}
         );
-        if (data?.workshop === true) {
-            cost = cost + 1300;
+        if (data?.workshop == true) {
+            setCost(cost + 1300);
             data.session = Number(data.session)+1;
         }
-        if (data?.relative === "true") {
-            cost = cost * 0.95;
-            discount = discount + cost * 0.05;
+        if (data?.relative == "true") {
+            setDiscount(discount + cost * 0.05);
+            setCost(cost * 0.95);
         }
+        setDiscount(Math.round(discount * 100) / 100);
+        setCost(Math.round(cost * 100) / 100);
         console.log(cost + "-------" + discount);
     }, [data])
    
@@ -146,8 +149,8 @@ const Calculator = () => {
                         className='calculator-form__submit'
                     />
                 </form>
-                {isSubmit && 
-                // TODO*: refresh fetched data 
+                {
+                   isSubmit &&
                     <Paragraph
                         big
                         place='center'
