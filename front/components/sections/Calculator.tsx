@@ -32,7 +32,6 @@ const Calculator = () => {
     }, []);
     const therapistNameList = therapistList?.map(item => item.attributes.first_name);
     useEffect(() => {
-        // TODO: fetching cost and name from api 
         if (data?.workshop === true) {
             data.session = Number(data.session) -1;
         }
@@ -53,7 +52,7 @@ const Calculator = () => {
             }}
         );
         if (data?.workshop === true) {
-            cost = cost + 1200;
+            cost = cost + 1300;
             data.session = Number(data.session)+1;
         }
         if (data?.relative === "true") {
@@ -68,9 +67,6 @@ const Calculator = () => {
             {/* If above 24 sessions, 15% discount
                 If has relatives, 5% discount 
                 If workshops, 1 therapy session free
-
-                1300zl - workshops
-                200zl - therapy session
             */}
             <div className='calculator'>
                 <form className='calculator-form' onSubmit={formik.handleSubmit}>

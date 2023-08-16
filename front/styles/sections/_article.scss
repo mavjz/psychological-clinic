@@ -1,4 +1,5 @@
 .article {
+    @include sizes(fit-content);
     @include grid(row, 2vh);
     margin: 4vh 0;
     position: relative;
