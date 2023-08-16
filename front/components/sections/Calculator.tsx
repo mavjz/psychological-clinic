@@ -9,9 +9,8 @@ import React, {useEffect, useState} from 'react'
 const Calculator = () => {
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
-    // TODO: find proper type
-    let cost: Number = 0;
-    let discount: Number = 0;
+    let cost: number = 0;
+    let discount: number = 0;
     const formik = useFormik({
         initialValues: {
             therapist: '',
@@ -29,39 +28,39 @@ const Calculator = () => {
     useEffect(() => {
         strapiTherapistGet({}).then((res) => {
             setTherapistList(res.data.data);
-            console.log(res.data.data);
         });
     }, []);
     const therapistNameList = therapistList?.map(item => item.attributes.first_name);
-    console.log(therapistNameList);
-    // const [therapist, setTherapist] = useState();
-    // const TEMPtherapistName = 'Jacek';
-    // const filters: filters = {};
-    // filters.first_name = {
-    //     $eq: TEMPtherapistName
-    // }
-    // useEffect(() => {
-    //     strapiTherapistGet(filters).then((res) => {
-    //         setTherapist(res.data.data);
-    //         console.log(res.data.data);
-    //     });
-    // }, [formik.handleChange]);
     useEffect(() => {
-        
         // TODO: fetching cost and name from api 
-        if (data?.therapist === 'TEMPJacek') {
-            cost = 150 * Number(data.session);
-            if (Number(data.session) > 24) {
-                cost = cost * 0.9;
-                discount = cost * 0.1;
-            }
+        if (data?.workshop === true) {
+            data.session = Number(data.session) -1;
         }
-        if (data?.therapist === 'TEMPBożena') {
-            cost = 200 * Number(data.session);
-            if (Number(data.session) > 24) {
-                cost = cost * 0.9;
-            }
+        therapistList?.map((item) => {
+                if (data?.therapist === item.attributes.first_name) {
+                    cost = item.attributes.session_cost * Number(data.session);
+                    if (data?.workshop === true) {
+                        if (Number(data.session)+1 >= 24) {
+                            cost = cost * 0.9;
+                            discount = cost * 0.1;
+                        }
+                    } else {
+                        if (Number(data.session) >= 24) {
+                            cost = cost * 0.9;
+                            discount = cost * 0.1;
+                        }
+                    }
+            }}
+        );
+        if (data?.workshop === true) {
+            cost = cost + 1200;
+            data.session = Number(data.session)+1;
         }
+        if (data?.relative === "true") {
+            cost = cost * 0.95;
+            discount = discount + cost * 0.05;
+        }
+        console.log(cost + "-------" + discount);
     }, [data])
    
     return (
@@ -77,20 +76,16 @@ const Calculator = () => {
                 <form className='calculator-form' onSubmit={formik.handleSubmit}>
                     <div className='calculator-form__question'>
                         <label htmlFor='therapist'>Wybierz terapeutę</label>
-                        {/*
-                            TODO: types for therapists
-                            TODO*: refresh fetched data in component
-                        */}
-                        
                         <select onChange={formik.handleChange} name='therapist' defaultValue={'DEFAULT'}>
                             <option disabled hidden value={'DEFAULT'}>Kliknij by rozwinąć listę</option>
+                            {/*
+                                TODO: types for therapists
+                            */}
                             {
-                                therapistNameList?.map((item) => 
-                                    <option value={formik.values.therapist.item}>{item}</option>
+                                therapistNameList?.map((item, index) => 
+                                    <option value={formik.values.therapist.item} key={index}>{item}</option>
                                 )
                             }
-                            {/* <option value={formik.values.therapist.Jacek}>TEMPJacek</option>
-                            <option value={formik.values.therapist.Bożena}>TEMPBożena</option> */}
                         </select>
                     </div>
                     <div className='calculator-form__question'>
@@ -177,8 +172,4 @@ type formData = {
     relative?: string,
     relativesCode?: number | undefined,
     workshop?: boolean,
-}
-
-type filters = {
-    [Keys: string]: Object,
 }
