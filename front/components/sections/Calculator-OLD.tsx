@@ -6,7 +6,7 @@ import { strapiTherapistGet } from "lib/strapi/therapists/get";
 import { strapiTherapistQuery } from "lib/strapi/therapists/queryType";
 import React, { useEffect, useState } from "react";
 
-const Calculator = () => {
+const CalculatorOLD = () => {
   const [data, setData] = useState<formData>();
   const [isSubmit, setIsSubmit] = useState(false);
   const [cost, setCost] = useState(0);
@@ -86,7 +86,7 @@ const Calculator = () => {
               </option>
               {/*
                 TODO: types for therapists
-            */}
+              */}
               {therapistNameList?.map((therapistName, index) => (
                 <option
                   value={formik.values.therapist.therapistName}
@@ -179,7 +179,7 @@ const Calculator = () => {
   );
 };
 
-export default Calculator;
+export default CalculatorOLD;
 
 type formData = {
   therapist?: string;
