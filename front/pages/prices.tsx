@@ -2,7 +2,7 @@ import Headline from "components/items/Headline";
 import Article from "components/sections/Article";
 import Calculator from "components/sections/Calculator";
 import Welcome from "components/sections/Welcome";
-import WrapperElements from "components/wrappers/WrapperElements";
+import WrapperColumn from "components/wrappers/WrapperColumn";
 import { strapiTherapistGet } from "lib/strapi/therapists/get";
 import { strapiTherapistQuery } from "lib/strapi/therapists/queryType";
 import React, { useEffect, useState } from "react";
@@ -37,7 +37,7 @@ const Prices = () => {
                 text="Skorzystaj z kalkulatora kosztów wizyt psychoterapeutycznych"
             />
             <Calculator/>
-            <WrapperElements>
+            <WrapperColumn>
                 <Article
                     headline="Promocje"
                     texts={[
@@ -63,7 +63,7 @@ const Prices = () => {
                         }
                     ]}
                 /> */}
-            </WrapperElements>
+            </WrapperColumn>
             
         </React.Fragment>
     )

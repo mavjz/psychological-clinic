@@ -15,7 +15,7 @@ const Calculator = () => {
         initialValues: {
             therapist: '',
             session: undefined,
-            relative: '',
+            relative: false,
             relativesCode: undefined,
             workshop: false,
         },
@@ -30,15 +30,15 @@ const Calculator = () => {
             setTherapistList(res.data.data);
         });
     }, []);
-    const therapistNameList = therapistList?.map(item => item.attributes.first_name);
+    const therapistNameList = therapistList?.map(therapist => therapist.attributes.first_name);
     useEffect(() => {
-        if (data?.workshop === true) {
+        if (data?.workshop) {
             data.session = Number(data.session) -1;
         }
-        therapistList?.map((item) => {
-            if (data?.therapist == item.attributes.first_name) {
-                setCost(item.attributes.session_cost * Number(data.session));
-                if (data?.workshop == true) {
+        therapistList?.map((therapist) => {
+            if (data?.therapist === therapist.attributes.first_name) {
+                setCost(therapist.attributes.session_cost * Number(data.session));
+                if (data?.workshop) {
                     if (Number(data.session)+1 >= 24) {
                         setDiscount(cost * 0.1);
                         setCost(cost * 0.9);
@@ -52,11 +52,11 @@ const Calculator = () => {
                 }
             }}
         );
-        if (data?.workshop == true) {
+        if (data?.workshop) {
             setCost(cost + 1300);
             data.session = Number(data.session)+1;
         }
-        if (data?.relative == "true") {
+        if (data?.relative) {
             setDiscount(discount + cost * 0.05);
             setCost(cost * 0.95);
         }
@@ -81,8 +81,8 @@ const Calculator = () => {
                                 TODO: types for therapists
                             */}
                             {
-                                therapistNameList?.map((item, index) => 
-                                    <option value={formik.values.therapist.item} key={index}>{item}</option>
+                                therapistNameList?.map((therapistName, index) => 
+                                    <option value={formik.values.therapist.therapistName} key={index}>{therapistName}</option>
                                 )
                             }
                         </select>
@@ -104,8 +104,8 @@ const Calculator = () => {
                                 <input 
                                     type='radio' 
                                     name='relative' 
-                                    value='true'
-                                    checked={formik.values.relative === 'true'}
+                                    value={true}
+                                    checked={formik.values.relative === true}
                                     onChange={formik.handleChange}
                                 />
                                 <label htmlFor='relative'>Tak</label>
@@ -114,8 +114,8 @@ const Calculator = () => {
                                 <input 
                                     type='radio' 
                                     name='relative' 
-                                    value='false'
-                                    checked={formik.values.relative === 'false'}
+                                    value={false}
+                                    checked={formik.values.relative === false}
                                     onChange={formik.handleChange}
                                 />
                                 <label htmlFor='relative'>Nie</label>
@@ -168,7 +168,7 @@ export default Calculator
 type formData = {
     therapist?: string, 
     session: number | undefined,
-    relative?: string,
+    relative?: boolean,
     relativesCode?: number | undefined,
     workshop?: boolean,
 }
