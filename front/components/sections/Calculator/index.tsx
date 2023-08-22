@@ -14,14 +14,13 @@ const Calculator = () => {
     initialValues: {
       therapist: "",
       session: undefined,
-      relative: " ",
+      relative: "",
       relativesCode: undefined,
       workshop: false,
     },
     onSubmit: () => {
       setData(formik.values);
       setIsSubmit(true);
-      console.log(formik.values);
     },
   });
   const [therapistList, setTherapistList] = useState<strapiTherapistQuery[]>();
@@ -36,8 +35,17 @@ const Calculator = () => {
   const [cost, setCost] = useState(0);
   const [discount, setDiscount] = useState(0);
   useEffect(() => {
-    calculation({data, therapistList, cost, setCost, discount, setDiscount});
-  }, [data])
+    setCost(0);
+    setDiscount(0);
+    console.log(cost + " -BEFORE- " + discount);
+    setCost(calculation({data, therapistList, cost, discount, 
+      // setCost, setDiscount
+    })?.[0]);
+    setDiscount(calculation({data, therapistList, cost, discount, 
+      // setCost, setDiscount
+    })?.[1]);
+    console.log(cost + " -AFTER- " + discount);
+  }, [data]);
   return (
     <WrapperWidth>
       {/* If above 24 sessions, 15% discount
