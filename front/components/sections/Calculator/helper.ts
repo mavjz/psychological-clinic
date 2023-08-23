@@ -6,9 +6,9 @@ export function calculation({
   therapistList,
   cost,
   discount,
-  // setCost,
-  // setDiscount,
 }: props) {
+  discount = 0;
+  cost = 0;
   if (data?.workshop) {
     data.session = Number(data.session) - 1;
   }
@@ -40,13 +40,11 @@ export function calculation({
   }
   discount = Math.round(discount * 100) / 100;
   cost = Math.round(cost * 100) / 100;
-  return [cost, discount]
+  return {cost, discount};
 }
 type props = {
   data: formData | undefined,
   therapistList: strapiTherapistQuery[] | undefined,
   cost: number,
   discount: number,
-  // setCost: React.Dispatch<React.SetStateAction<number>>, 
-  // setDiscount: React.Dispatch<React.SetStateAction<number>>,
 };

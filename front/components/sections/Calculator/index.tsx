@@ -35,16 +35,8 @@ const Calculator = () => {
   const [cost, setCost] = useState(0);
   const [discount, setDiscount] = useState(0);
   useEffect(() => {
-    setCost(0);
-    setDiscount(0);
-    console.log(cost + " -BEFORE- " + discount);
-    setCost(calculation({data, therapistList, cost, discount, 
-      // setCost, setDiscount
-    })?.[0]);
-    setDiscount(calculation({data, therapistList, cost, discount, 
-      // setCost, setDiscount
-    })?.[1]);
-    console.log(cost + " -AFTER- " + discount);
+    setCost(calculation({data, therapistList, cost, discount})?.cost);
+    setDiscount(calculation({data, therapistList, cost, discount})?.discount);
   }, [data]);
   return (
     <WrapperWidth>
@@ -145,14 +137,14 @@ const Calculator = () => {
             className="calculator-form__submit"
           />
         </form>
-        {/* {isSubmit && (
+        {isSubmit && (
           <Paragraph
             big
             place="center"
             color="black"
             text={`Łączny koszt wynosi ${cost} złotych. Udało Ci się zaoszczędzić ${discount} złotych`}
           />
-        )} */}
+        )}
       </div>
     </WrapperWidth>
   );
