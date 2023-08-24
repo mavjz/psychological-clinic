@@ -154,7 +154,7 @@ const Calculator = () => {
                 </form>
                 {isSubmit && (
                     <Paragraph
-                        big
+                        size="big"
                         place="center"
                         color="black"
                         text={`Łączny koszt wynosi ${cost} złotych. Udało Ci się zaoszczędzić ${discount} złotych`}

@@ -2,9 +2,7 @@ import React from 'react';
 import { ParagraphType } from 'types/items/paragraph';
 
 const Paragraph = ({
-    small,
-    medium,
-    big,
+    size,
     text,
     place = 'left',
     color = 'green',
@@ -14,9 +12,9 @@ const Paragraph = ({
     const classes = color.concat(' ' + place);
     return (
         <React.Fragment>
-            {small && <p className={`paragraph-small ${classes}`}>{text}</p>}
-            {medium && <p className={`paragraph-medium ${classes}`}>{text}</p>}
-            {big && <p className={`paragraph-big ${classes}`}>{text}</p>}
+            {size === 'small' && <p className={`paragraph-small ${classes}`}>{text}</p>}
+            {size === 'medium' && <p className={`paragraph-medium ${classes}`}>{text}</p>}
+            {size === 'big' && <p className={`paragraph-big ${classes}`}>{text}</p>}
         </React.Fragment>
     );
 };

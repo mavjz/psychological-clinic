@@ -1,7 +1,5 @@
 export type ParagraphType = {
-    small?: boolean;
-    medium?: boolean;
-    big?: boolean;
+    size: 'small' | 'medium' | 'big';
     text: string;
     place?: string;
     color?: string;

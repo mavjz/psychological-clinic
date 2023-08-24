@@ -3,6 +3,7 @@ import WrapperWidth from 'components/wrappers/Wrapperwidth';
 import React from 'react';
 import { ParagraphType } from 'types/items/paragraph';
 import Article from './Article';
+import { ArticleType } from 'types/sections/article';
 
 const BenefitsInDetail = ({
     isCouple,
@@ -42,6 +43,4 @@ type BenefitsInDetailType = {
     isPerson?: boolean;
     isLove?: boolean;
     isLovePrice?: boolean;
-    headline: string;
-    texts: Array<ParagraphType>;
-};
+} & ArticleType;

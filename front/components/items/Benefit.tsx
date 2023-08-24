@@ -43,8 +43,13 @@ const Benefit = ({
                     ) : null}
                 </div>
             </div>
-            <Headline size="h2" place="center" text={headline} color="greendark" />
-            <Paragraph small place="center" text={text || ''} />
+            <Headline
+                size="h2"
+                place="center"
+                text={headline}
+                color="greendark"
+            />
+            <Paragraph size="small" place="center" text={text || ''} />
         </div>
     );
 };

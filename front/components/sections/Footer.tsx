@@ -30,7 +30,7 @@ const Footer = ({ sites }: FooterType) => {
                                     Praesent ligula risus, dignissim id mauris a, pretium rutrum magna. 
                                     Pellentesque at turpis consequat, euismod quam vitae, vulputate nisl. 
                                     Aliquam lectus nibh, scelerisque eget magna vitae, fringilla efficitur leo."
-                            medium
+                            size="medium"
                             place="justify"
                             color="white"
                         />
@@ -59,7 +59,7 @@ const Footer = ({ sites }: FooterType) => {
                             <LocationOnIcon className="footer-desktop__contact--subsection-icon" />
                             <Paragraph
                                 text="ul. Karowa 53, Warszawa 00-324"
-                                small
+                                size="small"
                                 color="white"
                             />
                         </div>
@@ -67,7 +67,7 @@ const Footer = ({ sites }: FooterType) => {
                             <LocationOnIcon className="footer-desktop__contact--subsection-icon" />
                             <Paragraph
                                 text="ul. Żółwińska 81, Szczecin 71-895"
-                                small
+                                size="small"
                                 color="white"
                             />
                         </div>
@@ -75,7 +75,7 @@ const Footer = ({ sites }: FooterType) => {
                             <PhoneEnabledIcon className="footer-desktop__contact--subsection-icon" />
                             <Paragraph
                                 text="+48 51 970 85 82"
-                                small
+                                size="small"
                                 color="white"
                             />
                         </div>
@@ -83,7 +83,7 @@ const Footer = ({ sites }: FooterType) => {
                             <AccessTimeIcon className="footer-desktop__contact--subsection-icon" />
                             <Paragraph
                                 text="Pon - Pt: 8-17, Sb - Nd: 10-14"
-                                small
+                                size="small"
                                 color="white"
                             />
                         </div>

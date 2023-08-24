@@ -25,13 +25,13 @@ const Profile = ({ image, name, text, isBig }: ProfileType) => {
                 >
                     <Headline
                         text={name}
-                        size={isBig ? "h1" : "h3"}
+                        size={isBig ? 'h1' : 'h3'}
                         place="center"
                         color="white"
                     />
                     <Paragraph
                         text={text || ''}
-                        small
+                        size="small"
                         color="white"
                         place="center"
                     />
