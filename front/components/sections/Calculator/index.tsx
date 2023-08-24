@@ -12,7 +12,9 @@ const Calculator = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const formik = useFormik({
     initialValues: {
-      therapist: "",
+      therapist: {
+        therapistName: ''
+      },
       session: undefined,
       relative: "",
       relativesCode: undefined,
@@ -153,7 +155,9 @@ const Calculator = () => {
 export default Calculator;
 
 export type formData = {
-  therapist?: string;
+  therapist?: {
+    therapistName: string, 
+  };
   session: number | undefined;
   relative?: string;
   relativesCode?: number | undefined;
