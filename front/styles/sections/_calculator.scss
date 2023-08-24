@@ -1,0 +1,27 @@
+.calculator {
+    @include grid($justify-content: center);
+    margin: 2rem 0;
+    &-form {
+        padding: 1rem;
+        border-radius: 0.5rem;
+        background-color: $green-light;
+        @include sizes(calc(50vw - 2rem), fit-content);
+        @include grid(row, 1rem);
+        &__question {
+            @include sizes(fit-content, fit-content);
+            @include grid(column, $column-gap: 0.5rem, $justify-content: left);
+        }
+        &__relatives {
+            background-color: $green-light;
+            @include grid(row);
+            &--answer {
+                margin-top: -0.75rem;
+                @include grid(column, $column-gap: 0.5rem, $justify-content: left);
+            }
+        }
+        &__submit {
+            @include sizes(fit-content, fit-content);
+            padding: 0 1rem;
+        }
+    }
+}

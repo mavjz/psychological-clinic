@@ -1,9 +1,0 @@
-.wrapperbasic {
-    @include sizes(100%, fit-content);
-    display: grid;
-    place-content: center;
-    &-child {
-        @include sizes(100%, fit-content, 1280px);
-        box-sizing: border-box;
-    }
-}

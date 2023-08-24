@@ -26,6 +26,9 @@
       "relation": "oneToMany",
       "target": "api::appointment.appointment",
       "mappedBy": "therapist"
+    },
+    "session_cost": {
+      "type": "integer"
     }
   }
 }

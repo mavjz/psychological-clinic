@@ -1,5 +1,6 @@
 @import "./mixins";
 @import "./variables.scss";
+@import "./global";
 
 @import 'react-day-picker/dist/style.css';
 
@@ -10,6 +11,7 @@
 @import "./items/appointment";
 
 @import "./wrappers/wrapperWidth";
+@import "./wrappers/wrapperColumn";
 
 @import "./sections/navbar";
 @import "./sections/welcome";
@@ -20,87 +22,5 @@
 @import "./sections/benefitsindetail";
 @import "./sections/howwework";
 @import "./sections/footer";
+@import "./sections/calculator";
 
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "NotoSans";
-}
-
-body {
-    background-color: $white-creamy;
-}
-@font-face {
-    font-family: "NotoSans";
-    src: url(./fonts/Noto_Sans/NotoSans-Regular.ttf);
-}
-
-a, p, h1, h2, h3, h4, h5, h6 {
-    background-color: transparent;
-    user-select: none;
-}
-
-// TEXT COLORS
-
-@each $name, $color in $colors {
-    .text#{$name} {
-        color: $color;
-    }
-}
-
-// TEXT ALIGN
-
-@each $side in $sides {
-    .text#{$side} {
-        text-align: $side;
-    }
-}
-
-.capslock {
-    text-transform: uppercase;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-
-// h1 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h2 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h3 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h4 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h5 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-a {
-    text-decoration: none;
-    cursor: pointer;
-}

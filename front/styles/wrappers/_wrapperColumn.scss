@@ -1,0 +1,14 @@
+.wrapperColumn {
+    @include sizes(100%, fit-content);
+    display: grid;
+    place-content: center;
+    &-child {
+        @include grid(column);
+        @include sizes(calc(100vw - 2rem), fit-content, 1280px);
+        box-sizing: border-box;
+        padding: 0 2rem;
+        @media screen and (max-width: $width-tablet) {
+            @include sizes(100vw, fit-content, $width-tablet);
+        }
+    }
+}
