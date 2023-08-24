@@ -1,10 +1,5 @@
  export type HeadlineType = {
-    h1?: boolean,
-    h2?: boolean,
-    h3?: boolean,
-    h4?: boolean,
-    h5?: boolean,
-    h6?: boolean,
+    size: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
     text: string,
     place?: string,
     color?: string,
