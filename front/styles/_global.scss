@@ -1,18 +1,25 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "NotoSans";
+    font-family: 'NotoSans';
 }
 
 body {
     background-color: $white-creamy;
 }
 @font-face {
-    font-family: "NotoSans";
+    font-family: 'NotoSans';
     src: url(./fonts/Noto_Sans/NotoSans-Regular.ttf);
 }
 
-a, p, h1, h2, h3, h4, h5, h6 {
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     background-color: transparent;
     user-select: none;
 }
@@ -40,7 +47,6 @@ a, p, h1, h2, h3, h4, h5, h6 {
 .hidden {
     visibility: hidden;
 }
-
 
 // h1 {
 //     font-size: ;

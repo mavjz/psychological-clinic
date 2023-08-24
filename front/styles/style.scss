@@ -1,26 +1,25 @@
-@import "./mixins";
-@import "./variables.scss";
-@import "./global";
+@import './mixins';
+@import './variables.scss';
+@import './global';
 
 @import 'react-day-picker/dist/style.css';
 
-@import "./items/counter";
-@import "./items/paragraph";
-@import "./items/benefit";
-@import "./items/profile";
-@import "./items/appointment";
+@import './items/counter';
+@import './items/paragraph';
+@import './items/benefit';
+@import './items/profile';
+@import './items/appointment';
 
-@import "./wrappers/wrapperWidth";
-@import "./wrappers/wrapperColumn";
+@import './wrappers/wrapperWidth';
+@import './wrappers/wrapperColumn';
 
-@import "./sections/navbar";
-@import "./sections/welcome";
-@import "./sections/counters";
-@import "./sections/article";
-@import "./sections/benefits";
-@import "./sections/CEOProfile";
-@import "./sections/benefitsindetail";
-@import "./sections/howwework";
-@import "./sections/footer";
-@import "./sections/calculator";
-
+@import './sections/navbar';
+@import './sections/welcome';
+@import './sections/counters';
+@import './sections/article';
+@import './sections/benefits';
+@import './sections/CEOProfile';
+@import './sections/benefitsindetail';
+@import './sections/howwework';
+@import './sections/footer';
+@import './sections/calculator';

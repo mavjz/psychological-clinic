@@ -1,11 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const Services = () => {
-    return (
-        <React.Fragment>
+    return <React.Fragment></React.Fragment>;
+};
 
-        </React.Fragment>
-    )
-}
-
-export default Services
+export default Services;

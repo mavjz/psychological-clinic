@@ -3,19 +3,19 @@ import Headline from 'components/items/Headline';
 import WrapperWidth from 'components/wrappers/Wrapperwidth';
 import React from 'react';
 import { BenefitType } from 'types/items/benefit';
-const Benefits = ({items, headline}: BenefitsType) => {
+const Benefits = ({ items, headline }: BenefitsType) => {
     return (
         <WrapperWidth>
-            <div className='benefits'>
+            <div className="benefits">
                 <Headline
-                    h1
-                    place='center'
-                    color='greendark'
-                    text={headline || ""}
+                    size="h1"
+                    place="center"
+                    color="greendark"
+                    text={headline || ''}
                     isUppercase
                 />
-                <div className='benefits-items'>
-                    {items.map((item, index) =>
+                <div className="benefits-items">
+                    {items.map((item, index) => (
                         <Benefit
                             key={index}
                             isCouple={item?.isCouple}
@@ -27,14 +27,14 @@ const Benefits = ({items, headline}: BenefitsType) => {
                             headline={item?.headline}
                             text={item?.text}
                         />
-                    )}
+                    ))}
                 </div>
             </div>
         </WrapperWidth>
-    )
-}
-export default Benefits
+    );
+};
+export default Benefits;
 type BenefitsType = {
-    items: Array<BenefitType>,
-    headline?: string,
-}
+    items: Array<BenefitType>;
+    headline?: string;
+};

@@ -1,10 +1,10 @@
-import WrapperWidth from "components/wrappers/Wrapperwidth";
-import Image from "next/image";
-import React from "react";
-import { ArticleType } from "types/sections/article";
-import Article from "./Article";
+import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import Image from 'next/image';
+import React from 'react';
+import { ArticleType } from 'types/sections/article';
+import Article from './Article';
 
-const CEOProfile = ({photo, headline, texts}: CEOProfileType) => {
+const CEOProfile = ({ photo, headline, texts }: CEOProfileType) => {
     return (
         <WrapperWidth>
             <div className="CEOProfile">
@@ -16,18 +16,15 @@ const CEOProfile = ({photo, headline, texts}: CEOProfileType) => {
                         className="CEOProfile-placeholder__image"
                     />
                 </div>
-                <Article
-                    headline={headline}
-                    texts={texts}
-                />
+                <Article headline={headline} texts={texts} />
             </div>
         </WrapperWidth>
-    )
-}
+    );
+};
 
-export default CEOProfile
+export default CEOProfile;
 
 type CEOProfileType = {
-    photo: string,
-    headline: string,
-} & ArticleType
+    photo: string;
+    headline: string;
+} & ArticleType;

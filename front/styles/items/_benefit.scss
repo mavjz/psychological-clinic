@@ -9,7 +9,7 @@
             @include grid($place-items: center);
             @include sizes(8vw, 8vw);
             border-radius: 100%;
-            border: solid 5px $green-dark; 
+            border: solid 5px $green-dark;
             background-color: $green-light;
             @media screen and (max-width: $width-tablet) {
                 @include sizes(25vw, 25vw);

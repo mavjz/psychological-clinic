@@ -26,7 +26,7 @@ const Counter = ({headline, number, text, isPlus}: CounterType) => {
             </div>
             <div className="counter-text">
                 <Headline
-                    h4
+                    size="h4"
                     color="green"
                     text={text || ""}
                 />

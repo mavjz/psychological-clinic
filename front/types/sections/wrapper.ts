@@ -1,5 +1,5 @@
-import { Expression } from "typescript";
+import { Expression } from 'typescript';
 
 export type WrapperType = {
-    children: JSX.Element | JSX.Element[] | any ;
-}
+    children: JSX.Element | JSX.Element[] | any;
+};

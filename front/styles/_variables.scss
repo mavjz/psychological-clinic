@@ -1,28 +1,23 @@
-$green: #7E8D85;
-$green-light: #B3BFB8;
+$green: #7e8d85;
+$green-light: #b3bfb8;
 $green-dark-mid: #506255;
-$green-dark: #3C493F;
-$white-creamy: #F0F7F4;
+$green-dark: #3c493f;
+$white-creamy: #f0f7f4;
 $white: white;
-$mint: #A2E3C4;
+$mint: #a2e3c4;
 $yellow-light: #fffdf5;
 
 $width-tablet: 768px;
 
 $colors: (
-    "green": #7E8D85,
-    "greenlight": #B3BFB8,
-    "greendarkmid": #506255,
-    "greendark": #3C493F,
-    "whitecreamy": #F0F7F4,
-    "white": white,
-    "mint": #A2E3C4,
-    "yellowlight": #fffdf5,
+    'green': #7e8d85,
+    'greenlight': #b3bfb8,
+    'greendarkmid': #506255,
+    'greendark': #3c493f,
+    'whitecreamy': #f0f7f4,
+    'white': white,
+    'mint': #a2e3c4,
+    'yellowlight': #fffdf5,
 );
 
-$sides: (
-    left, 
-    right,
-    center,
-    justify,
-);
+$sides: (left, right, center, justify);

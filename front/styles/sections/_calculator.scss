@@ -16,7 +16,11 @@
             @include grid(row);
             &--answer {
                 margin-top: -0.75rem;
-                @include grid(column, $column-gap: 0.5rem, $justify-content: left);
+                @include grid(
+                    column,
+                    $column-gap: 0.5rem,
+                    $justify-content: left
+                );
             }
         }
         &__submit {

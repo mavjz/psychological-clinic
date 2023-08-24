@@ -1,46 +1,45 @@
-import Button from "components/items/Button";
-import WrapperWidth from "components/wrappers/Wrapperwidth";
-import React from "react";
-import { SiteType } from "types/items/site";
-import { useMedia } from "use-media";
+import Button from 'components/items/Button';
+import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import React from 'react';
+import { SiteType } from 'types/items/site';
+import { useMedia } from 'use-media';
 
-const Navbar = ({sites}: NavbarType) => {
-    const isWide = useMedia({maxWidth: "768px"});
+const Navbar = ({ sites }: NavbarType) => {
+    const isWide = useMedia({ maxWidth: '768px' });
     return (
         <div className="navbar">
-            {!isWide && 
+            {!isWide && (
                 <div className="navbar-desktop">
                     <Button
                         isLink
                         link="/"
                         text="HumanHealth.com"
                         color="greendark"
-                        h3
+                        size="h3"
                     />
                     <div className="navbar-desktop__items">
-                        {sites.map((site, index) =>
+                        {sites.map((site, index) => (
                             <Button
                                 isLink
-                                h4
+                                size="h4"
                                 color="greendark"
                                 key={index}
                                 text={site?.name}
                                 link={site?.link}
                             />
-                        )}
+                        ))}
                     </div>
                 </div>
-            }
-            {isWide &&
+            )}
+            {isWide && (
                 <WrapperWidth>
-                    <div className="navbar-mobile">
-                    </div>
+                    <div className="navbar-mobile"></div>
                 </WrapperWidth>
-            }
+            )}
         </div>
-    )
-}
-export default Navbar
+    );
+};
+export default Navbar;
 type NavbarType = {
-    sites: Array<SiteType>
-}
+    sites: Array<SiteType>;
+};

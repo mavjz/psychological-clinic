@@ -7,7 +7,7 @@ const Article = ({headline, texts}: ArticleType) => {
     return (
         <div className='article'>
             <Headline
-                h2
+                size="h2"
                 text={headline}
                 color="greendark"
                 place='center'

@@ -1,33 +1,30 @@
-import React from "react";  
-import { WrapperType } from "types/sections/wrapper";
+import React from 'react';
+import { WrapperType } from 'types/sections/wrapper';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 
-const Transition = ({children}: WrapperType) => {
+const Transition = ({ children }: WrapperType) => {
     const { asPath } = useRouter();
     const variants = {
-            out: {
+        out: {
             opacity: 0,
             y: 40,
             transition: {
-                duration: 0.75
-            }
+                duration: 0.75,
+            },
         },
         in: {
             opacity: 1,
             y: 0,
             transition: {
                 duration: 0.75,
-                delay: 0.5
-            }
-        }
+                delay: 0.5,
+            },
+        },
     };
     return (
         <React.Fragment>
-            <AnimatePresence
-                initial={false}
-                mode="wait"
-                >
+            <AnimatePresence initial={false} mode="wait">
                 <motion.div
                     key={asPath}
                     variants={variants}
@@ -35,11 +32,11 @@ const Transition = ({children}: WrapperType) => {
                     initial="out"
                     exit="out"
                 >
-                {children}
+                    {children}
                 </motion.div>
-	        </AnimatePresence>
+            </AnimatePresence>
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default Transition
+export default Transition;
