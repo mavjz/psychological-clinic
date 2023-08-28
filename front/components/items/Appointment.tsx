@@ -2,26 +2,39 @@ import WrapperWidth from 'components/wrappers/Wrapperwidth';
 import { isSameDay } from 'date-fns';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
+import { strapiTherapistGet } from 'lib/strapi/therapists/get';
+import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
+import Button from './Button';
 
 const Appointment = () => {
-    const TEMPtherapist = 'Bożena';
+    const [chosenTherapist, setChosenTherapist] = useState<string>();
     let rightTime: Date;
     let queryChosenDate: string | undefined;
     const filters: filters = {};
-    filters.therapist = {
-        first_name: {
-            $eq: TEMPtherapist,
-        },
-    };
     let [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
+    const [therapists, setTherapists] = useState<strapiTherapistQuery[]>();
     const [appointmentsTherapist, setAppointmentsTherapist] =
         useState<strapiAppointmentQuery[]>();
     const [appointmentsDate, setAppointmentsDate] =
         useState<strapiAppointmentQuery[]>();
+    useEffect(() => {
+        strapiTherapistGet().then((res) => {
+            setTherapists(res.data.data);
+        });
+    }, []);
+    useEffect(() => {
+        setChosenDate(undefined);
+        filters.therapist = {
+            first_name: {
+                $eq: chosenTherapist,
+            },
+        };
+        console.log(chosenTherapist)
+    }, [chosenTherapist]);
     useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
@@ -32,12 +45,14 @@ const Appointment = () => {
                 $eq: queryChosenDate,
             };
         }
+        console.log(queryChosenDate)
+        console.log(chosenTherapist)
         strapiAppointmentGet(filters).then((res) => {
             setAppointmentsTherapist(res.data.data);
             setAppointmentsDate(res.data.data);
             setIsLoading(false);
         });
-    }, [chosenDate]);
+    }, [chosenDate || chosenTherapist]);
     const allDates = appointmentsTherapist?.map((item) => item.attributes.date);
     // deleting repeated dates
     /* indexOf is searching the first index numer of current item value and 
@@ -82,7 +97,23 @@ const Appointment = () => {
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
-                    {/* TODO making panel to choose therapists */}
+                    {therapists?.map((therapist, index) => (
+                        <Button
+                            key={index}
+                            variant="h3"
+                            text={
+                                therapist.attributes.first_name +
+                                ' ' +
+                                therapist.attributes.last_name
+                            }
+                            colorClass="greendark"
+                            onClick={() =>
+                                setChosenTherapist(
+                                    therapist.attributes.first_name
+                                )
+                            }
+                        />
+                    ))}
                 </div>
                 <div className="appointment-content__data">
                     <div className="appointment-content__data--calendar">

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { HeadlineType } from 'types/items/headline';
 import Headline from './Headline';
 const Button = ({
@@ -15,7 +15,9 @@ const Button = ({
     className,
     image,
     type,
+    onClick,
 }: ButtonType) => {
+    function empty(): any {}
     return (
         <React.Fragment>
             {isLink ? (
@@ -67,7 +69,11 @@ const Button = ({
                     </button>
                 </div>
             ) : (
-                <button className={className} type={type}>
+                <button
+                    className={className}
+                    type={type}
+                    onClick={onClick === undefined ? empty() : onClick}
+                >
                     <Headline
                         variant={variant}
                         text={text}
@@ -88,4 +94,5 @@ type ButtonType = {
     isLink?: boolean;
     isImage?: boolean;
     className?: string;
+    onClick?: () => void;
 } & HeadlineType;
