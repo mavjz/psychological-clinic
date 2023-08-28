@@ -155,8 +155,8 @@ const Calculator = () => {
                 {isSubmit && (
                     <Paragraph
                         size="big"
-                        place="center"
-                        color="black"
+                        placeClass="center"
+                        colorClass="black"
                         text={`Łączny koszt wynosi ${cost} złotych. Udało Ci się zaoszczędzić ${discount} złotych`}
                     />
                 )}

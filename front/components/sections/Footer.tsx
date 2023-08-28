@@ -31,8 +31,8 @@ const Footer = ({ sites }: FooterType) => {
                                     Pellentesque at turpis consequat, euismod quam vitae, vulputate nisl. 
                                     Aliquam lectus nibh, scelerisque eget magna vitae, fringilla efficitur leo."
                             size="medium"
-                            place="justify"
-                            color="white"
+                            placeClass="justify"
+                            colorClass="white"
                         />
                     </div>
                     <div className="footer-desktop__sites">
@@ -60,7 +60,7 @@ const Footer = ({ sites }: FooterType) => {
                             <Paragraph
                                 text="ul. Karowa 53, Warszawa 00-324"
                                 size="small"
-                                color="white"
+                                colorClass="white"
                             />
                         </div>
                         <div className="footer-desktop__contact--subsection">
@@ -68,7 +68,7 @@ const Footer = ({ sites }: FooterType) => {
                             <Paragraph
                                 text="ul. Żółwińska 81, Szczecin 71-895"
                                 size="small"
-                                color="white"
+                                colorClass="white"
                             />
                         </div>
                         <div className="footer-desktop__contact--subsection">
@@ -76,7 +76,7 @@ const Footer = ({ sites }: FooterType) => {
                             <Paragraph
                                 text="+48 51 970 85 82"
                                 size="small"
-                                color="white"
+                                colorClass="white"
                             />
                         </div>
                         <div className="footer-desktop__contact--subsection">
@@ -84,7 +84,7 @@ const Footer = ({ sites }: FooterType) => {
                             <Paragraph
                                 text="Pon - Pt: 8-17, Sb - Nd: 10-14"
                                 size="small"
-                                color="white"
+                                colorClass="white"
                             />
                         </div>
                         <div className="footer-desktop__contact--subsection">

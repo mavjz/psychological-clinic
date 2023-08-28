@@ -19,7 +19,7 @@ const Article = ({ headline, texts }: ArticleType) => {
                         key={index}
                         text={text?.text}
                         size="medium"
-                        place="left"
+                        placeClass="left"
                     />
                 ))}
             </div>

@@ -49,7 +49,7 @@ const Benefit = ({
                 text={headline}
                 colorClass="greendark"
             />
-            <Paragraph size="small" place="center" text={text || ''} />
+            <Paragraph size="small" placeClass="center" text={text || ''} />
         </div>
     );
 };
