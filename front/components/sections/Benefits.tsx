@@ -8,9 +8,9 @@ const Benefits = ({ items, headline }: BenefitsType) => {
         <WrapperWidth>
             <div className="benefits">
                 <Headline
-                    size="h1"
-                    place="center"
-                    color="greendark"
+                    variant="h1"
+                    placeClass="center"
+                    colorClass="greendark"
                     text={headline || ''}
                     isUppercase
                 />

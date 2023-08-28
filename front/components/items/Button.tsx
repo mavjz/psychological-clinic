@@ -4,10 +4,10 @@ import React from 'react';
 import { HeadlineType } from 'types/items/headline';
 import Headline from './Headline';
 const Button = ({
-    size,
+    variant,
     text,
-    color = 'green',
-    place = 'center',
+    colorClass = 'green',
+    placeClass = 'center',
     link,
     isUppercase,
     isLink,
@@ -42,12 +42,12 @@ const Button = ({
                         legacyBehavior
                         className={className}
                     >
-                        <a className={`${className}-a text${color}`}>
+                        <a className={`${className}-a text${colorClass}`}>
                             <Headline
-                                size={size}
+                                variant={variant}
                                 text={text}
-                                place="center"
-                                color={color}
+                                placeClass="center"
+                                colorClass={colorClass}
                                 isUppercase={isUppercase}
                             />
                         </a>
@@ -69,10 +69,10 @@ const Button = ({
             ) : (
                 <button className={className} type={type}>
                     <Headline
-                        size={size}
+                        variant={variant}
                         text={text}
-                        place={place}
-                        color={color}
+                        placeClass={placeClass}
+                        colorClass={colorClass}
                         isUppercase={isUppercase}
                     />
                 </button>

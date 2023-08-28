@@ -44,10 +44,10 @@ const Benefit = ({
                 </div>
             </div>
             <Headline
-                size="h2"
-                place="center"
+                variant="h2"
+                placeClass="center"
                 text={headline}
-                color="greendark"
+                colorClass="greendark"
             />
             <Paragraph size="small" place="center" text={text || ''} />
         </div>

@@ -18,9 +18,9 @@ const About = () => {
             <Headline
                 text="Nasz zespół"
                 isUppercase
-                color="greendark"
-                place="center"
-                size="h1"
+                colorClass="greendark"
+                placeClass="center"
+                variant="h1"
             />
             <CEOProfile
                 photo="/images/therapist-her.jpg"

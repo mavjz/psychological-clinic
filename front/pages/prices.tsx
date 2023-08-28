@@ -25,15 +25,15 @@ const Prices = () => {
                 text="Sprawdź promocje i koszty wizyt psychoterapeutycznych"
             />
             <Headline
-                place="center"
-                color="greendark"
-                size="h2"
+                placeClass="center"
+                colorClass="greendark"
+                variant="h2"
                 text="Zadbaj o swój umysł bez obaw o portfel"
             />
             <Headline
-                place="center"
-                color="black"
-                size="h3"
+                placeClass="center"
+                colorClass="black"
+                variant="h3"
                 text="Skorzystaj z kalkulatora kosztów wizyt psychoterapeutycznych"
             />
             <Calculator />

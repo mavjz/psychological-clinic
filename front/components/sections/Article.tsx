@@ -7,10 +7,10 @@ const Article = ({ headline, texts }: ArticleType) => {
     return (
         <div className="article">
             <Headline
-                size="h2"
+                variant="h2"
                 text={headline}
-                color="greendark"
-                place="center"
+                colorClass="greendark"
+                placeClass="center"
                 isUppercase
             />
             <div className="article-text">

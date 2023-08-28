@@ -2,23 +2,19 @@ import React from 'react';
 import { HeadlineType } from 'types/items/headline';
 
 const Headline = ({
-    size,
+    variant = 'h6',
     text,
-    place = 'left',
-    color = 'green',
+    placeClass = 'left',
+    colorClass = 'green',
     isUppercase,
 }: HeadlineType) => {
-    color = 'text'.concat(color.toLowerCase());
-    place = 'text'.concat(place.toLowerCase());
-    const classes = color.concat(' ' + place);
+    colorClass = 'text'.concat(colorClass.toLowerCase());
+    placeClass = 'text'.concat(placeClass.toLowerCase());
+    const classes = colorClass.concat(' ' + placeClass);
+    const HeadlineElement = variant;
     return (
         <React.Fragment>
-            {size === "h1" && <h1 className={`${classes} ${isUppercase && "capslock"}`}>{text}</h1>}
-            {size === "h2" && <h2 className={`${classes} ${isUppercase && "capslock"}`}>{text}</h2>}
-            {size === "h3" && <h3 className={`${classes} ${isUppercase && "capslock"}`}>{text}</h3>}
-            {size === "h4" && <h4 className={`${classes} ${isUppercase && "capslock"}`}>{text}</h4>}
-            {size === "h5" && <h5 className={`${classes} ${isUppercase && "capslock"}`}>{text}</h5>}
-            {size === "h6" && <h6 className={`${classes} ${isUppercase && "capslock"}`}>{text}</h6>}
+            <HeadlineElement className={`${classes} ${isUppercase && "capslock"}`}>{text}</HeadlineElement>
         </React.Fragment>
     );
 };

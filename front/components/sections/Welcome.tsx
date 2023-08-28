@@ -36,7 +36,7 @@ const Welcome = ({ image, headline, text }: WelcomeType) => {
             )}
             <WrapperWidth>
                 <div className="welcome-text">
-                    <Headline text={headline} color="white" size="h1" />
+                    <Headline text={headline} colorClass="white" variant="h1" />
                     <Paragraph text={text} size="big" color="white" />
                 </div>
             </WrapperWidth>

@@ -14,15 +14,15 @@ const Navbar = ({ sites }: NavbarType) => {
                         isLink
                         link="/"
                         text="HumanHealth.com"
-                        color="greendark"
-                        size="h3"
+                        colorClass="greendark"
+                        variant="h3"
                     />
                     <div className="navbar-desktop__items">
                         {sites.map((site, index) => (
                             <Button
                                 isLink
-                                size="h4"
-                                color="greendark"
+                                variant="h4"
+                                colorClass="greendark"
                                 key={index}
                                 text={site?.name}
                                 link={site?.link}

@@ -145,8 +145,8 @@ const Calculator = () => {
                         </label>
                     </div>
                     <Button
-                        size="h3"
-                        color="greendark"
+                        variant="h3"
+                        colorClass="greendark"
                         text="Oblicz"
                         type="submit"
                         className="calculator-form__submit"

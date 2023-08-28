@@ -20,10 +20,10 @@ const Footer = ({ sites }: FooterType) => {
                 <div className="footer-desktop">
                     <div className="footer-desktop__bio">
                         <Headline
-                            size="h1"
+                            variant="h1"
                             text="HumanHealth.com"
-                            color="yellowlight"
-                            place="center"
+                            colorClass="yellowlight"
+                            placeClass="center"
                         />
                         <Paragraph
                             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -39,8 +39,8 @@ const Footer = ({ sites }: FooterType) => {
                         {sites.map((site, index) => (
                             <Button
                                 isLink
-                                size="h3"
-                                color="white"
+                                variant="h3"
+                                colorClass="white"
                                 key={index}
                                 text={site?.name}
                                 link={site?.link}
@@ -51,9 +51,9 @@ const Footer = ({ sites }: FooterType) => {
                     <div className="footer-desktop__contact">
                         <Headline
                             text="Skontaktuj się"
-                            size="h2"
-                            color="yellowlight"
-                            place="center"
+                            variant="h2"
+                            colorClass="yellowlight"
+                            placeClass="center"
                         />
                         <div className="footer-desktop__contact--subsection">
                             <LocationOnIcon className="footer-desktop__contact--subsection-icon" />
@@ -91,20 +91,20 @@ const Footer = ({ sites }: FooterType) => {
                             <PolicyIcon className="footer-desktop__contact--subsection-icon" />
                             <Button
                                 isLink
-                                size="h5"
+                                variant="h5"
                                 link="/policyprivacy"
                                 text="Polityka prywatności"
-                                color="white"
+                                colorClass="white"
                             />
                         </div>
                         <div className="footer-desktop__contact--subsection">
                             <DescriptionIcon className="footer-desktop__contact--subsection-icon" />
                             <Button
                                 isLink
-                                size="h5"
+                                variant="h5"
                                 link="/statue"
                                 text="Regulamin"
-                                color="white"
+                                colorClass="white"
                             />
                         </div>
                     </div>

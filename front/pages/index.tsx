@@ -53,10 +53,10 @@ export default function Home() {
             <Button
                 isLink
                 link="/purposes"
-                size="h1"
+                variant="h1"
                 text="Nasze wartości"
                 isUppercase
-                color="greendark"
+                colorClass="greendark"
             />
             <Benefits
                 items={[
@@ -95,10 +95,10 @@ export default function Home() {
             <Button
                 isLink
                 link="/about"
-                size="h1"
+                variant="h1"
                 text="Poznajcie nas"
                 isUppercase
-                color="greendark"
+                colorClass="greendark"
             />
             <CEOProfile
                 photo="/images/therapist-her.jpg"
