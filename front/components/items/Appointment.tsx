@@ -143,7 +143,6 @@ const Appointment = () => {
                             showOutsideDays
                             ISOWeek
                             fromMonth={new Date()}
-                            // TEMP
                             disabled={isDayDisabled}
                             modifiersClassNames={{
                                 disabled:
