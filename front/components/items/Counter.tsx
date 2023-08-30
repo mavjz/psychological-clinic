@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import CountUp, { useCountUp } from 'react-countup';
+import CountUp from 'react-countup';
 import { CounterType } from "types/items/counter";
 import Headline from "./Headline";
 
@@ -26,8 +26,8 @@ const Counter = ({headline, number, text, isPlus}: CounterType) => {
             </div>
             <div className="counter-text">
                 <Headline
-                    h4
-                    color="green"
+                    variant="h4"
+                    colorClass="green"
                     text={text || ""}
                 />
             </div>

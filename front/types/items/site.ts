@@ -1,4 +1,4 @@
 export type SiteType = {
-    link: string,
-    name: string,
-}
+    link: string;
+    name: string;
+};

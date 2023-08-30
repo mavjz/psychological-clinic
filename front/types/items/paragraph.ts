@@ -1,8 +1,6 @@
 export type ParagraphType = {
-    small?: boolean, 
-    medium?: boolean, 
-    big?: boolean, 
-    text: string,
-    place?: string,
-    color?: string,
-}   
+    size: 'small' | 'medium' | 'big';
+    text: string;
+    placeClass?: string;
+    colorClass?: string;
+};

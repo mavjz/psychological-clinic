@@ -1,30 +1,30 @@
-import Headline from 'components/items/Headline'
-import Paragraph from 'components/items/Paragraph'
-import React from 'react'
-import { ArticleType } from 'types/sections/article'
+import Headline from 'components/items/Headline';
+import Paragraph from 'components/items/Paragraph';
+import React from 'react';
+import { ArticleType } from 'types/sections/article';
 
-const Article = ({headline, texts}: ArticleType) => {
+const Article = ({ headline, texts }: ArticleType) => {
     return (
-        <div className='article'>
+        <div className="article">
             <Headline
-                h2
+                variant="h2"
                 text={headline}
-                color="greendark"
-                place='center'
+                colorClass="greendark"
+                placeClass="center"
                 isUppercase
             />
-            <div className='article-text'>
-                {texts.map((text, index) => 
+            <div className="article-text">
+                {texts.map((text, index) => (
                     <Paragraph
                         key={index}
                         text={text?.text}
-                        medium
-                        place='left'
+                        size="medium"
+                        placeClass="left"
                     />
-                )}
+                ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Article
+export default Article;
