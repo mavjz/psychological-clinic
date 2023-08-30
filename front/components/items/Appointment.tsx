@@ -114,6 +114,7 @@ const Appointment = () => {
                                     therapist.attributes.first_name
                                 )
                             }
+                            className='appointment-content__panel--button'
                         />
                     ))}
                 </div>

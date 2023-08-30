@@ -5,6 +5,12 @@
     }
     &-content {
         &__panel {
+            @include flex(row, wrap, 1vw, 1vw);
+            &--button {
+                padding: 0.1em 1em;
+                border: solid 2px $green-dark;
+                border-radius: 0.1em;
+            }
         }
         &__data {
             @include grid(column, $column-gap: 2vw);
