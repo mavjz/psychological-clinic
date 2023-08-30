@@ -33,7 +33,6 @@ const Appointment = () => {
                 $eq: chosenTherapist,
             },
         };
-        console.log(chosenTherapist);
     }, [chosenTherapist]);
     useEffect(() => {
         if (chosenDate) {
@@ -45,6 +44,11 @@ const Appointment = () => {
                 $eq: queryChosenDate,
             };
         }
+        filters.therapist = {
+            first_name: {
+                $eq: chosenTherapist,
+            },
+        };
         strapiAppointmentGet(filters).then((res) => {
             setAppointmentsTherapist(res.data.data);
             setAppointmentsDate(res.data.data);
