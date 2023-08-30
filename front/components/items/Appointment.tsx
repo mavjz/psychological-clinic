@@ -65,18 +65,21 @@ const Appointment = () => {
         return allDates?.indexOf(item) === index;
     });
     const availableDate = stringDate?.map((item) => new Date(item));
+    const randomDate = new Date(1999, 1, 1);
     const availableDatewoPastDates = availableDate?.map((item) => {
         if (new Date() <= item) {
             return item;
         } else {
-            return undefined;
+            return randomDate;
         }
     });
-    const disabledDates = availableDatewoPastDates?.filter((item) => !!item);
+    const dateToRemove = availableDatewoPastDates?.indexOf(randomDate);
+    const disabledDates = availableDatewoPastDates?.filter((item) => {
+        return availableDatewoPastDates?.indexOf(item) !== dateToRemove;
+    })
     // ??? https://github.com/gpbl/react-day-picker/issues/768
     function isDayDisabled(day: Date) {
         return !disabledDates?.some((disabledDay) =>
-        // TODO: fix
             isSameDay(day, disabledDay)
         );
     }
