@@ -6,6 +6,9 @@
     &-content {
         &__panel {
             @include flex(row, wrap, 1vw, 1vw);
+            @media screen and (max-width: $width-tablet){
+                @include grid(row, $row-gap: 1vw);
+            }
             &--button {
                 padding: 0.1em 1em;
                 border: solid 2px $green-dark;
@@ -13,6 +16,9 @@
             }
         }
         &__data {
+            @media screen and (max-width: $width-tablet){
+                @include grid(row, 2vw);
+            }
             @include grid(column, $column-gap: 2vw);
             position: relative;
             &--calendar {
