@@ -65,6 +65,21 @@ const Appointment = () => {
         return allDates?.indexOf(item) === index;
     });
     const availableDate = stringDate?.map((item) => new Date(item));
+    const availableDatewoPastDates = availableDate?.map((item) => {
+        if (new Date() <= item) {
+            return item;
+        } else {
+            return undefined;
+        }
+    });
+    const disabledDates = availableDatewoPastDates?.filter((item) => !!item);
+    // ??? https://github.com/gpbl/react-day-picker/issues/768
+    function isDayDisabled(day: Date) {
+        return !disabledDates?.some((disabledDay) =>
+        // TODO: fix
+            isSameDay(day, disabledDay)
+        );
+    }
     let allHours = appointmentsDate?.map((item) => item.attributes.time);
     let sortedHours = allHours?.sort(function (a, b) {
         return (
@@ -73,12 +88,6 @@ const Appointment = () => {
         );
     });
     let allHourswoSeconds = sortedHours?.map((item) => item.slice(0, 5));
-    // ??? https://github.com/gpbl/react-day-picker/issues/768
-    function isDayDisabled(day: Date) {
-        return !availableDate?.some((disabledDay) =>
-            isSameDay(day, disabledDay)
-        );
-    }
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -99,6 +108,13 @@ const Appointment = () => {
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
+                    <Button
+                        variant="h3"
+                        text="Wszyscy terapeuci"
+                        colorClass="greendark"
+                        onClick={() => setChosenTherapist(undefined)}
+                        className="appointment-content__panel--button"
+                    />
                     {therapists?.map((therapist, index) => (
                         <Button
                             key={index}
@@ -114,13 +130,17 @@ const Appointment = () => {
                                     therapist.attributes.first_name
                                 )
                             }
-                            className='appointment-content__panel--button'
+                            className="appointment-content__panel--button"
                         />
                     ))}
                 </div>
                 <div className="appointment-content__data">
                     <div className="appointment-content__data--calendar">
                         <DayPicker
+                            showOutsideDays
+                            ISOWeek
+                            fromMonth={new Date()}
+                            // TEMP
                             disabled={isDayDisabled}
                             modifiersClassNames={{
                                 disabled:
