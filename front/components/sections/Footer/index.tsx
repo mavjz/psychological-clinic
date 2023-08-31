@@ -1,9 +1,8 @@
+import React from 'react';
 import Button from 'components/items/Button';
 import Headline from 'components/items/Headline';
 import Paragraph from 'components/items/Paragraph';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
-import React from 'react';
-import useMedia from 'use-media';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -12,7 +11,6 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import { FooterType } from './helper';
 
 const Footer = ({ sites }: FooterType) => {
-    const isWide = useMedia({ maxWidth: '768px' });
     return (
         <div className="footer">
             <WrapperWidth>
