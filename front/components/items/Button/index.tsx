@@ -22,7 +22,7 @@ const Button = ({
             {isLink ? (
                 isImage ? (
                     <Link href={link || '/'} passHref legacyBehavior className={className}>
-                        {children}  
+                        {children}
                     </Link>
                 ) : (
                     <Link href={link || '/'} passHref legacyBehavior className={className}>
@@ -30,7 +30,7 @@ const Button = ({
                             <Headline
                                 variant={variant}
                                 text={text}
-                                placeClass="center"
+                                placeClass={placeClass}
                                 colorClass={colorClass}
                                 isUppercase={isUppercase}
                             />
@@ -38,11 +38,9 @@ const Button = ({
                     </Link>
                 )
             ) : isImage ? (
-                <div className={className}>
-                    <button className={`${className}-button`} type={type} onClick={onClick}>
-                        {children}
-                    </button>
-                </div>
+                <button className={className} type={type} onClick={onClick}>
+                    {children}
+                </button>
             ) : (
                 <button className={className} type={type} onClick={onClick}>
                     <Headline

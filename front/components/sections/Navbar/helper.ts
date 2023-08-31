@@ -1,5 +1,6 @@
-import { SiteType } from "types/site";
+import { SiteType } from 'types/site';
 
 export type NavbarType = {
-    sites: Array<SiteType>;
+    sites: SiteType[];
+    sitesMobile: SiteType[];
 };
