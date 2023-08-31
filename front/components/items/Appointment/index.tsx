@@ -8,13 +8,13 @@ import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import Button from '../Button';
-import { filters, getDateofAppointments, getTimeOfAppointment } from './helper';
+import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper';
 
 const Appointment = () => {
     const filters: filters = {};
     const [therapists, setTherapists] = useState<strapiTherapistQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
-    const [chosenTherapist, setChosenTherapist] = useState<string>();
+    const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -25,7 +25,7 @@ const Appointment = () => {
     useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            const rightTime = new Date(chosenDate?.getTime() - -120 * 60 * 1000);
+            const rightTime = new Date(chosenDate?.getTime() - (-120 * 60 * 1000));
             // changing format of date to YYYY-MM-DD
             const queryChosenDate = rightTime?.toISOString().slice(0, 10);
             filters.date = {
@@ -33,7 +33,7 @@ const Appointment = () => {
             };
         }
         filters.therapist = {
-            first_name: {
+            id: {
                 $eq: chosenTherapist,
             },
         };
@@ -43,7 +43,7 @@ const Appointment = () => {
         });
     }, [chosenDate || chosenTherapist]);
     const isDayDisabled = (day: Date) => {
-        return !getDateofAppointments({ appointments })?.some((avaibleDay) =>
+        return !getDateOfAppointments({ appointments })?.some((avaibleDay) =>
             isSameDay(day, avaibleDay)
         );
     };
@@ -85,7 +85,7 @@ const Appointment = () => {
                             }
                             colorClass="greendark"
                             onClick={() => {
-                                setChosenTherapist(therapist.attributes.first_name);
+                                setChosenTherapist(therapist.id);
                                 setChosenDate(undefined);
                             }}
                             className="appointment-content__panel--button"
@@ -114,7 +114,7 @@ const Appointment = () => {
                             chosenDate ? 'appointment-content__data--availabledates' : 'hidden'
                         }
                     >
-                        {getTimeOfAppointment({ appointments })?.map((item, index) => (
+                        {getTimeOfAppointments({ appointments })?.map((item, index) => (
                             <div key={index}>{item}</div>
                         ))}
                     </div>
