@@ -44,8 +44,8 @@ const Appointment = () => {
     }, [chosenDate || chosenTherapist]);
     // ??? https://github.com/gpbl/react-day-picker/issues/768
     const isDayDisabled = (day: Date) => {
-        return !getDateofAppointments({ appointments })?.some((disabledDay) =>
-            isSameDay(day, disabledDay)
+        return !getDateofAppointments({ appointments })?.some((avaibleDay) =>
+            isSameDay(day, avaibleDay)
         );
     };
     if (isLoading) {
