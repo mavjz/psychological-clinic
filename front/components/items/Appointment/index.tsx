@@ -7,20 +7,16 @@ import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
-import Button from './Button';
+import Button from '../Button';
+import { filters, getDateofAppointments, getTimeOfAppointment } from './helper';
 
 const Appointment = () => {
-    const [chosenTherapist, setChosenTherapist] = useState<string>();
-    let rightTime: Date;
-    let queryChosenDate: string | undefined;
     const filters: filters = {};
-    let [chosenDate, setChosenDate] = useState<Date>();
-    const [isLoading, setIsLoading] = useState(true);
     const [therapists, setTherapists] = useState<strapiTherapistQuery[]>();
-    const [appointmentsTherapist, setAppointmentsTherapist] =
-        useState<strapiAppointmentQuery[]>();
-    const [appointmentsDate, setAppointmentsDate] =
-        useState<strapiAppointmentQuery[]>();
+    const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
+    const [chosenTherapist, setChosenTherapist] = useState<string>();
+    const [chosenDate, setChosenDate] = useState<Date>();
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         strapiTherapistGet().then((res) => {
             setTherapists(res.data.data);
@@ -28,18 +24,15 @@ const Appointment = () => {
     }, []);
     useEffect(() => {
         setChosenDate(undefined);
-        filters.therapist = {
-            first_name: {
-                $eq: chosenTherapist,
-            },
-        };
     }, [chosenTherapist]);
     useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            rightTime = new Date(chosenDate?.getTime() - -120 * 60 * 1000);
+            const rightTime = new Date(
+                chosenDate?.getTime() - -120 * 60 * 1000
+            );
             // changing format of date to YYYY-MM-DD
-            queryChosenDate = rightTime?.toISOString().slice(0, 10);
+            const queryChosenDate = rightTime?.toISOString().slice(0, 10);
             filters.date = {
                 $eq: queryChosenDate,
             };
@@ -50,47 +43,16 @@ const Appointment = () => {
             },
         };
         strapiAppointmentGet(filters).then((res) => {
-            setAppointmentsTherapist(res.data.data);
-            setAppointmentsDate(res.data.data);
+            setAppointments(res.data.data);
             setIsLoading(false);
         });
     }, [chosenDate || chosenTherapist]);
-    const allDates = appointmentsTherapist?.map((item) => item.attributes.date);
-    // deleting repeated dates
-    /* indexOf is searching the first index numer of current item value and 
-    then compering to the left elements. If they're same, value's true, 
-    if they're reapeted value's false and won't stay in new array
-    e.g "water" is 0, but also 3, 4, 5, so only "0 water" would stay, because 0 doesn't equal 3 */
-    const stringDate = allDates?.filter((item, index) => {
-        return allDates?.indexOf(item) === index;
-    });
-    const availableDate = stringDate?.map((item) => new Date(item));
-    const randomDate = new Date(1999, 1, 1);
-    const availableDatewoPastDates = availableDate?.map((item) => {
-        if (new Date() <= item) {
-            return item;
-        } else {
-            return randomDate;
-        }
-    });
-    const dateToRemove = availableDatewoPastDates?.indexOf(randomDate);
-    const disabledDates = availableDatewoPastDates?.filter((item) => {
-        return availableDatewoPastDates?.indexOf(item) !== dateToRemove;
-    })
     // ??? https://github.com/gpbl/react-day-picker/issues/768
-    function isDayDisabled(day: Date) {
-        return !disabledDates?.some((disabledDay) =>
+    const isDayDisabled = (day: Date) => {
+        return !getDateofAppointments({ appointments })?.some((disabledDay) =>
             isSameDay(day, disabledDay)
         );
-    }
-    let allHours = appointmentsDate?.map((item) => item.attributes.time);
-    let sortedHours = allHours?.sort(function (a, b) {
-        return (
-            Number(new Date('2023/01/01 ' + a)) -
-            Number(new Date('2023/01/01 ' + b))
-        );
-    });
-    let allHourswoSeconds = sortedHours?.map((item) => item.slice(0, 5));
+    };
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -163,9 +125,9 @@ const Appointment = () => {
                                 : 'hidden'
                         }
                     >
-                        {allHourswoSeconds?.map((item, index) => (
-                            <div key={index}>{item}</div>
-                        ))}
+                        {getTimeOfAppointment({ appointments })?.map(
+                            (item, index) => <div key={index}>{item}</div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -174,7 +136,3 @@ const Appointment = () => {
 };
 
 export default Appointment;
-
-type filters = {
-    [Keys: string]: Object;
-};
