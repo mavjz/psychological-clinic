@@ -15,10 +15,9 @@ const Footer = ({ sites }: FooterType) => {
     const isWide = useMedia({ maxWidth: '768px' });
     return (
         <div className="footer">
-            {/* {!isWide &&  */}
             <WrapperWidth>
-                <div className="footer-desktop">
-                    <div className="footer-desktop__bio">
+                <div className="footer-content">
+                    <div className="footer-content__bio">
                         <Headline
                             variant="h1"
                             text="HumanHealth.com"
@@ -35,7 +34,7 @@ const Footer = ({ sites }: FooterType) => {
                             colorClass="white"
                         />
                     </div>
-                    <div className="footer-desktop__sites">
+                    <div className="footer-content__sites">
                         {sites.map((site, index) => (
                             <Button
                                 isLink
@@ -44,47 +43,47 @@ const Footer = ({ sites }: FooterType) => {
                                 key={index}
                                 text={site?.name}
                                 link={site?.link}
-                                className="footer-desktop__sites--button"
+                                className="footer-content__sites--button"
                             />
                         ))}
                     </div>
-                    <div className="footer-desktop__contact">
+                    <div className="footer-content__contact">
                         <Headline
                             text="Skontaktuj się"
                             variant="h2"
                             colorClass="yellowlight"
                             placeClass="center"
                         />
-                        <div className="footer-desktop__contact--subsection">
-                            <LocationOnIcon className="footer-desktop__contact--subsection-icon" />
+                        <div className="footer-content__contact--subsection">
+                            <LocationOnIcon className="footer-content__contact--subsection-icon" />
                             <Paragraph
                                 text="ul. Karowa 53, Warszawa 00-324"
                                 size="small"
                                 colorClass="white"
                             />
                         </div>
-                        <div className="footer-desktop__contact--subsection">
-                            <LocationOnIcon className="footer-desktop__contact--subsection-icon" />
+                        <div className="footer-content__contact--subsection">
+                            <LocationOnIcon className="footer-content__contact--subsection-icon" />
                             <Paragraph
                                 text="ul. Żółwińska 81, Szczecin 71-895"
                                 size="small"
                                 colorClass="white"
                             />
                         </div>
-                        <div className="footer-desktop__contact--subsection">
-                            <PhoneEnabledIcon className="footer-desktop__contact--subsection-icon" />
+                        <div className="footer-content__contact--subsection">
+                            <PhoneEnabledIcon className="footer-content__contact--subsection-icon" />
                             <Paragraph text="+48 51 970 85 82" size="small" colorClass="white" />
                         </div>
-                        <div className="footer-desktop__contact--subsection">
-                            <AccessTimeIcon className="footer-desktop__contact--subsection-icon" />
+                        <div className="footer-content__contact--subsection">
+                            <AccessTimeIcon className="footer-content__contact--subsection-icon" />
                             <Paragraph
                                 text="Pon - Pt: 8-17, Sb - Nd: 10-14"
                                 size="small"
                                 colorClass="white"
                             />
                         </div>
-                        <div className="footer-desktop__contact--subsection">
-                            <PolicyIcon className="footer-desktop__contact--subsection-icon" />
+                        <div className="footer-content__contact--subsection">
+                            <PolicyIcon className="footer-content__contact--subsection-icon" />
                             <Button
                                 isLink
                                 variant="h5"
@@ -93,8 +92,8 @@ const Footer = ({ sites }: FooterType) => {
                                 colorClass="white"
                             />
                         </div>
-                        <div className="footer-desktop__contact--subsection">
-                            <DescriptionIcon className="footer-desktop__contact--subsection-icon" />
+                        <div className="footer-content__contact--subsection">
+                            <DescriptionIcon className="footer-content__contact--subsection-icon" />
                             <Button
                                 isLink
                                 variant="h5"
@@ -106,14 +105,6 @@ const Footer = ({ sites }: FooterType) => {
                     </div>
                 </div>
             </WrapperWidth>
-            {/* } */}
-            {/* {isWide &&
-                <WrapperWidth>
-                    <div className="footer-mobile">
-                
-                    </div>
-                </WrapperWidth>
-            } */}
         </div>
     );
 };

@@ -4,7 +4,8 @@
     @media screen and (max-width: $width-tablet) {
         @include sizes(100%, fit-content);
     }
-    &-desktop {
+    &-content {
+        background-color: $green-dark-mid;
         @include sizes(calc(100% - 4vw), calc(45vh - 30px));
         @include grid(column, $justify-content: space-between);
         position: relative;
