@@ -1,11 +1,15 @@
 import Button from 'components/items/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import { useMedia } from 'use-media';
 import { NavbarType } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
+import Headline from 'components/items/Headline';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const Navbar = ({ sites }: NavbarType) => {
     const isWide = useMedia({ maxWidth: '768px' });
+    const [isClicked, setIsClicked] = useState(false);
     return (
         <div className="navbar">
             {!isWide && (
@@ -33,7 +37,13 @@ const Navbar = ({ sites }: NavbarType) => {
             )}
             {isWide && (
                 <WrapperWidth>
-                    <div className="navbar-mobile"></div>
+                    <div className="navbar-mobile">
+                        <Headline text="HumanHealth.com" colorClass="greendark" variant="h3" />
+                        <Button isImage className="" onClick={() => setIsClicked(!isClicked)}>
+                            {isClicked ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
+                        </Button>
+                    </div>
+                    {isClicked && <div className="navbar-mobile__open"></div>}
                 </WrapperWidth>
             )}
         </div>
