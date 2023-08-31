@@ -1,20 +1,24 @@
 import React from 'react';
-import { ParagraphType } from 'types/items/paragraph';
+import { HeadlineType } from './helper';
 
-const Paragraph = ({
-    size,
+const Headline = ({
+    variant = 'h6',
     text,
     placeClass = 'left',
     colorClass = 'green',
-}: ParagraphType) => {
+    isUppercase,
+}: HeadlineType) => {
     colorClass = 'text'.concat(colorClass.toLowerCase());
     placeClass = 'text'.concat(placeClass.toLowerCase());
     const classes = colorClass.concat(' ' + placeClass);
+    const HeadlineElement = variant;
     return (
         <React.Fragment>
-            <p className={`paragraph-${size} ${classes}`}>{text}</p>
+            <HeadlineElement className={`${classes} ${isUppercase && 'capslock'}`}>
+                {text}
+            </HeadlineElement>
         </React.Fragment>
     );
 };
 
-export default Paragraph;
+export default Headline;

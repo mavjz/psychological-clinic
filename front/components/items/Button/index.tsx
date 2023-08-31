@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { HeadlineType } from 'types/items/headline';
-import Headline from './Headline';
+import { ButtonType } from './helper';
+import Headline from '../Headline';
 const Button = ({
     variant,
     text,
@@ -20,12 +20,7 @@ const Button = ({
         <React.Fragment>
             {isLink ? (
                 isImage ? (
-                    <Link
-                        href={link || '/'}
-                        passHref
-                        legacyBehavior
-                        className={className}
-                    >
+                    <Link href={link || '/'} passHref legacyBehavior className={className}>
                         <figure className={`${className}-placeholder`}>
                             <Image
                                 src={image || ''}
@@ -36,12 +31,7 @@ const Button = ({
                         </figure>
                     </Link>
                 ) : (
-                    <Link
-                        href={link || '/'}
-                        passHref
-                        legacyBehavior
-                        className={className}
-                    >
+                    <Link href={link || '/'} passHref legacyBehavior className={className}>
                         <a className={`${className}-a text${colorClass}`}>
                             <Headline
                                 variant={variant}
@@ -81,11 +71,3 @@ const Button = ({
     );
 };
 export default Button;
-type ButtonType = {
-    type?: 'button' | 'submit' | 'reset' | undefined;
-    image?: string;
-    link?: string;
-    isLink?: boolean;
-    isImage?: boolean;
-    className?: string;
-} & HeadlineType;

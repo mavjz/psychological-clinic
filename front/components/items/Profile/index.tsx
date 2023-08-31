@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
-import { ProfileType } from 'types/items/profile';
-import Headline from './Headline';
-import Paragraph from './Paragraph';
+import { ProfileType } from './helper';
+import Headline from '../Headline';
+import Paragraph from '../Paragraph';
 
 const Profile = ({ image, name, text, isBig }: ProfileType) => {
     return (
@@ -12,28 +12,22 @@ const Profile = ({ image, name, text, isBig }: ProfileType) => {
                     src={image}
                     alt="Terapeuta"
                     fill
-                    className={`${
-                        isBig ? 'profilebig' : 'profile'
-                    }-placeholder__image`}
+                    className={`${isBig ? 'profilebig' : 'profile'}-placeholder__image`}
                 />
             </div>
             <div className={`${isBig ? 'profilebig' : 'profile'}-hover`}>
-                <div
-                    className={`${
-                        isBig ? 'profilebig' : 'profile'
-                    }-hover__text`}
-                >
+                <div className={`${isBig ? 'profilebig' : 'profile'}-hover__text`}>
                     <Headline
                         text={name}
-                        size={isBig ? 'h1' : 'h3'}
-                        place="center"
-                        color="white"
+                        variant={isBig ? 'h1' : 'h3'}
+                        placeClass="center"
+                        colorClass="white"
                     />
                     <Paragraph
                         text={text || ''}
                         size="small"
-                        color="white"
-                        place="center"
+                        colorClass="white"
+                        placeClass="center"
                     />
                 </div>
             </div>

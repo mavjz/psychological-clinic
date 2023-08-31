@@ -7,6 +7,7 @@
 body {
     background-color: $white-creamy;
 }
+
 @font-face {
     font-family: 'NotoSans';
     src: url(./fonts/Noto_Sans/NotoSans-Regular.ttf);
@@ -47,41 +48,6 @@ h6 {
 .hidden {
     visibility: hidden;
 }
-
-// h1 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h2 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h3 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h4 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
-
-// h5 {
-//     font-size: ;
-//     @media screen and (max-width: $width-tablet) {
-//         font-size: ;
-//     }
-// }
 
 a {
     text-decoration: none;

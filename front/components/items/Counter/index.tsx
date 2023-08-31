@@ -1,10 +1,10 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import React from 'react';
 import CountUp from 'react-countup';
-import { CounterType } from "types/items/counter";
-import Headline from "./Headline";
+import { CounterType } from './helper';
+import Headline from '../Headline';
 
-const Counter = ({headline, number, text, isPlus}: CounterType) => {
+const Counter = ({ headline, number, text, isPlus }: CounterType) => {
     return (
         <div className="counter">
             <div className="counter-headline">
@@ -17,23 +17,18 @@ const Counter = ({headline, number, text, isPlus}: CounterType) => {
                     />
                 </div>
                 <CountUp
-                    prefix={isPlus ? "+": ""}
-                    suffix={" " + headline} 
+                    prefix={isPlus ? '+' : ''}
+                    suffix={' ' + headline}
                     end={number}
                     className="counter-headline__text"
                     duration={1}
                 />
             </div>
             <div className="counter-text">
-                <Headline
-                    variant="h4"
-                    colorClass="green"
-                    text={text || ""}
-                />
+                <Headline variant="h4" colorClass="green" text={text || ''} />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Counter
-
+export default Counter;

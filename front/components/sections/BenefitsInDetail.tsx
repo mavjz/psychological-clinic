@@ -1,7 +1,6 @@
 import Benefit from 'components/items/Benefit';
 import WrapperWidth from 'components/wrappers/Wrapperwidth';
 import React from 'react';
-import { ParagraphType } from 'types/items/paragraph';
 import Article from './Article';
 import { ArticleType } from 'types/sections/article';
 
