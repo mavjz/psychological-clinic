@@ -1,7 +1,7 @@
 import Footer from 'components/sections/Footer';
 import Navbar from 'components/sections/Navbar';
 import React from 'react';
-import { WrapperType } from 'types/sections/wrapper';
+import { WrapperType } from 'types/wrapper';
 const Layout = ({ children }: WrapperType) => {
     return (
         <React.Fragment>

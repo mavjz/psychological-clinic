@@ -1,10 +1,10 @@
 import Headline from 'components/items/Headline';
 import Paragraph from 'components/items/Paragraph';
-import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Image from 'next/image';
 import React from 'react';
 import { useMedia } from 'use-media';
 import { WelcomeType } from './helper';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Welcome = ({ image, headline, text }: WelcomeType) => {
     const isWide = useMedia({ minWidth: '768px' });

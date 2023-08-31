@@ -1,5 +1,5 @@
 import React from 'react';
-import { WrapperType } from 'types/sections/wrapper';
+import { WrapperType } from 'types/wrapper';
 
 const WrapperColumn = ({ children }: WrapperType) => {
     return (

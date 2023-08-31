@@ -1,11 +1,11 @@
 import Button from 'components/items/Button';
 import Paragraph from 'components/items/Paragraph';
-import WrapperWidth from 'components/wrappers/WrapperWidth';
 import { useFormik } from 'formik';
 import { strapiTherapistGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { calculation } from './helper';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Calculator = () => {
     const [data, setData] = useState<formData>();

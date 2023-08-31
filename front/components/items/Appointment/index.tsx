@@ -1,4 +1,3 @@
-import WrapperWidth from 'components/wrappers/WrapperWidth';
 import { isSameDay } from 'date-fns';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
@@ -6,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import { filters } from './helper';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Appointment = () => {
     const TEMPtherapist = 'Bożena';

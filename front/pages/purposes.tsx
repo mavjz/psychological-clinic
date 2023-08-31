@@ -1,5 +1,4 @@
 //  cele terapii, podstawowe założenia
-import Benefits from 'components/sections/Benefits';
 import BenefitsInDetail from 'components/sections/BenefitsInDetail';
 import Welcome from 'components/sections/Welcome';
 import React from 'react';

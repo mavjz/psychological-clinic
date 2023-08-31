@@ -1,4 +1,4 @@
-import { SiteType } from "types/items/site";
+import { SiteType } from "types/site";
 
 export type NavbarType = {
     sites: Array<SiteType>;
