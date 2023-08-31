@@ -4,7 +4,7 @@ import Benefits from 'components/sections/Benefits';
 import CEOProfile from 'components/sections/CEOProfile';
 import Counters from 'components/sections/Counters';
 import Welcome from 'components/sections/Welcome';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
 
 export default function Home() {

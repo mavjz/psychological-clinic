@@ -5,6 +5,7 @@ import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
+import { filters } from './helper';
 
 const Appointment = () => {
     const TEMPtherapist = 'Bożena';
@@ -119,6 +120,4 @@ const Appointment = () => {
 
 export default Appointment;
 
-type filters = {
-    [Keys: string]: Object;
-};
+

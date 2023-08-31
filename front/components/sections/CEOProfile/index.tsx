@@ -1,4 +1,4 @@
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Image from 'next/image';
 import React from 'react';
 import Article from '../Article';

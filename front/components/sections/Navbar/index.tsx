@@ -1,5 +1,5 @@
 import Button from 'components/items/Button';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
 import { useMedia } from 'use-media';
 import { NavbarType } from './helper';

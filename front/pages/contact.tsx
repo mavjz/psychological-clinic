@@ -3,7 +3,7 @@ import Appointment from 'components/items/Appointment';
 import Article from 'components/sections/Article';
 import CEOProfile from 'components/sections/CEOProfile';
 import Welcome from 'components/sections/Welcome';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
 
 const Contact = () => {

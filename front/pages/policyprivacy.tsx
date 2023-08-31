@@ -1,5 +1,5 @@
 import Article from 'components/sections/Article';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
 
 const PolicyPrivacy = () => {

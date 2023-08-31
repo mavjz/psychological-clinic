@@ -4,6 +4,7 @@
 
 @import 'react-day-picker/dist/style.css';
 
+@import "../components/items/Appointment/style";
 @import "../components/items/Benefit/style";
 @import "../components/items/Counter/style";
 @import "../components/items/Headline/style";
@@ -20,18 +21,5 @@
 @import "../components/sections/Navbar/style";
 @import "../components/sections/Welcome/style";
 
-@import './items/appointment';
-
-@import './wrappers/wrapperWidth';
-@import './wrappers/wrapperColumn';
-
-@import './sections/navbar';
-@import './sections/welcome';
-@import './sections/counters';
-@import './sections/article';
-@import './sections/benefits';
-@import './sections/CEOProfile';
-@import './sections/benefitsindetail';
-@import './sections/howwework';
-@import './sections/footer';
-@import './sections/calculator';
+@import "../components/wrappers/WrapperColumn/style";
+@import "../components/wrappers/WrapperWidth/style";

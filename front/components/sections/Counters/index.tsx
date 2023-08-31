@@ -1,5 +1,5 @@
 import Counter from 'components/items/Counter';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
 import { CountersType } from './helper';
 

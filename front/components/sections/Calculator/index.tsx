@@ -1,6 +1,6 @@
 import Button from 'components/items/Button';
 import Paragraph from 'components/items/Paragraph';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import { useFormik } from 'formik';
 import { strapiTherapistGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';

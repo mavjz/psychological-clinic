@@ -1,5 +1,5 @@
 import Benefit from 'components/items/Benefit';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
 import Article from '../Article';
 import { BenefitsInDetailType } from './helper';

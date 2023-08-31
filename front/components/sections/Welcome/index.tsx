@@ -1,6 +1,6 @@
 import Headline from 'components/items/Headline';
 import Paragraph from 'components/items/Paragraph';
-import WrapperWidth from 'components/wrappers/Wrapperwidth';
+import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Image from 'next/image';
 import React from 'react';
 import { useMedia } from 'use-media';
