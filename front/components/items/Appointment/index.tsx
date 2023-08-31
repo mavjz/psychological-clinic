@@ -2,8 +2,8 @@ import WrapperWidth from 'components/wrappers/Wrapperwidth';
 import { isSameDay } from 'date-fns';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
-import { strapiTherapistGet } from 'lib/strapi/therapists/get';
-import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
+import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
+import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
@@ -12,13 +12,13 @@ import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper'
 
 const Appointment = () => {
     const filters: filters = {};
-    const [therapists, setTherapists] = useState<strapiTherapistQuery[]>();
+    const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        strapiTherapistGet().then((res) => {
+        strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
         });
     }, []);
