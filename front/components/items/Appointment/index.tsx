@@ -23,14 +23,9 @@ const Appointment = () => {
         });
     }, []);
     useEffect(() => {
-        setChosenDate(undefined);
-    }, [chosenTherapist]);
-    useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            const rightTime = new Date(
-                chosenDate?.getTime() - -120 * 60 * 1000
-            );
+            const rightTime = new Date(chosenDate?.getTime() - -120 * 60 * 1000);
             // changing format of date to YYYY-MM-DD
             const queryChosenDate = rightTime?.toISOString().slice(0, 10);
             filters.date = {
@@ -90,11 +85,10 @@ const Appointment = () => {
                                 therapist.attributes.last_name
                             }
                             colorClass="greendark"
-                            onClick={() =>
-                                setChosenTherapist(
-                                    therapist.attributes.first_name
-                                )
-                            }
+                            onClick={() => {
+                                setChosenTherapist(therapist.attributes.first_name);
+                                setChosenDate(undefined);
+                            }}
                             className="appointment-content__panel--button"
                         />
                     ))}
@@ -107,10 +101,8 @@ const Appointment = () => {
                             fromMonth={new Date()}
                             disabled={isDayDisabled}
                             modifiersClassNames={{
-                                disabled:
-                                    'appointment-content__data--calendar-disabled',
-                                selected:
-                                    'appointment-content__data--calendar-selected',
+                                disabled: 'appointment-content__data--calendar-disabled',
+                                selected: 'appointment-content__data--calendar-selected',
                                 today: 'appointment-content__data--calendar-today',
                             }}
                             mode="single"
@@ -120,14 +112,12 @@ const Appointment = () => {
                     </div>
                     <div
                         className={
-                            chosenDate
-                                ? 'appointment-content__data--availabledates'
-                                : 'hidden'
+                            chosenDate ? 'appointment-content__data--availabledates' : 'hidden'
                         }
                     >
-                        {getTimeOfAppointment({ appointments })?.map(
-                            (item, index) => <div key={index}>{item}</div>
-                        )}
+                        {getTimeOfAppointment({ appointments })?.map((item, index) => (
+                            <div key={index}>{item}</div>
+                        ))}
                     </div>
                 </div>
             </div>
