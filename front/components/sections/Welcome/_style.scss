@@ -1,0 +1,39 @@
+.welcome {
+    margin-bottom: 4vh;
+    width: 100%;
+    &-placeholder {
+        position: relative;
+        @include sizes(100%, 60vh);
+        @media screen and (max-width: $width-tablet) {
+            @include sizes(100%, 50vh);
+        }
+    }
+    &-gradient {
+        @include sizes(100%, 60vh);
+        background: $green-dark;
+        opacity: 0.6;
+        margin-top: -60vh;
+        @media screen and (max-width: $width-tablet) {
+            @include sizes(100%, 50vh);
+            margin-top: -50vh;
+        }
+    }
+    &-text {
+        @include grid(row, 3vh);
+        position: absolute;
+        margin-top: -30vh;
+        margin-left: 2vw;
+        h1 {
+            font-size: 50px;
+        }
+        @media screen and (max-width: $width-tablet) {
+            margin-top: -48vh;
+            margin-left: 0;
+            width: calc(100% - 4rem);
+            box-sizing: border-box;
+            h1 {
+                font-size: 3rem;
+            }
+        }
+    }
+}

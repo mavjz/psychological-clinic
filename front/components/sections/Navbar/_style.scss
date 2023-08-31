@@ -1,0 +1,32 @@
+.navbar {
+    @include sizes(100%, 5vh);
+    display: grid;
+    place-content: center;
+    justify-content: space-between;
+    background-color: $white;
+    box-shadow: 0 2px 15px 2px opacify($color: $green-light, $amount: 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    &-desktop {
+        margin: 0 3rem;
+        @include grid(column);
+        width: calc(100vw - 6rem);
+        box-sizing: border-box;
+        justify-content: space-between;
+        &__items {
+            @include grid(column, $column-gap: 3vw);
+            :hover {
+                transition: color 0.3s ease-in-out;
+                color: $green-light;
+            }
+        }
+    }
+    &-mobile {
+        margin: 0 3rem;
+        @include grid(column);
+        width: calc(100vw - 6rem);
+        box-sizing: border-box;
+        justify-content: space-between;
+    }
+}

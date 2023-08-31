@@ -1,0 +1,10 @@
+.counters {
+    @include grid(column, $column-gap: 1vw, $justify-content: space-between);
+    margin: 6vh 0;
+    box-sizing: border-box;
+    max-width: 100%;
+    @media screen and (max-width: $width-tablet) {
+        @include grid(row, 2vh);
+        margin: 0;
+    }
+}
