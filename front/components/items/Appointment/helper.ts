@@ -19,10 +19,6 @@ export const getTimeOfAppointment = ({ appointments }: props) => {
 export const getDateofAppointments = ({ appointments }: props) => {
     const allDates = appointments?.map((item) => item.attributes.date);
     // deleting repeated dates
-    /* indexOf is searching the first index numer of current item value and 
-    then compering to the left elements. If they're same, value's true, 
-    if they're reapeted value's false and won't stay in new array
-    e.g "water" is 0, but also 3, 4, 5, so only "0 water" would stay, because 0 doesn't equal 3 */
     const stringDate = allDates?.filter((item, index) => {
         return allDates?.indexOf(item) === index;
     });
