@@ -7,5 +7,5 @@ export type ButtonType = {
     isImage?: boolean;
     className?: string;
     onClick?: () => void;
-    children?: any;
+    children?: React.ReactNode;
 } & HeadlineType;
