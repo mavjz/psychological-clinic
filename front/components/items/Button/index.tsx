@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { ButtonType } from './helper';
 import Headline from '../Headline';
+
 const Button = ({
     variant,
     text,
@@ -12,23 +12,17 @@ const Button = ({
     isUppercase,
     isLink,
     isImage,
+    children,
     className,
-    image,
     type,
+    onClick,
 }: ButtonType) => {
     return (
         <React.Fragment>
             {isLink ? (
                 isImage ? (
                     <Link href={link || '/'} passHref legacyBehavior className={className}>
-                        <figure className={`${className}-placeholder`}>
-                            <Image
-                                src={image || ''}
-                                alt="Image"
-                                fill
-                                className={`${className}-placeholder__image`}
-                            />
-                        </figure>
+                        {children}
                     </Link>
                 ) : (
                     <Link href={link || '/'} passHref legacyBehavior className={className}>
@@ -36,7 +30,7 @@ const Button = ({
                             <Headline
                                 variant={variant}
                                 text={text}
-                                placeClass="center"
+                                placeClass={placeClass}
                                 colorClass={colorClass}
                                 isUppercase={isUppercase}
                             />
@@ -44,20 +38,11 @@ const Button = ({
                     </Link>
                 )
             ) : isImage ? (
-                <div className={className}>
-                    <button className={`${className}-button`} type={type}>
-                        <figure className={`${className}-button__placeholder`}>
-                            <Image
-                                src={image || ''}
-                                alt="Image"
-                                fill
-                                className={`${className}-button__placeholder--image`}
-                            />
-                        </figure>
-                    </button>
-                </div>
+                <button className={className} type={type} onClick={onClick}>
+                    {children}
+                </button>
             ) : (
-                <button className={className} type={type}>
+                <button className={className} type={type} onClick={onClick}>
                     <Headline
                         variant={variant}
                         text={text}

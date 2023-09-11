@@ -23,10 +23,23 @@
         }
     }
     &-mobile {
-        margin: 0 3rem;
         @include grid(column);
-        width: calc(100vw - 6rem);
-        box-sizing: border-box;
+        width: calc(100vw - 4rem);
         justify-content: space-between;
+        &__button {
+            border: none;
+            background: none;
+        }
+        &__open {
+            position: absolute;
+            background-color: $white;
+            @include sizes(100%, 95vh);
+            margin-top: 5vh;
+            padding-top: 2rem;
+            &--items {
+                margin-left: 2rem;
+                @include grid(row, 2rem);
+            }
+        }
     }
 }

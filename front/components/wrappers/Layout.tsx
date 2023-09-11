@@ -24,6 +24,32 @@ const Layout = ({ children }: WrapperType) => {
                         link: '/sources',
                     },
                 ]}
+                sitesMobile={[
+                    {
+                        name: 'O nas',
+                        link: '/about',
+                    },
+                    {
+                        name: 'Nasze wartości',
+                        link: '/purposes',
+                    },
+                    {
+                        name: 'Cennik',
+                        link: '/prices',
+                    },
+                    {
+                        name: 'Oferta',
+                        link: '/services',
+                    },
+                    {
+                        name: 'Kontakt',
+                        link: '/contact',
+                    },
+                    {
+                        name: 'Źródła',
+                        link: '/sources',
+                    },
+                ]}
             />
             {children}
             <Footer
