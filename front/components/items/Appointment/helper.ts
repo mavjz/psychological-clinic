@@ -10,7 +10,9 @@ type props = {
 export const getTimeOfAppointments = ({ appointments }: props) => {
     let allHours = appointments?.map((item) => item.attributes.time);
     let sortedHours = allHours?.sort(function (a, b) {
-        return Number(new Date('2023/01/01 ' + a)) - Number(new Date('2023/01/01 ' + b));
+        const hourA = a.replace(/:/g, "");
+        const hourB = b.replace(/:/g, "");
+        return (Number(hourA) - Number(hourB));
     });
     return sortedHours?.map((item) => item.slice(0, 5));
 };
