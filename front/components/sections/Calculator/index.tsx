@@ -1,11 +1,11 @@
-import Button from 'components/items/Button';
 import Paragraph from 'components/items/Paragraph';
 import { useFormik } from 'formik';
-import { strapiTherapistGet } from 'lib/strapi/therapists/get';
-import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
+import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
+import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { calculation } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
+import Button from 'components/items/Button';
 
 const Calculator = () => {
     const [data, setData] = useState<formData>();
@@ -25,9 +25,9 @@ const Calculator = () => {
             setIsSubmit(true);
         },
     });
-    const [therapistList, setTherapistList] = useState<strapiTherapistQuery[]>();
+    const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     useEffect(() => {
-        strapiTherapistGet().then((res) => {
+        strapiTherapistsGet().then((res) => {
             setTherapistList(res.data.data);
         });
     }, []);

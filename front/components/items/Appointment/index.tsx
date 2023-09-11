@@ -7,8 +7,8 @@ import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
-import Button from '../Button';
 import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper';
+import Button from '../Button';
 
 const Appointment = () => {
     const filters: filters = {};
