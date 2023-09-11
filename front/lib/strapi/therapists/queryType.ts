@@ -1,4 +1,5 @@
-export type strapiTherapistQuery = {
+export type strapiTherapistsQuery = {
+    id: number,
     attributes: {
         createdAt: string,
         first_name: string,

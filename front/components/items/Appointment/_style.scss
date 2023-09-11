@@ -5,7 +5,7 @@
     }
     &-content {
         &__panel {
-            // @include flex(row, wrap, 1vw, 1vw);
+            @include flex(row, wrap, 1vw, 1vw);
             @media screen and (max-width: $width-tablet){
                 @include grid(row, $row-gap: 1vw);
             }

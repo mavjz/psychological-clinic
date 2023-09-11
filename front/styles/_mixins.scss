@@ -36,3 +36,20 @@
     place-items: $place-items;
     justify-content: $justify-content;
 }
+
+@mixin flex(
+    $direction: inherit,
+    $wrap: inherit,
+    $row-gap: inherit,
+    $column-gap: inherit,
+    $align-items: inherit,
+    $justify-content: inherit
+) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    row-gap: $row-gap;
+    column-gap: $column-gap;
+    align-items: $align-items;
+    justify-content: $justify-content;
+}
