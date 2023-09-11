@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { HeadlineType } from 'types/items/headline';
 import Headline from './Headline';
+import { HeadlineType } from './Headline/helper';
 const Button = ({
     variant,
     text,
