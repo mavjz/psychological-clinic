@@ -1,0 +1,6 @@
+.appointmentapproval {
+    @include sizes(100vw, 100vh);
+    background-color: rgb(0, 0, 0, 0.3);
+    position: absolute;
+    z-index: 10;
+}

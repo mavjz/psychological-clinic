@@ -9,6 +9,7 @@ import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper';
 import Button from '../Button';
+import AppointmentApproval from '../AppointmentApproval';
 
 const Appointment = () => {
     const filters: filters = {};
@@ -25,7 +26,7 @@ const Appointment = () => {
     useEffect(() => {
         if (chosenDate) {
             // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            const rightTime = new Date(chosenDate?.getTime() - (-120 * 60 * 1000));
+            const rightTime = new Date(chosenDate?.getTime() - -120 * 60 * 1000);
             // changing format of date to YYYY-MM-DD
             const queryChosenDate = rightTime?.toISOString().slice(0, 10);
             filters.date = {
@@ -64,16 +65,21 @@ const Appointment = () => {
         );
     }
     return (
+        <>
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
-                    <Button
+                    {/* TODO: Adding Names next to time of appointment */}
+                    {/* <Button
                         variant="h3"
                         text="Wszyscy terapeuci"
                         colorClass="greendark"
-                        onClick={() => setChosenTherapist(undefined)}
+                        onClick={() => {
+                            setChosenTherapist(undefined);
+                            setChosenDate(undefined);
+                        }}
                         className="appointment-content__panel--button"
-                    />
+                    /> */}
                     {therapists?.map((therapist, index) => (
                         <Button
                             key={index}
@@ -115,12 +121,23 @@ const Appointment = () => {
                         }
                     >
                         {getTimeOfAppointments({ appointments })?.map((item, index) => (
-                            <div key={index}>{item}</div>
+                            <div key={index} className='appointment-content__data--availabledates-item'>
+                                <div>{item}</div>
+                                <Button
+                                    colorClass='greendark'
+                                    className='appointment-content__data--availabledates-item__button'
+                                    variant='h4'
+                                    text='Umów wizytę'
+                                    onClick={() => console.log("Uzupełnij")}
+                                />
+                            </div>
                         ))}
                     </div>
                 </div>
             </div>
         </WrapperWidth>
+        <AppointmentApproval/>
+        </>
     );
 };
 
