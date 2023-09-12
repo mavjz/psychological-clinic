@@ -66,6 +66,7 @@ const Appointment = () => {
     }
     return (
         <>
+        <AppointmentApproval/>
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
@@ -136,7 +137,7 @@ const Appointment = () => {
                 </div>
             </div>
         </WrapperWidth>
-        <AppointmentApproval/>
+        
         </>
     );
 };
