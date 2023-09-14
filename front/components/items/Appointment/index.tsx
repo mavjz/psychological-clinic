@@ -9,7 +9,6 @@ import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper';
 import Button from '../Button';
-import AppointmentApproval from '../AppointmentApproval';
 
 const Appointment = () => {
     const filters: filters = {};
@@ -65,8 +64,6 @@ const Appointment = () => {
         );
     }
     return (
-        <>
-        <AppointmentApproval/>
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
@@ -129,7 +126,8 @@ const Appointment = () => {
                                     className='appointment-content__data--availabledates-item__button'
                                     variant='h4'
                                     text='Umów wizytę'
-                                    onClick={() => console.log("Uzupełnij")}
+                                    isLink
+                                    link='/managingappointment'
                                 />
                             </div>
                         ))}
@@ -137,8 +135,6 @@ const Appointment = () => {
                 </div>
             </div>
         </WrapperWidth>
-        
-        </>
     );
 };
 

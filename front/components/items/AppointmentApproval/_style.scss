@@ -1,12 +1,14 @@
 .appointmentapproval {
     @include sizes(100%, 100vh);
     background-color: rgb(0, 0, 0, 0.6);
-    position: absolute;
-    overflow: visible;
     z-index: 2;
-    &-dups {
-        position: sticky;
-        top: 0;
-        @include sizes(100%, 100vh);
+    @include grid($place-items: center);
+    &-alert {
+        @include sizes(30rem, 20rem);
+        @include grid(row, 20px);
+        align-items: start;
+        align-content: start;
+        padding: 3rem;
+        background-color: $green-light;
     }
 }
