@@ -119,15 +119,21 @@ const Appointment = () => {
                         }
                     >
                         {getTimeOfAppointments({ appointments })?.map((item, index) => (
-                            <div key={index} className='appointment-content__data--availabledates-item'>
+                            <div
+                                key={index}
+                                className="appointment-content__data--availabledates-item"
+                            >
                                 <div>{item}</div>
                                 <Button
-                                    colorClass='greendark'
-                                    className='appointment-content__data--availabledates-item__button'
-                                    variant='h4'
-                                    text='Umów wizytę'
-                                    isLink
-                                    link='/managingappointment'
+                                    colorClass="greendark"
+                                    className="appointment-content__data--availabledates-item__button"
+                                    variant="h4"
+                                    text="Umów wizytę"
+                                    onClick={() => {
+                                        // toggleBodyScroll();
+                                    }}
+                                    // isLink
+                                    // link='/managingappointment'
                                 />
                             </div>
                         ))}
@@ -137,5 +143,9 @@ const Appointment = () => {
         </WrapperWidth>
     );
 };
+
+// const toggleBodyScroll = () => {
+//     document.body.style.overflow = 'hidden';
+// };
 
 export default Appointment;
