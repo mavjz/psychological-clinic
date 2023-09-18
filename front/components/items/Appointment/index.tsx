@@ -1,19 +1,27 @@
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import { isSameDay } from 'date-fns';
-import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
+import { strapiAppointmentGet, strapiAppointmentGetPopulation } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
-import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper';
+import {
+    filters,
+    formingDate,
+    getDateOfAppointments,
+    getIdOfAppointment,
+    getTimeOfAppointments,
+} from './helper';
 import Button from '../Button';
 
 const Appointment = () => {
     const filters: filters = {};
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
+    const [chosenTime, setChosenTime] = useState<string>();
+    const [visits, setVisits] = useState<strapiAppointmentQuery[]>();
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
@@ -21,15 +29,17 @@ const Appointment = () => {
         strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
         });
+        strapiAppointmentGetPopulation('populate=*').then((res) => {
+            setVisits(res.data.data);
+        });
     }, []);
     useEffect(() => {
+        setChosenTime(undefined);
+    }, [chosenDate]);
+    useEffect(() => {
         if (chosenDate) {
-            // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            const rightTime = new Date(chosenDate?.getTime() - -120 * 60 * 1000);
-            // changing format of date to YYYY-MM-DD
-            const queryChosenDate = rightTime?.toISOString().slice(0, 10);
             filters.date = {
-                $eq: queryChosenDate,
+                $eq: formingDate({ chosenDate }),
             };
         }
         filters.therapist = {
@@ -41,7 +51,8 @@ const Appointment = () => {
             setAppointments(res.data.data);
             setIsLoading(false);
         });
-    }, [chosenDate || chosenTherapist]);
+        getIdOfAppointment({ visits, chosenTherapist, chosenDate, chosenTime });
+    }, [chosenDate || chosenTherapist || chosenTime]);
     const isDayDisabled = (day: Date) => {
         return !getDateOfAppointments({ appointments })?.some((avaibleDay) =>
             isSameDay(day, avaibleDay)
@@ -91,6 +102,7 @@ const Appointment = () => {
                             onClick={() => {
                                 setChosenTherapist(therapist.id);
                                 setChosenDate(undefined);
+                                setChosenTime(undefined);
                             }}
                             className="appointment-content__panel--button"
                         />
@@ -130,6 +142,7 @@ const Appointment = () => {
                                     variant="h4"
                                     text="Umów wizytę"
                                     onClick={() => {
+                                        setChosenTime(item);
                                         // toggleBodyScroll();
                                     }}
                                     // isLink

@@ -6,6 +6,9 @@ const base_url = 'http://localhost:1337/api/';
 export const strapiGet = async ({ req_url, filters }: StrapiCRUDType) =>
     await axios.get(base_url + req_url + '?' + qs.stringify({ filters }));
 
+export const strapiGetPopulation = async ({ req_url, req }: StrapiCRUDType) =>
+    await axios.get(base_url + req_url + '?' + req);
+
 export const strapiPost = async ({ req_url, req }: StrapiCRUDType) =>
     await axios.post(base_url + req_url, req);
 
