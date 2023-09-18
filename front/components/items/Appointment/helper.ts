@@ -1,20 +1,4 @@
-import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
-
-export type filters = {
-    [Keys: string]: Object;
-};
-type propsOfFormingDate = {
-    chosenDate: Date;
-};
-type props = {
-    appointments: strapiAppointmentQuery[] | undefined;
-};
-type propsOfGetId = {
-    fullDataAppointment: strapiAppointmentQuery[] | undefined;
-    chosenTherapist: number | undefined;
-    chosenDate: Date | undefined;
-    chosenTime: string | undefined;
-};
+import { propsAppointment, propsOfFormingDate, propsOfGetId } from './models';
 
 export const formingDate = ({ chosenDate }: propsOfFormingDate) => {
     // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
@@ -23,7 +7,7 @@ export const formingDate = ({ chosenDate }: propsOfFormingDate) => {
     return rightTime?.toISOString().slice(0, 10);
 };
 
-export const getTimeOfAppointments = ({ appointments }: props) => {
+export const getTimeOfAppointments = ({ appointments }: propsAppointment) => {
     let allHours = appointments?.map((item) => item.attributes.time);
     let sortedHours = allHours?.sort(function (a, b) {
         return Number(a.replace(/:/g, '')) - Number(b.replace(/:/g, ''));
@@ -31,7 +15,7 @@ export const getTimeOfAppointments = ({ appointments }: props) => {
     return sortedHours?.map((item) => item.slice(0, 5));
 };
 
-export const getDateOfAppointments = ({ appointments }: props) => {
+export const getDateOfAppointments = ({ appointments }: propsAppointment) => {
     const allDates = appointments?.map((item) => item.attributes.date);
     // deleting repeated dates
     const stringDate = allDates?.filter((item, index) => {

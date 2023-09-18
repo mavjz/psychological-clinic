@@ -7,17 +7,19 @@ import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
+import Button from '../Button';
+import { useRouter } from 'next/router';
+import { filters } from './models';
 import {
-    filters,
     formingDate,
     getDateOfAppointments,
     getIdOfAppointment,
     getTimeOfAppointments,
 } from './helper';
-import Button from '../Button';
 
 const Appointment = () => {
     const filters: filters = {};
+    const router = useRouter();
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
     const [chosenTime, setChosenTime] = useState<string>();
@@ -143,10 +145,8 @@ const Appointment = () => {
                                     text="Umów wizytę"
                                     onClick={() => {
                                         setChosenTime(item);
-                                        // toggleBodyScroll();
+                                        router.push('/managingappointment');
                                     }}
-                                    // isLink
-                                    // link='/managingappointment'
                                 />
                             </div>
                         ))}
@@ -156,9 +156,5 @@ const Appointment = () => {
         </WrapperWidth>
     );
 };
-
-// const toggleBodyScroll = () => {
-//     document.body.style.overflow = 'hidden';
-// };
 
 export default Appointment;

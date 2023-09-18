@@ -1,9 +1,10 @@
 import React from 'react';
-import { AppointmentApprovalType } from './helper';
 import Headline from '../Headline';
 import Paragraph from '../Paragraph';
+import { AppointmentApprovalType } from './models';
 
 const AppointmentApproval = ({ therapist, date, time }: AppointmentApprovalType) => {
+    document.body.style.overflow = 'hidden';
     return (
         <div className="appointmentapproval">
             <div className="appointmentapproval-alert">
@@ -15,12 +16,10 @@ const AppointmentApproval = ({ therapist, date, time }: AppointmentApprovalType)
                 />
                 <Paragraph
                     size="medium"
-                    text={"Wizyta u " + therapist + ' w dniu ' + date + ' o godzinie ' + time}
+                    text={'Wizyta u ' + therapist + ' w dniu ' + date + ' o godzinie ' + time}
                     colorClass="greendark"
                 />
-                <div className="appointmentapproval-alert__buttons">
-
-                </div>
+                <div className="appointmentapproval-alert__buttons"></div>
             </div>
         </div>
     );
