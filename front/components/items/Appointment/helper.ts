@@ -53,12 +53,9 @@ export const getIdOfAppointment = ({
 }: propsOfGetId) => {
     return fullDataAppointment?.filter((item) => {
         if (item.attributes.therapist.data.id === chosenTherapist) {
-            console.log(item);
             if (chosenDate !== undefined) {
                 if (item.attributes.date === formingDate({ chosenDate })) {
-                    console.log(item);
                     if (item.attributes.time === chosenTime + ':00.000') {
-                        console.log(item);
                         return item;
                     }
                 }
