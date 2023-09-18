@@ -10,7 +10,7 @@ type props = {
     appointments: strapiAppointmentQuery[] | undefined;
 };
 type propsOfGetId = {
-    visits: strapiAppointmentQuery[] | undefined;
+    fullDataAppointment: strapiAppointmentQuery[] | undefined;
     chosenTherapist: number | undefined;
     chosenDate: Date | undefined;
     chosenTime: string | undefined;
@@ -46,12 +46,12 @@ export const getDateOfAppointments = ({ appointments }: props) => {
 };
 
 export const getIdOfAppointment = ({
-    visits,
+    fullDataAppointment,
     chosenTherapist,
     chosenDate,
     chosenTime,
 }: propsOfGetId) => {
-    return visits?.filter((item) => {
+    return fullDataAppointment?.filter((item) => {
         if (item.attributes.therapist.data.id === chosenTherapist) {
             console.log(item);
             if (chosenDate !== undefined) {

@@ -21,7 +21,7 @@ const Appointment = () => {
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
     const [chosenTime, setChosenTime] = useState<string>();
-    const [visits, setVisits] = useState<strapiAppointmentQuery[]>();
+    const [fullDataAppointment, setFullDataAppointment] = useState<strapiAppointmentQuery[]>();
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +30,7 @@ const Appointment = () => {
             setTherapists(res.data.data);
         });
         strapiAppointmentGetPopulation('populate=*').then((res) => {
-            setVisits(res.data.data);
+            setFullDataAppointment(res.data.data);
         });
     }, []);
     useEffect(() => {
@@ -51,7 +51,7 @@ const Appointment = () => {
             setAppointments(res.data.data);
             setIsLoading(false);
         });
-        getIdOfAppointment({ visits, chosenTherapist, chosenDate, chosenTime });
+        getIdOfAppointment({ fullDataAppointment, chosenTherapist, chosenDate, chosenTime });
     }, [chosenDate || chosenTherapist || chosenTime]);
     const isDayDisabled = (day: Date) => {
         return !getDateOfAppointments({ appointments })?.some((avaibleDay) =>
