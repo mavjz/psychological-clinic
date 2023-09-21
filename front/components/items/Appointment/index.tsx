@@ -4,7 +4,7 @@ import { strapiAppointmentGet, strapiAppointmentGetPopulation } from 'lib/strapi
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import Button from '../Button';
@@ -16,10 +16,12 @@ import {
     getIdOfAppointment,
     getTimeOfAppointments,
 } from './helper';
+import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
 
 const Appointment = () => {
     const filters: filters = {};
     const router = useRouter();
+    const { setAppointmentID } = useContext(AppointmentDataContext);
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
     const [chosenTime, setChosenTime] = useState<string>();
@@ -53,8 +55,15 @@ const Appointment = () => {
             setAppointments(res.data.data);
             setIsLoading(false);
         });
-        getIdOfAppointment({ fullDataAppointment, chosenTherapist, chosenDate, chosenTime });
     }, [chosenDate || chosenTherapist || chosenTime]);
+    useEffect(() => {
+        getIdOfAppointment({
+            fullDataAppointment,
+            chosenTherapist,
+            chosenDate,
+            chosenTime,
+        })?.map((item) => setAppointmentID(item));
+    }, [chosenTime]);
     const isDayDisabled = (day: Date) => {
         return !getDateOfAppointments({ appointments })?.some((avaibleDay) =>
             isSameDay(day, avaibleDay)

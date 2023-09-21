@@ -4,11 +4,7 @@ import React from 'react';
 const PolicyPrivacy = () => {
     return (
         <React.Fragment>
-            <AppointmentApproval
-                therapist=''
-                // date={}
-                time=''
-            />
+            <AppointmentApproval />
         </React.Fragment>
     );
 };

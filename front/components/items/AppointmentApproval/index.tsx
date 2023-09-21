@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Headline from '../Headline';
 import Paragraph from '../Paragraph';
-import { AppointmentApprovalType } from './models';
+import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
 
-const AppointmentApproval = ({ therapist, date, time }: AppointmentApprovalType) => {
+const AppointmentApproval = () => {
     document.body.style.overflow = 'hidden';
+    const { appointmentID } = useContext(AppointmentDataContext);
+    const dataToArray = [appointmentID];
     return (
         <div className="appointmentapproval">
             <div className="appointmentapproval-alert">
@@ -14,11 +16,25 @@ const AppointmentApproval = ({ therapist, date, time }: AppointmentApprovalType)
                     colorClass="greendark"
                     placeClass="center"
                 />
-                <Paragraph
-                    size="medium"
-                    text={'Wizyta u ' + therapist + ' w dniu ' + date + ' o godzinie ' + time}
-                    colorClass="greendark"
-                />
+                {dataToArray?.map((item, index) => (
+                    <Paragraph
+                        key={index}
+                        size="medium"
+                        text={
+                            'Wizyta u ' +
+                            item?.attributes.therapist.data.attributes.first_name +
+                            ' ' +
+                            item?.attributes.therapist.data.attributes.last_name +
+                            ' w dniu ' +
+                            item?.attributes.date.slice(0, 10).split('-').reverse().join('.') +
+                            'r.' +
+                            ' o godzinie ' +
+                            item?.attributes.time.slice(0, 5)
+                        }
+                        colorClass="greendark"
+                    />
+                ))}
+
                 <div className="appointmentapproval-alert__buttons"></div>
             </div>
         </div>
