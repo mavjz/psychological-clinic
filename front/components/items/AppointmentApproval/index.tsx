@@ -25,7 +25,7 @@ const AppointmentApproval = () => {
                             ' ' +
                             item?.attributes.therapist.data.attributes.last_name +
                             ' w dniu ' +
-                            item?.attributes.date.slice(0, 10).split('-').reverse().join('.') +
+                            item?.attributes.date.split('-').reverse().join('.') +
                             'r.' +
                             ' o godzinie ' +
                             item?.attributes.time.slice(0, 5)
