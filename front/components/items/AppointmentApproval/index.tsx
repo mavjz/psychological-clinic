@@ -6,7 +6,6 @@ import { AppointmentDataContext } from 'components/wrappers/AppointmentDataConte
 const AppointmentApproval = () => {
     document.body.style.overflow = 'hidden';
     const { appointmentID } = useContext(AppointmentDataContext);
-    const dataToArray = [appointmentID];
     return (
         <div className="appointmentapproval">
             <div className="appointmentapproval-alert">
@@ -16,7 +15,7 @@ const AppointmentApproval = () => {
                     colorClass="greendark"
                     placeClass="center"
                 />
-                {dataToArray?.map((item, index) => (
+                {[appointmentID]?.map((item, index) => (
                     <Paragraph
                         key={index}
                         size="medium"
