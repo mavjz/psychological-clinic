@@ -1,16 +1,28 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Headline from '../Headline';
 import Paragraph from '../Paragraph';
 import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
+import { giveAppointmentCode } from './helper';
+import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
+import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 const AppointmentApproval = () => {
     document.body.style.overflow = 'hidden';
     const router = useRouter();
+    const [appointments, getAppointments] = useState<strapiAppointmentQuery[]>();
+    useEffect(() => {
+        strapiAppointmentGet().then((res) => {
+            getAppointments(res.data.data);
+        });
+    }, []);
     const { appointmentID } = useContext(AppointmentDataContext);
-    const bookingAppointment = { data: { is_booked: true } };
+    const bookingAppointment = {
+        data: { is_booked: true, appointment_code: giveAppointmentCode(appointments) },
+    };
+
     return (
         <div className="appointmentapproval">
             <div className="appointmentapproval-alert">
@@ -31,8 +43,7 @@ const AppointmentApproval = () => {
                                 item?.attributes.therapist.data.attributes.last_name +
                                 ' w dniu ' +
                                 item?.attributes.date.split('-').reverse().join('.') +
-                                'r.' +
-                                ' o godzinie ' +
+                                'r. o godzinie ' +
                                 item?.attributes.time.slice(0, 5)
                             }
                             colorClass="greendark"
