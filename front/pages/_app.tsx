@@ -5,7 +5,6 @@ import Transition from 'components/wrappers/Transition';
 import { AppointmentDataContextProvider } from 'components/wrappers/AppointmentDataContext';
 
 export default function App({ Component, pageProps }: AppProps) {
-    document.body.style.overflow = 'auto';
     return (
         <AppointmentDataContextProvider>
             <Layout>

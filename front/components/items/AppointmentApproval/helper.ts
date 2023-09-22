@@ -12,13 +12,11 @@ export const giveAppointmentCode = (appointments: strapiAppointmentQuery[] | und
             }
         })
         .map((item) => Number(item));
-    let latestAppointment;
     if (numberOfappointmentCode !== undefined) {
         if (numberOfappointmentCode?.length > 0) {
-            latestAppointment = (Math.max(...numberOfappointmentCode) + 1).toString;
+            return (Math.max(...numberOfappointmentCode) + 1).toString().padStart(6, '0');
         } else {
-            latestAppointment = '1';
+            return '000001';
         }
     }
-    return latestAppointment;
 };

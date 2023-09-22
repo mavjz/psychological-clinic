@@ -11,18 +11,22 @@ import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 const AppointmentApproval = () => {
     const router = useRouter();
+    const [isDeclined, setIsDeclined] = useState(false);
+    const [isApproved, setIsApproved] = useState(false);
     const [appointments, getAppointments] = useState<strapiAppointmentQuery[]>();
     useEffect(() => {
         strapiAppointmentGet().then((res) => {
             getAppointments(res.data.data);
             document.body.style.overflow = 'hidden';
         });
-    }, []);
+    }, [isApproved]);
     const { appointmentID } = useContext(AppointmentDataContext);
     const bookingAppointment = {
-        data: { is_booked: true, appointment_code: giveAppointmentCode(appointments) },
+        data: {
+            is_booked: true,
+            appointment_code: giveAppointmentCode(appointments),
+        },
     };
-
     return (
         <div className="appointmentapproval">
             <div className="appointmentapproval-alert">
@@ -36,7 +40,7 @@ const AppointmentApproval = () => {
                         />
                         <Paragraph
                             size="medium"
-                            text="Nie martw się! Będziesz mógł tu wrócić, gdy zarezerwujesz wizytę u swojego terapuety"
+                            text="Nie martw się! Będziesz mógł tu wrócić, gdy zarezerwujesz wizytę u swojego terapuety."
                             colorClass="greendark"
                         />
                         <Button
@@ -51,54 +55,81 @@ const AppointmentApproval = () => {
                     <React.Fragment>
                         <Headline
                             variant="h1"
-                            text="Potwierdzenie wizyty"
+                            text={`${
+                                (isApproved && 'Potwierdzono') ||
+                                (isDeclined && 'Anulowano') ||
+                                'Potwierdzenie wizyty'
+                            }`}
                             colorClass="greendark"
                             placeClass="center"
                         />
-                        {[appointmentID]?.map((item, index) => (
-                            <React.Fragment key={index}>
-                                <Paragraph
-                                    size="medium"
-                                    text={
-                                        'Wizyta u ' +
-                                        item?.attributes.therapist.data.attributes.first_name +
-                                        ' ' +
-                                        item?.attributes.therapist.data.attributes.last_name +
-                                        ' w dniu ' +
-                                        item?.attributes.date.split('-').reverse().join('.') +
-                                        'r. o godzinie ' +
-                                        item?.attributes.time.slice(0, 5)
-                                    }
-                                    colorClass="greendark"
-                                />
-                                <Paragraph
-                                    size="medium"
-                                    text={
-                                        'Koszt: ' +
-                                        item?.attributes.therapist.data.attributes.session_cost +
-                                        'zł. Płatność przed wizytą gotówką lub kartą'
-                                    }
-                                    colorClass="greendark"
-                                />
-                            </React.Fragment>
-                        ))}
+                        {/* TODO print appointment_code */}
+                        {[appointmentID]?.map((item, index) => {
+                            return (
+                                <React.Fragment key={index}>
+                                    <Paragraph
+                                        size="medium"
+                                        text={
+                                            'Wizyta u ' +
+                                            item?.attributes.therapist.data.attributes.first_name +
+                                            ' ' +
+                                            item?.attributes.therapist.data.attributes.last_name +
+                                            ' w dniu ' +
+                                            item?.attributes.date.split('-').reverse().join('.') +
+                                            'r. o godzinie ' +
+                                            item?.attributes.time.slice(0, 5)
+                                        }
+                                        colorClass="greendark"
+                                    />
+                                    <Paragraph
+                                        size="medium"
+                                        text={`${
+                                            (isApproved && ' ') ||
+                                            (isDeclined && ' ') ||
+                                            'Koszt: ' +
+                                                item?.attributes.therapist.data.attributes
+                                                    .session_cost +
+                                                'zł. Płatność przed wizytą gotówką lub kartą'
+                                        }`}
+                                        colorClass="greendark"
+                                    />
+                                </React.Fragment>
+                            );
+                        })}
+
                         <div className="appointmentapproval-alert__buttons">
-                            <Button
-                                variant="h3"
-                                colorClass="greendark"
-                                text="Zatwierdź"
-                                onClick={() => {
-                                    strapiAppointmentPut(appointmentID.id, bookingAppointment);
-                                }}
-                            />
-                            <Button
-                                variant="h3"
-                                colorClass="greendark"
-                                text="Powrót do strony głównej"
-                                onClick={() => {
-                                    router.push('/');
-                                }}
-                            />
+                            {!isApproved && !isDeclined ? (
+                                <React.Fragment>
+                                    <Button
+                                        variant="h3"
+                                        colorClass="greendark"
+                                        text="Zatwierdź"
+                                        onClick={() => {
+                                            strapiAppointmentPut(
+                                                appointmentID.id,
+                                                bookingAppointment
+                                            );
+                                            setIsApproved(true);
+                                        }}
+                                    />
+                                    <Button
+                                        variant="h3"
+                                        colorClass="greendark"
+                                        text="Anuluj"
+                                        onClick={() => {
+                                            setIsDeclined(true);
+                                        }}
+                                    />
+                                </React.Fragment>
+                            ) : (
+                                <Button
+                                    variant="h3"
+                                    colorClass="greendark"
+                                    text="Powrót do strony głównej"
+                                    isLink
+                                    link="/"
+                                />
+                            )}
                         </div>
                     </React.Fragment>
                 )}

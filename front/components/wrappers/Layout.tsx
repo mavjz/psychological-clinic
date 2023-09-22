@@ -1,8 +1,11 @@
 import Footer from 'components/sections/Footer';
 import Navbar from 'components/sections/Navbar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { WrapperType } from 'types/wrapper';
 const Layout = ({ children }: WrapperType) => {
+    useEffect(() => {
+        document.body.style.overflow = 'auto';
+    }, []);
     return (
         <React.Fragment>
             <Navbar
