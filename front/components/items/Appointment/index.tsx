@@ -29,6 +29,9 @@ const Appointment = () => {
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
+    filters.is_booked = {
+        $eq: false,
+    };
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
