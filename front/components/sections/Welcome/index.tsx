@@ -7,33 +7,25 @@ import { WelcomeType } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Welcome = ({ image, headline, text }: WelcomeType) => {
-    const isWide = useMedia({ minWidth: '768px' });
+    const isWide = useMedia({ maxWidth: '768px' });
     return (
         <div className="welcome">
             {isWide ? (
-                <WrapperWidth>
+                <div className="welcome-container">
                     <div className="welcome-placeholder">
-                        <Image
-                            src={image}
-                            alt="Background photo"
-                            fill
-                            className="welcome-placeholder__image"
-                        />
+                        <Image src={image} alt="Background photo" fill />
                     </div>
                     <div className="welcome-gradient" />
-                </WrapperWidth>
+                </div>
             ) : (
-                <React.Fragment>
-                    <div className="welcome-placeholder">
-                        <Image
-                            src={image}
-                            alt="Background photo"
-                            fill
-                            className="welcome-placeholder__image"
-                        />
+                <WrapperWidth>
+                    <div className="welcome-container">
+                        <div className="welcome-placeholder">
+                            <Image src={image} alt="Background photo" fill />
+                        </div>
+                        <div className="welcome-gradient" />
                     </div>
-                    <div className="welcome-gradient" />
-                </React.Fragment>
+                </WrapperWidth>
             )}
             <WrapperWidth>
                 <div className="welcome-text">
@@ -46,4 +38,3 @@ const Welcome = ({ image, headline, text }: WelcomeType) => {
 };
 
 export default Welcome;
-
