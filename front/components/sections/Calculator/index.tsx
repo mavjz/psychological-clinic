@@ -6,15 +6,18 @@ import React, { useEffect, useState } from 'react';
 import { calculation } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
+import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
+import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 
 const Calculator = () => {
     // TODO yup validator
+    // TODO solve for/label problem
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const formik = useFormik({
         initialValues: {
             therapist: '',
-            session: 1,
+            session: '',
             relative: '',
             relativesCode: '',
             workshop: false,
@@ -24,17 +27,23 @@ const Calculator = () => {
             setIsSubmit(true);
         },
     });
+    const [appointmentList, setAppointmentList] = useState<strapiAppointmentQuery[]>();
     const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapistList(res.data.data);
         });
+        strapiAppointmentGet().then((res) => {
+            setAppointmentList(res.data.data);
+        });
     }, []);
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
     useEffect(() => {
-        setCost(calculation({ data, therapistList, cost, discount })?.cost);
-        setDiscount(calculation({ data, therapistList, cost, discount })?.discount);
+        setCost(calculation({ data, therapistList, appointmentList, cost, discount })?.cost);
+        setDiscount(
+            calculation({ data, therapistList, appointmentList, cost, discount })?.discount
+        );
     }, [data]);
     return (
         <WrapperWidth>
@@ -144,7 +153,7 @@ export default Calculator;
 
 export type formData = {
     therapist?: string;
-    session: number | undefined;
+    session: string;
     relative?: string;
     relativesCode?: string;
     workshop?: boolean;

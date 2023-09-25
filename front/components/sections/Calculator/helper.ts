@@ -1,22 +1,24 @@
+import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { formData } from '.';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 
-export function calculation({ data, therapistList, cost, discount }: props) {
+export function calculation({ data, therapistList, appointmentList, cost, discount }: props) {
     discount = 0;
     cost = 0;
+    let numberOfDataSession = Number(data?.session);
     if (data?.workshop) {
-        data.session = Number(data.session) - 1;
+        numberOfDataSession = numberOfDataSession - 1;
     }
     therapistList?.find((therapist) => {
         if (therapist?.id === Number(data?.therapist)) {
-            cost = Number(therapist.attributes.session_cost) * Number(data?.session);
+            cost = Number(therapist.attributes.session_cost) * numberOfDataSession;
             if (data?.workshop) {
-                if (Number(data?.session) + 1 >= 24) {
+                if (numberOfDataSession + 1 >= 24) {
                     discount = cost * 0.1;
                     cost = cost * 0.9;
                 }
             } else {
-                if (Number(data?.session) >= 24) {
+                if (numberOfDataSession >= 24) {
                     discount = cost * 0.1;
                     cost = cost * 0.9;
                 }
@@ -25,11 +27,18 @@ export function calculation({ data, therapistList, cost, discount }: props) {
     });
     if (data?.workshop) {
         cost = cost + 1300;
-        data.session = Number(data.session) + 1;
+        numberOfDataSession = numberOfDataSession + 1;
     }
     if (data?.relative === 'promo') {
-        discount = discount + cost * 0.05;
-        cost = cost * 0.95;
+        appointmentList?.find((appointment) => {
+            if (
+                appointment?.attributes.appointment_code ===
+                data?.relativesCode?.toString().padStart(6, '0')
+            ) {
+                discount = discount + cost * 0.05;
+                cost = cost * 0.95;
+            }
+        });
     }
     discount = Math.round(discount * 100) / 100;
     cost = Math.round(cost * 100) / 100;
@@ -39,6 +48,7 @@ export function calculation({ data, therapistList, cost, discount }: props) {
 type props = {
     data: formData | undefined;
     therapistList: strapiTherapistsQuery[] | undefined;
+    appointmentList: strapiAppointmentQuery[] | undefined;
     cost: number;
     discount: number;
 };
