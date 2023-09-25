@@ -1,5 +1,6 @@
 .profile {
     position: relative;
+    @include sizes(fit-content, fit-content);
     &-placeholder {
         @include sizes(12rem, 12rem);
         position: relative;

@@ -1,0 +1,6 @@
+.profiles {
+    @include flex(row, wrap);
+    justify-content: space-between;
+    row-gap: 2rem;
+    place-items: center;
+}
