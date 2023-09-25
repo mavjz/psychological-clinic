@@ -1,17 +1,21 @@
 .CEOProfile {
     @include grid(column, $column-gap: 0);
-    margin: 6vh 0;
+    place-items: center;
+    margin: 2rem 0;
     @media screen and (max-width: $width-tablet) {
-        @include grid(row, 2vh);
+        @include grid(row, 1rem);
     }
     &-placeholder {
-        @include sizes(25vw, 25vw);
+        @include sizes(25rem, 25rem);
         position: relative;
         border: solid 5px $green-light;
         @media screen and (max-width: $width-tablet) {
+            justify-self: center;
+            box-sizing: border-box;
+        }
+        @media screen and (max-width: 450px) {
             @include sizes(100%, 100%);
             padding-bottom: 100%;
-            box-sizing: border-box;
         }
         &__image {
             @include image;
