@@ -1,4 +1,5 @@
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
+import { ProperAppointmentCode } from './models';
 
 // This function is created solely for project requirements and
 // should not be used commercially due to data security concerns
@@ -19,4 +20,16 @@ export const giveAppointmentCode = (appointments: strapiAppointmentQuery[] | und
             return '000001';
         }
     }
+};
+
+export const findProperAppointmentCode = ({
+    appointments,
+    appointmentID,
+}: ProperAppointmentCode) => {
+    const object = appointments?.find((item) => {
+        if (item?.id === appointmentID?.id) {
+            return item;
+        }
+    });
+    return object?.attributes.appointment_code;
 };

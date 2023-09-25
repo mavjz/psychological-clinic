@@ -5,11 +5,12 @@ import { AppointmentDataContext } from 'components/wrappers/AppointmentDataConte
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
-import { giveAppointmentCode } from './helper';
+import { findProperAppointmentCode, giveAppointmentCode } from './helper';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 const AppointmentApproval = () => {
+    // TODO: fix overflow after leaving page
     const router = useRouter();
     const [isDeclined, setIsDeclined] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
@@ -17,7 +18,6 @@ const AppointmentApproval = () => {
     useEffect(() => {
         strapiAppointmentGet().then((res) => {
             getAppointments(res.data.data);
-            document.body.style.overflow = 'hidden';
         });
     }, [isApproved]);
     const { appointmentID } = useContext(AppointmentDataContext);
@@ -84,7 +84,12 @@ const AppointmentApproval = () => {
                                     <Paragraph
                                         size="medium"
                                         text={`${
-                                            (isApproved && ' ') ||
+                                            (isApproved &&
+                                                'Twój kod wizyty to ' +
+                                                    findProperAppointmentCode({
+                                                        appointments,
+                                                        appointmentID,
+                                                    })) ||
                                             (isDeclined && ' ') ||
                                             'Koszt: ' +
                                                 item?.attributes.therapist.data.attributes

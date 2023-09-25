@@ -3,9 +3,6 @@ import Navbar from 'components/sections/Navbar';
 import React, { useEffect } from 'react';
 import { WrapperType } from 'types/wrapper';
 const Layout = ({ children }: WrapperType) => {
-    useEffect(() => {
-        document.body.style.overflow = 'auto';
-    }, []);
     return (
         <React.Fragment>
             <Navbar
