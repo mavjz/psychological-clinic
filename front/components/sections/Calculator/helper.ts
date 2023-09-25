@@ -1,5 +1,5 @@
 import { formData } from '.';
-import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
+import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 
 export function calculation({ data, therapistList, cost, discount }: props) {
     discount = 0;
@@ -7,9 +7,9 @@ export function calculation({ data, therapistList, cost, discount }: props) {
     if (data?.workshop) {
         data.session = Number(data.session) - 1;
     }
-    for (let i = 0; i < Number(therapistList?.length); i++) {
-        if (therapistList?.[i].attributes.first_name === data?.therapist) {
-            cost = Number(therapistList?.[i].attributes.session_cost) * Number(data?.session);
+    therapistList?.find((therapist) => {
+        if (therapist?.id === Number(data?.therapist)) {
+            cost = Number(therapist.attributes.session_cost) * Number(data?.session);
             if (data?.workshop) {
                 if (Number(data?.session) + 1 >= 24) {
                     discount = cost * 0.1;
@@ -22,7 +22,7 @@ export function calculation({ data, therapistList, cost, discount }: props) {
                 }
             }
         }
-    }
+    });
     if (data?.workshop) {
         cost = cost + 1300;
         data.session = Number(data.session) + 1;
@@ -38,7 +38,7 @@ export function calculation({ data, therapistList, cost, discount }: props) {
 
 type props = {
     data: formData | undefined;
-    therapistList: strapiTherapistQuery[] | undefined;
+    therapistList: strapiTherapistsQuery[] | undefined;
     cost: number;
     discount: number;
 };

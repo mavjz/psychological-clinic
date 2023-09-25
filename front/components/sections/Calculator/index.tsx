@@ -8,16 +8,15 @@ import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
 
 const Calculator = () => {
+    // TODO yup validator
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const formik = useFormik({
         initialValues: {
-            therapist: {
-                therapistName: '',
-            },
-            session: undefined,
+            therapist: '',
+            session: 1,
             relative: '',
-            relativesCode: undefined,
+            relativesCode: '',
             workshop: false,
         },
         onSubmit: () => {
@@ -31,7 +30,6 @@ const Calculator = () => {
             setTherapistList(res.data.data);
         });
     }, []);
-    const therapistNameList = therapistList?.map((therapist) => therapist.attributes.first_name);
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
     useEffect(() => {
@@ -56,9 +54,11 @@ const Calculator = () => {
                             <option disabled hidden value={'DEFAULT'}>
                                 Kliknij by rozwinąć listę
                             </option>
-                            {therapistNameList?.map((therapistName, index) => (
-                                <option value={formik.values.therapist.therapistName} key={index}>
-                                    {therapistName}
+                            {therapistList?.map((therapist, index) => (
+                                <option value={therapist.id} key={index}>
+                                    {therapist.attributes.first_name +
+                                        ' ' +
+                                        therapist.attributes.last_name}
                                 </option>
                             ))}
                         </select>
@@ -143,11 +143,9 @@ const Calculator = () => {
 export default Calculator;
 
 export type formData = {
-    therapist?: {
-        therapistName: string;
-    };
+    therapist?: string;
     session: number | undefined;
     relative?: string;
-    relativesCode?: number | undefined;
+    relativesCode?: string;
     workshop?: boolean;
 };
