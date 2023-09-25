@@ -1,11 +1,16 @@
 .welcome {
     @include sizes(100%, fit-content);
-    margin-bottom: 4vh;
+    margin-bottom: 2rem;
+    @media screen and (min-width: $width-tablet) {
+        h1 {
+            font-size: 3rem;
+        }
+    }
     &-container {
         position: relative;
     }
     &-placeholder {
-        @include sizes(100%, 30rem);
+        @include sizes(100%, 25rem);
         @media screen and (max-width: $width-tablet) {
             @include sizes(100%, 20rem);
         }
@@ -22,13 +27,17 @@
     }
     &-text {
         @include grid(row, 3vh);
-        margin-top: -25rem;
+        margin-top: -20rem;
         position: relative;
-        z-index: 1;
         padding: 0 2rem;
         @media screen and (max-width: $width-tablet) {
             margin-top: -17rem;
             padding: 0;
+        }
+        @media screen and (min-width: $width-tablet) {
+            p {
+                width: 35rem;
+            }
         }
     }
 }
