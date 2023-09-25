@@ -1,6 +1,9 @@
 .counter {
     @include grid(row);
     @include sizes(fit-content, fit-content);
+    @media screen and (max-width: $width-tablet) {
+        @include grid(row, 0);
+    }
     &-text {
         margin-left: 4rem;
     }
