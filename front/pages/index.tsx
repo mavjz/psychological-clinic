@@ -43,7 +43,7 @@ export default function Home() {
                             text: ``,
                         },
                         {
-                            text: `Skupiamy się na każdym z klientów jako wyjątkowym przypadku. Uważamy za ważne rozmowę oraz dobrą komunikację pomiędzy klientem a psychoterapuetą. 
+                            text: `Skupiamy się na każdym z klientów jako wyjątkowym przypadku. Uważamy za ważne rozmowę oraz dobrą komunikację pomiędzy klientem a psychoterapeutą. 
                 Przede wszystkim czas na sesji poświęcamy na odkryciu wizji pacjenta o nim samym otaczając go akceptacją i dając mu należytą empatię. Na naszych spotkaniach 
                 oferujemy całowitą poufność. Dajemy miejsce na otwartość i podzielenie się wszystkim tym, co w danym momencie potrzebuje nasz klient.`,
                         },
