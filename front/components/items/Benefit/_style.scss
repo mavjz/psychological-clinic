@@ -1,25 +1,16 @@
 .benefit {
-    @include grid(row, 1vh, $place-items: center);
-    max-width: 15vw;
-    @media screen and (max-width: $width-tablet) {
-        max-width: 100%;
-    }
+    @include grid(row, 0.5rem, $place-items: center);
+    @include sizes(fit-content, fit-content, 15rem);
     &-icon {
         &__border {
             @include grid($place-items: center);
-            @include sizes(8vw, 8vw);
+            @include sizes(6rem, 6rem);
             border-radius: 100%;
             border: solid 5px $green-dark;
             background-color: $green-light;
-            @media screen and (max-width: $width-tablet) {
-                @include sizes(25vw, 25vw);
-            }
             &--image {
-                @include sizes(5vw, 5vw);
+                @include sizes(4rem, 4rem);
                 color: $green-dark;
-                @media screen and (max-width: $width-tablet) {
-                    @include sizes(18vw, 18vw);
-                }
             }
         }
     }
