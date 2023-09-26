@@ -19,7 +19,11 @@ import {
 import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
 
 const Appointment = () => {
-    const filters: filters = {};
+    const filters: filters = {
+        is_booked: {
+            $eq: false,
+        },
+    };
     const router = useRouter();
     const { setAppointmentID } = useContext(AppointmentDataContext);
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
@@ -30,9 +34,7 @@ const Appointment = () => {
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
-    filters.is_booked = {
-        $eq: false,
-    };
+
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
@@ -41,9 +43,11 @@ const Appointment = () => {
             setDataAppointmentWithTherapist(res.data.data);
         });
     }, []);
+
     useEffect(() => {
         setChosenTime(undefined);
     }, [chosenDate]);
+
     useEffect(() => {
         if (chosenDate) {
             filters.date = {
@@ -60,6 +64,7 @@ const Appointment = () => {
             setIsLoading(false);
         });
     }, [chosenDate || chosenTherapist || chosenTime]);
+
     useEffect(() => {
         returnAppointmentByID({
             dataAppointmentWithTherapist,
@@ -68,11 +73,13 @@ const Appointment = () => {
             chosenTime,
         })?.map((item) => setAppointmentID(item));
     }, [chosenTime]);
+
     const isDayDisabled = (day: Date) => {
         return !getDateOfAppointments({ appointments })?.some((avaibleDay) =>
             isSameDay(day, avaibleDay)
         );
     };
+
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -89,6 +96,7 @@ const Appointment = () => {
             </WrapperWidth>
         );
     }
+
     return (
         <WrapperWidth>
             <div className="appointment-content">
