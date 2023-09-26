@@ -13,7 +13,7 @@ import { filters } from './models';
 import {
     formatDate,
     getDateOfAppointments,
-    getIdOfAppointment,
+    returnAppointmentByID,
     getTimeOfAppointments,
 } from './helper';
 import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
@@ -25,7 +25,8 @@ const Appointment = () => {
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
     const [chosenTime, setChosenTime] = useState<string>();
-    const [fullDataAppointment, setFullDataAppointment] = useState<strapiAppointmentQuery[]>();
+    const [dataAppointmentWithTherapist, setDataAppointmentWithTherapist] =
+        useState<strapiAppointmentQuery[]>();
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +38,7 @@ const Appointment = () => {
             setTherapists(res.data.data);
         });
         strapiAppointmentGetPopulation('populate=*').then((res) => {
-            setFullDataAppointment(res.data.data);
+            setDataAppointmentWithTherapist(res.data.data);
         });
     }, []);
     useEffect(() => {
@@ -60,8 +61,8 @@ const Appointment = () => {
         });
     }, [chosenDate || chosenTherapist || chosenTime]);
     useEffect(() => {
-        getIdOfAppointment({
-            fullDataAppointment,
+        returnAppointmentByID({
+            dataAppointmentWithTherapist,
             chosenTherapist,
             chosenDate,
             chosenTime,

@@ -5,9 +5,9 @@ export const formatDate = ({ chosenDate }: propsOfFormingDate) =>
 
 export const getTimeOfAppointments = ({ appointments }: propsAppointment) => {
     let allHours = appointments?.map((item) => item.attributes.time);
-    let sortedHours = allHours?.sort(function (a, b) {
-        return Number(a.replace(/:/g, '')) - Number(b.replace(/:/g, ''));
-    });
+    let sortedHours = allHours?.sort(
+        (a, b) => Number(a.replace(/:/g, '')) - Number(b.replace(/:/g, ''))
+    );
     return sortedHours?.map((item) => item.slice(0, 5));
 };
 
@@ -25,21 +25,19 @@ export const getDateOfAppointments = ({ appointments }: propsAppointment) => {
     });
 };
 
-export const getIdOfAppointment = ({
-    fullDataAppointment,
+export const returnAppointmentByID = ({
+    dataAppointmentWithTherapist,
     chosenTherapist,
     chosenDate,
     chosenTime,
-}: propsOfGetId) => {
-    return fullDataAppointment?.filter((item) => {
-        if (item.attributes.therapist.data.id === chosenTherapist) {
-            if (chosenDate !== undefined) {
-                if (item.attributes.date === formatDate({ chosenDate })) {
-                    if (item.attributes.time === chosenTime + ':00.000') {
-                        return item;
-                    }
-                }
-            }
+}: propsOfGetId) =>
+    dataAppointmentWithTherapist?.filter((item) => {
+        if (
+            item.attributes.therapist.data.id === chosenTherapist &&
+            chosenDate &&
+            item.attributes.date === formatDate({ chosenDate }) &&
+            item.attributes.time.slice(0, 5) === chosenTime
+        ) {
+            return item;
         }
     });
-};

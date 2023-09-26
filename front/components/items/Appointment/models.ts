@@ -11,7 +11,7 @@ export type propsAppointment = {
 };
 
 export type propsOfGetId = {
-    fullDataAppointment: strapiAppointmentQuery[] | undefined;
+    dataAppointmentWithTherapist: strapiAppointmentQuery[] | undefined;
     chosenTherapist: number | undefined;
     chosenDate: Date | undefined;
     chosenTime: string | undefined;
