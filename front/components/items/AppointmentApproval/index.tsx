@@ -15,11 +15,6 @@ const AppointmentApproval = () => {
     const [isDeclined, setIsDeclined] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
     const [appointments, getAppointments] = useState<strapiAppointmentQuery[]>();
-    useEffect(() => {
-        strapiAppointmentGet().then((res) => {
-            getAppointments(res.data.data);
-        });
-    }, [isApproved]);
     const { appointmentID } = useContext(AppointmentDataContext);
     const bookingAppointment = {
         data: {
@@ -27,10 +22,17 @@ const AppointmentApproval = () => {
             appointment_code: createUniqueAppointmentCode(appointments),
         },
     };
+
+    useEffect(() => {
+        strapiAppointmentGet().then((res) => {
+            getAppointments(res.data.data);
+        });
+    }, [isApproved]);
+
     return (
         <div className="appointmentapproval">
             <div className="appointmentapproval-alert">
-                {appointmentID === undefined ? (
+                {appointmentID ? (
                     <React.Fragment>
                         <Headline
                             variant="h1"
@@ -64,44 +66,41 @@ const AppointmentApproval = () => {
                             placeClass="center"
                         />
                         {/* TODO print appointment_code */}
-                        {[appointmentID]?.map((item, index) => {
-                            return (
-                                <React.Fragment key={index}>
-                                    <Paragraph
-                                        size="medium"
-                                        text={
-                                            'Wizyta u ' +
-                                            item?.attributes.therapist.data.attributes.first_name +
-                                            ' ' +
-                                            item?.attributes.therapist.data.attributes.last_name +
-                                            ' w dniu ' +
-                                            item?.attributes.date.split('-').reverse().join('.') +
-                                            'r. o godzinie ' +
-                                            item?.attributes.time.slice(0, 5)
-                                        }
-                                        colorClass="greendark"
-                                    />
-                                    <Paragraph
-                                        size="medium"
-                                        text={`${
-                                            (isApproved &&
-                                                'Twój kod wizyty to ' +
-                                                    findAppointmentCodeById({
-                                                        appointments,
-                                                        appointmentID,
-                                                    })) ||
-                                            (isDeclined && ' ') ||
-                                            'Koszt: ' +
-                                                item?.attributes.therapist.data.attributes
-                                                    .session_cost +
-                                                'zł. Płatność przed wizytą gotówką lub kartą'
-                                        }`}
-                                        colorClass="greendark"
-                                    />
-                                </React.Fragment>
-                            );
-                        })}
-
+                        {[appointmentID]?.map((item, index) => (
+                            <React.Fragment key={index}>
+                                <Paragraph
+                                    size="medium"
+                                    text={
+                                        'Wizyta u ' +
+                                        item?.attributes.therapist.data.attributes.first_name +
+                                        ' ' +
+                                        item?.attributes.therapist.data.attributes.last_name +
+                                        ' w dniu ' +
+                                        item?.attributes.date.split('-').reverse().join('.') +
+                                        'r. o godzinie ' +
+                                        item?.attributes.time.slice(0, 5)
+                                    }
+                                    colorClass="greendark"
+                                />
+                                <Paragraph
+                                    size="medium"
+                                    text={`${
+                                        (isApproved &&
+                                            'Twój kod wizyty to ' +
+                                                findAppointmentCodeById({
+                                                    appointments,
+                                                    appointmentID,
+                                                })) ||
+                                        (isDeclined && ' ') ||
+                                        'Koszt: ' +
+                                            item?.attributes.therapist.data.attributes
+                                                .session_cost +
+                                            'zł. Płatność przed wizytą gotówką lub kartą'
+                                    }`}
+                                    colorClass="greendark"
+                                />
+                            </React.Fragment>
+                        ))}
                         <div className="appointmentapproval-alert__buttons">
                             {!isApproved && !isDeclined ? (
                                 <React.Fragment>
