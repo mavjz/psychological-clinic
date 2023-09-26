@@ -1,4 +1,4 @@
-import { SetStateAction, createContext, useState, Dispatch } from 'react';
+import { createContext, useState } from 'react';
 import { WrapperType } from 'types/wrapper';
 
 const AppointmentDataContext = createContext<any>({} as any);

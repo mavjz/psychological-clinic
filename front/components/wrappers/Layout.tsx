@@ -1,6 +1,6 @@
 import Footer from 'components/sections/Footer';
 import Navbar from 'components/sections/Navbar';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { WrapperType } from 'types/wrapper';
 const Layout = ({ children }: WrapperType) => {
     return (
