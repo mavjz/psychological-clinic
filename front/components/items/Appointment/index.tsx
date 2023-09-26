@@ -11,7 +11,7 @@ import Button from '../Button';
 import { useRouter } from 'next/router';
 import { filters } from './models';
 import {
-    formingDate,
+    formatDate,
     getDateOfAppointments,
     getIdOfAppointment,
     getTimeOfAppointments,
@@ -46,7 +46,7 @@ const Appointment = () => {
     useEffect(() => {
         if (chosenDate) {
             filters.date = {
-                $eq: formingDate({ chosenDate }),
+                $eq: formatDate({ chosenDate }),
             };
         }
         filters.therapist = {

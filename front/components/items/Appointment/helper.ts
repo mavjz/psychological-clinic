@@ -1,11 +1,7 @@
 import { propsAppointment, propsOfFormingDate, propsOfGetId } from './models';
 
-export const formingDate = ({ chosenDate }: propsOfFormingDate) => {
-    // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-    const rightTime = new Date(chosenDate?.getTime() - 60 * 1000 * -120);
-    // changing format of date to YYYY-MM-DD
-    return rightTime?.toISOString().slice(0, 10);
-};
+export const formatDate = ({ chosenDate }: propsOfFormingDate) =>
+    new Date(chosenDate?.getTime() - 60 * 1000 * -120).toISOString().slice(0, 10);
 
 export const getTimeOfAppointments = ({ appointments }: propsAppointment) => {
     let allHours = appointments?.map((item) => item.attributes.time);
@@ -38,7 +34,7 @@ export const getIdOfAppointment = ({
     return fullDataAppointment?.filter((item) => {
         if (item.attributes.therapist.data.id === chosenTherapist) {
             if (chosenDate !== undefined) {
-                if (item.attributes.date === formingDate({ chosenDate })) {
+                if (item.attributes.date === formatDate({ chosenDate })) {
                     if (item.attributes.time === chosenTime + ':00.000') {
                         return item;
                     }
