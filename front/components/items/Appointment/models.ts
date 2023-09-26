@@ -6,11 +6,11 @@ export type filters = {
 export type propsOfFormingDate = {
     chosenDate: Date;
 };
-export type propsAppointment = {
+export type propsOfAppointments = {
     appointments: strapiAppointmentQuery[] | undefined;
 };
 
-export type propsOfGetId = {
+export type propsOfReturnAppointmentByID = {
     dataAppointmentWithTherapist: strapiAppointmentQuery[] | undefined;
     chosenTherapist: number | undefined;
     chosenDate: Date | undefined;
