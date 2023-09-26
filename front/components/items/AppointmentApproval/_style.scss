@@ -1,4 +1,4 @@
-.appointmentapproval {
+.appointmentApproval {
     @include sizes(100%, 100vh);
     background-color: rgb(0, 0, 0, 0.6);
     @include grid($place-items: center);

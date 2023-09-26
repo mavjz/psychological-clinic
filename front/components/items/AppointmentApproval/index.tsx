@@ -30,8 +30,8 @@ const AppointmentApproval = () => {
     }, [isApproved]);
 
     return (
-        <div className="appointmentapproval">
-            <div className="appointmentapproval-alert">
+        <div className="appointmentApproval">
+            <div className="appointmentApproval-alert">
                 {appointmentID ? (
                     <React.Fragment>
                         <Headline
@@ -101,7 +101,7 @@ const AppointmentApproval = () => {
                                 />
                             </React.Fragment>
                         ))}
-                        <div className="appointmentapproval-alert__buttons">
+                        <div className="appointmentApproval-alert__buttons">
                             {!isApproved && !isDeclined ? (
                                 <React.Fragment>
                                     <Button
