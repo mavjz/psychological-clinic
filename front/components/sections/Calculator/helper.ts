@@ -2,7 +2,13 @@ import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { formData } from '.';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 
-export function calculation({ data, therapistList, appointmentList, cost, discount }: props) {
+export const therapyCostCalculation = ({
+    data,
+    therapistList,
+    appointmentList,
+    cost,
+    discount,
+}: props) => {
     discount = 0;
     cost = 0;
     let numberOfDataSession = Number(data?.session);
@@ -43,7 +49,7 @@ export function calculation({ data, therapistList, appointmentList, cost, discou
     discount = Math.round(discount * 100) / 100;
     cost = Math.round(cost * 100) / 100;
     return { cost, discount };
-}
+};
 
 type props = {
     data: formData | undefined;

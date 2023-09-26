@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
-import { calculation } from './helper';
+import { therapyCostCalculation } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
@@ -40,9 +40,12 @@ const Calculator = () => {
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
     useEffect(() => {
-        setCost(calculation({ data, therapistList, appointmentList, cost, discount })?.cost);
+        setCost(
+            therapyCostCalculation({ data, therapistList, appointmentList, cost, discount })?.cost
+        );
         setDiscount(
-            calculation({ data, therapistList, appointmentList, cost, discount })?.discount
+            therapyCostCalculation({ data, therapistList, appointmentList, cost, discount })
+                ?.discount
         );
     }, [data]);
     return (
