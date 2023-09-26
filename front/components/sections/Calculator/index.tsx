@@ -12,6 +12,10 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 const Calculator = () => {
     // TODO yup validator
     // TODO solve for/label problem
+    const [cost, setCost] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const [appointmentList, setAppointmentList] = useState<strapiAppointmentQuery[]>();
+    const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const formik = useFormik({
@@ -27,8 +31,7 @@ const Calculator = () => {
             setIsSubmit(true);
         },
     });
-    const [appointmentList, setAppointmentList] = useState<strapiAppointmentQuery[]>();
-    const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
+
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapistList(res.data.data);
@@ -37,8 +40,7 @@ const Calculator = () => {
             setAppointmentList(res.data.data);
         });
     }, []);
-    const [cost, setCost] = useState(0);
-    const [discount, setDiscount] = useState(0);
+
     useEffect(() => {
         setCost(
             therapyCostCalculation({ data, therapistList, appointmentList, cost, discount })?.cost
@@ -48,6 +50,7 @@ const Calculator = () => {
                 ?.discount
         );
     }, [data]);
+
     return (
         <WrapperWidth>
             {/* If above 24 sessions, 15% discount
