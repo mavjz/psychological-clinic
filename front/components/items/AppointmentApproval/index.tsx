@@ -36,27 +36,6 @@ const AppointmentApproval = () => {
                     <React.Fragment>
                         <Headline
                             variant="h1"
-                            text="Nie powinno Cię tu być, ale..."
-                            colorClass="greendark"
-                            placeClass="center"
-                        />
-                        <Paragraph
-                            size="medium"
-                            text="Nie martw się! Będziesz mógł tu wrócić, gdy zarezerwujesz wizytę u swojego terapuety."
-                            colorClass="greendark"
-                        />
-                        <Button
-                            variant="h3"
-                            colorClass="greendark"
-                            text="Umów wizytę"
-                            isLink
-                            link="/contact"
-                        />
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
-                        <Headline
-                            variant="h1"
                             text={`${
                                 (isApproved && 'Potwierdzono') ||
                                 (isDeclined && 'Anulowano') ||
@@ -135,6 +114,27 @@ const AppointmentApproval = () => {
                                 />
                             )}
                         </div>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <Headline
+                            variant="h1"
+                            text="Nie powinno Cię tu być, ale..."
+                            colorClass="greendark"
+                            placeClass="center"
+                        />
+                        <Paragraph
+                            size="medium"
+                            text="Nie martw się! Będziesz mógł tu wrócić, gdy zarezerwujesz wizytę u swojego terapuety."
+                            colorClass="greendark"
+                        />
+                        <Button
+                            variant="h3"
+                            colorClass="greendark"
+                            text="Umów wizytę"
+                            isLink
+                            link="/contact"
+                        />
                     </React.Fragment>
                 )}
             </div>

@@ -16,6 +16,5 @@ export const createUniqueAppointmentCode = (appointments?: strapiAppointmentQuer
     }
 };
 
-export const findAppointmentCodeById = ({ appointments, appointmentID }: ProperAppointmentCode) => {
+export const findAppointmentCodeById = ({ appointments, appointmentID }: ProperAppointmentCode) =>
     appointments?.find((item) => item?.id === appointmentID?.id)?.attributes.appointment_code;
-};

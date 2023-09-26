@@ -12,6 +12,7 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 const Calculator = () => {
     // TODO yup validator
     // TODO solve for/label problem
+    // TODO proper suffix for "złoty"
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [appointmentList, setAppointmentList] = useState<strapiAppointmentQuery[]>();

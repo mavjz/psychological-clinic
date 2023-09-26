@@ -1,6 +1,6 @@
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import { isSameDay } from 'date-fns';
-import { strapiAppointmentGet, strapiAppointmentGetPopulation } from 'lib/strapi/appointments/get';
+import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
@@ -39,8 +39,9 @@ const Appointment = () => {
         strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
         });
-        strapiAppointmentGetPopulation('populate=*').then((res) => {
+        strapiAppointmentGet({}, 'populate=*').then((res) => {
             setDataAppointmentWithTherapist(res.data.data);
+            console.log(res.data.data);
         });
     }, []);
 

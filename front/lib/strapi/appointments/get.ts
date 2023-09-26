@@ -1,7 +1,4 @@
-import { strapiGet, strapiGetPopulation } from '../strapiCRUD';
+import { strapiGet } from '../strapiCRUD';
 
-export const strapiAppointmentGet = async (filters?: Object) =>
-    await strapiGet({ req_url: 'appointments', filters });
-
-export const strapiAppointmentGetPopulation = async (req?: string) =>
-    await strapiGetPopulation({ req_url: 'appointments', req });
+export const strapiAppointmentGet = async (filters?: Object, population?: string) =>
+    await strapiGet({ req_url: 'appointments', filters, population });
