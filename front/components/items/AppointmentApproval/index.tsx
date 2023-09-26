@@ -5,7 +5,7 @@ import { AppointmentDataContext } from 'components/wrappers/AppointmentDataConte
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
-import { findProperAppointmentCode, giveAppointmentCode } from './helper';
+import { findAppointmentCodeById, createUniqueAppointmentCode } from './helper';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
@@ -24,7 +24,7 @@ const AppointmentApproval = () => {
     const bookingAppointment = {
         data: {
             is_booked: true,
-            appointment_code: giveAppointmentCode(appointments),
+            appointment_code: createUniqueAppointmentCode(appointments),
         },
     };
     return (
@@ -86,7 +86,7 @@ const AppointmentApproval = () => {
                                         text={`${
                                             (isApproved &&
                                                 'Twój kod wizyty to ' +
-                                                    findProperAppointmentCode({
+                                                    findAppointmentCodeById({
                                                         appointments,
                                                         appointmentID,
                                                     })) ||
