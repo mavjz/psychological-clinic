@@ -16,18 +16,20 @@ export const therapyCostCalculation = ({
         numberOfDataSession = numberOfDataSession - 1;
     }
     therapistList?.find((therapist) => {
-        if (therapist?.id === Number(data?.therapist)) {
-            cost = Number(therapist.attributes.session_cost) * numberOfDataSession;
-            if (data?.workshop) {
-                if (numberOfDataSession + 1 >= 24) {
-                    discount = cost * 0.1;
-                    cost = cost * 0.9;
-                }
-            } else {
-                if (numberOfDataSession >= 24) {
-                    discount = cost * 0.1;
-                    cost = cost * 0.9;
-                }
+        if (therapist?.id !== Number(data?.therapist)) return;
+
+        cost = Number(therapist.attributes.session_cost) * numberOfDataSession;
+
+        if (data?.workshop) {
+            if (numberOfDataSession + 1 >= 24) {
+                discount = cost * 0.1;
+                cost = cost * 0.9;
+            }
+            discount = discount + Number(therapist.attributes.session_cost);
+        } else {
+            if (numberOfDataSession >= 24) {
+                discount = cost * 0.1;
+                cost = cost * 0.9;
             }
         }
     });
