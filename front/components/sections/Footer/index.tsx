@@ -9,15 +9,17 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PolicyIcon from '@mui/icons-material/Policy';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { FooterType } from './helper';
+import { useMedia } from 'use-media';
 
 const Footer = ({ sites }: FooterType) => {
+    const isWide = useMedia({ maxWidth: '786px' });
     return (
         <div className="footer">
             <WrapperWidth>
                 <div className="footer-content">
                     <div className="footer-content__bio">
                         <Headline
-                            variant="h1"
+                            variant={isWide ? 'h2' : 'h1'}
                             text="HumanHealth.com"
                             colorClass="yellowlight"
                             placeClass="center"
@@ -26,7 +28,7 @@ const Footer = ({ sites }: FooterType) => {
                             text="W Poradni Terapeutycznej HumanHealth.com wierzymy w zdolność każdej osoby do samorealizacji, rozwoju i życia pełnią życia. 
                             Nasza misja polega na wspieraniu naszych klientów w osiąganiu ich celów, 
                             pomagając im odkryć własną drogę do szczęścia i równowagi psychicznej."
-                            size="medium"
+                            size={isWide ? 'small' : 'medium'}
                             placeClass="justify"
                             colorClass="white"
                         />
@@ -47,7 +49,7 @@ const Footer = ({ sites }: FooterType) => {
                     <div className="footer-content__contact">
                         <Headline
                             text="Skontaktuj się"
-                            variant="h2"
+                            variant={isWide ? 'h3' : 'h2'}
                             colorClass="yellowlight"
                             placeClass="center"
                         />

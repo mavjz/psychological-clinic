@@ -7,7 +7,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const Navbar = ({ sites, sitesMobile }: NavbarType) => {
-    const isWide = useMedia({ maxWidth: '768px' });
+    const isWide = { maxWidth: '768px' };
     const [isClicked, setIsClicked] = useState(false);
     return (
         <div className="navbar">
@@ -45,7 +45,11 @@ const Navbar = ({ sites, sitesMobile }: NavbarType) => {
                                 colorClass="greendark"
                                 variant="h2"
                             />
-                            <Button isImage className="navbar-mobile__button" onClick={() => setIsClicked(!isClicked)} >
+                            <Button
+                                isImage
+                                className="navbar-mobile__button"
+                                onClick={() => setIsClicked(!isClicked)}
+                            >
                                 {isClicked ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
                             </Button>
                         </div>
