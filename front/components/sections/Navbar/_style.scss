@@ -1,5 +1,5 @@
 .navbar {
-    @include sizes(100%, 5vh);
+    @include sizes(100%, 2rem);
     display: grid;
     place-content: center;
     justify-content: space-between;
@@ -12,10 +12,9 @@
         margin: 0 3rem;
         @include grid(column);
         width: calc(100vw - 6rem);
-        box-sizing: border-box;
         justify-content: space-between;
         &__items {
-            @include grid(column, $column-gap: 3vw);
+            @include grid(column, $column-gap: 1.5rem);
             :hover {
                 transition: color 0.3s ease-in-out;
                 color: $green-light;
@@ -23,9 +22,9 @@
         }
     }
     &-mobile {
-        @include grid(column);
-        width: calc(100vw - 4rem);
+        @include flex(row);
         justify-content: space-between;
+        align-content: center;
         &__button {
             border: none;
             background: none;
@@ -34,7 +33,7 @@
             position: absolute;
             background-color: $white;
             @include sizes(100%, 95vh);
-            margin-top: 5vh;
+            margin-top: 2rem;
             padding-top: 2rem;
             &--items {
                 margin-left: 2rem;

@@ -7,34 +7,11 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const Navbar = ({ sites, sitesMobile }: NavbarType) => {
-    const isWide = { maxWidth: '768px' };
+    const isWide = useMedia({ maxWidth: '768px' });
     const [isClicked, setIsClicked] = useState(false);
     return (
         <div className="navbar">
-            {!isWide && (
-                <div className="navbar-desktop">
-                    <Button
-                        isLink
-                        link="/"
-                        text="HumanHealth.com"
-                        colorClass="greendark"
-                        variant="h3"
-                    />
-                    <div className="navbar-desktop__items">
-                        {sites.map((site, index) => (
-                            <Button
-                                isLink
-                                variant="h4"
-                                colorClass="greendark"
-                                key={index}
-                                text={site?.name}
-                                link={site?.link}
-                            />
-                        ))}
-                    </div>
-                </div>
-            )}
-            {isWide && (
+            {isWide ? (
                 <React.Fragment>
                     <WrapperWidth>
                         <div className="navbar-mobile">
@@ -63,7 +40,7 @@ const Navbar = ({ sites, sitesMobile }: NavbarType) => {
                                 {sitesMobile.map((site, index) => (
                                     <Button
                                         isLink
-                                        variant="h2"
+                                        variant="h3"
                                         colorClass="greendark"
                                         placeClass="left"
                                         key={index}
@@ -75,6 +52,28 @@ const Navbar = ({ sites, sitesMobile }: NavbarType) => {
                         </div>
                     )}
                 </React.Fragment>
+            ) : (
+                <div className="navbar-desktop">
+                    <Button
+                        isLink
+                        link="/"
+                        text="HumanHealth.com"
+                        colorClass="greendark"
+                        variant="h3"
+                    />
+                    <div className="navbar-desktop__items">
+                        {sites.map((site, index) => (
+                            <Button
+                                isLink
+                                variant="h4"
+                                colorClass="greendark"
+                                key={index}
+                                text={site?.name}
+                                link={site?.link}
+                            />
+                        ))}
+                    </div>
+                </div>
             )}
         </div>
     );
