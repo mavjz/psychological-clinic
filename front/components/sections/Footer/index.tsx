@@ -23,7 +23,7 @@ const Footer = ({ sites }: FooterType) => {
                             placeClass="center"
                         />
                         <Paragraph
-                            text="Poradni Terapeutycznej HumanHealth.com jest miejscem, gdzie liczy się człowiek i jego unikalna historia. 
+                            text="Poradnia terapeutyczna HumanHealth.com jest miejscem, gdzie liczy się człowiek i jego unikalna historia. 
                                     Nasza praktyka opiera się na nurtach humanistycznych, skupiających uwagę na wartości każdej jednostki 
                                     i jej potencjale do rozwoju."
                             size="medium"
