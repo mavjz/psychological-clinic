@@ -23,10 +23,9 @@ const Footer = ({ sites }: FooterType) => {
                             placeClass="center"
                         />
                         <Paragraph
-                            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                    Praesent ligula risus, dignissim id mauris a, pretium rutrum magna. 
-                                    Pellentesque at turpis consequat, euismod quam vitae, vulputate nisl. 
-                                    Aliquam lectus nibh, scelerisque eget magna vitae, fringilla efficitur leo."
+                            text="Poradni Terapeutycznej HumanHealth.com jest miejscem, gdzie liczy się człowiek i jego unikalna historia. 
+                                    Nasza praktyka opiera się na nurtach humanistycznych, skupiających uwagę na wartości każdej jednostki 
+                                    i jej potencjale do rozwoju."
                             size="medium"
                             placeClass="justify"
                             colorClass="white"
