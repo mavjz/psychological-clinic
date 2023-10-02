@@ -19,6 +19,7 @@ const AppointmentDataContextProvider = ({ children }: WrapperType) => {
     );
 };
 
+// handle the case where the context value might be undefined
 const useAppointmentContext = () => {
     const context = useContext(AppointmentDataContext);
     if (context === undefined) {
