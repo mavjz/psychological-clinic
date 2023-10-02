@@ -16,7 +16,7 @@ import {
     findMatchingAppointment,
     getTimeOfAppointments,
 } from './helper';
-import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
+import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 
 const Appointment = () => {
     const filters: filters = {
@@ -26,7 +26,7 @@ const Appointment = () => {
     };
     //const population = { populate: '*' };
     const router = useRouter();
-    const { setAppointmentID } = useContext(AppointmentDataContext);
+    const { setAppointmentID } = useAppointmentContext();
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
     const [chosenTime, setChosenTime] = useState<string>();

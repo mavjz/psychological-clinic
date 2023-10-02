@@ -1,11 +1,16 @@
-import { createContext, useState } from 'react';
+import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
+import { createContext, useState, useContext } from 'react';
 import { WrapperType } from 'types/wrapper';
 
-// TODO find proper types
-const AppointmentDataContext = createContext<any>({} as any);
+type AppointmentContextType = {
+    appointmentID: strapiAppointmentQuery | null;
+    setAppointmentID: (id: strapiAppointmentQuery | null) => void;
+};
+
+const AppointmentDataContext = createContext<AppointmentContextType | undefined>(undefined);
 
 const AppointmentDataContextProvider = ({ children }: WrapperType) => {
-    const [appointmentID, setAppointmentID] = useState();
+    const [appointmentID, setAppointmentID] = useState<strapiAppointmentQuery | null>(null);
 
     return (
         <AppointmentDataContext.Provider value={{ appointmentID, setAppointmentID }}>
@@ -14,4 +19,14 @@ const AppointmentDataContextProvider = ({ children }: WrapperType) => {
     );
 };
 
-export { AppointmentDataContext, AppointmentDataContextProvider };
+const useAppointmentContext = () => {
+    const context = useContext(AppointmentDataContext);
+    if (context === undefined) {
+        throw new Error(
+            'useAppointmentContext must be used within an AppointmentDataContextProvider'
+        );
+    }
+    return context;
+};
+
+export { AppointmentDataContextProvider, useAppointmentContext };

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Headline from '../Headline';
 import Paragraph from '../Paragraph';
-import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
+import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 import Button from '../Button';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
 import { findAppointmentCodeById, createUniqueAppointmentCode } from './helper';
@@ -13,7 +13,7 @@ const AppointmentApproval = () => {
     const [isDeclined, setIsDeclined] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
     const [appointments, getAppointments] = useState<strapiAppointmentQuery[]>();
-    const { appointmentID } = useContext(AppointmentDataContext);
+    const { appointmentID } = useAppointmentContext();
     const bookingAppointment = {
         data: {
             is_booked: true,

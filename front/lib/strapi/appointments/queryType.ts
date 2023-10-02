@@ -1,7 +1,7 @@
 import { strapiTherapistsQuery } from '../therapists/queryType';
 
 export type strapiAppointmentQuery = {
-    id: number;
+    id: string;
     attributes: {
         date: string;
         time: string;
