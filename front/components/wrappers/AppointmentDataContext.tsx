@@ -4,7 +4,7 @@ import { WrapperType } from 'types/wrapper';
 
 type AppointmentContextType = {
     appointmentID: strapiAppointmentQuery | null;
-    setAppointmentID: (idupa: strapiAppointmentQuery | null) => void;
+    setAppointmentID: (data: strapiAppointmentQuery | null) => void;
 };
 
 const AppointmentDataContext = createContext<AppointmentContextType | undefined>(undefined);
