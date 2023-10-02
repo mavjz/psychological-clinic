@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react';
 import { WrapperType } from 'types/wrapper';
 
+// TODO find proper types
 const AppointmentDataContext = createContext<any>({} as any);
 
 const AppointmentDataContextProvider = ({ children }: WrapperType) => {

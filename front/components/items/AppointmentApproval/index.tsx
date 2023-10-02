@@ -3,15 +3,13 @@ import Headline from '../Headline';
 import Paragraph from '../Paragraph';
 import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
 import Button from '../Button';
-import { useRouter } from 'next/router';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
 import { findAppointmentCodeById, createUniqueAppointmentCode } from './helper';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 const AppointmentApproval = () => {
-    // TODO: fix overflow after leaving page
-    const router = useRouter();
+    // TODO body.style.overflow.hidden
     const [isDeclined, setIsDeclined] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
     const [appointments, getAppointments] = useState<strapiAppointmentQuery[]>();
@@ -24,7 +22,7 @@ const AppointmentApproval = () => {
     };
 
     useEffect(() => {
-        strapiAppointmentGet().then((res) => {
+        strapiAppointmentGet({}).then((res) => {
             getAppointments(res.data.data);
         });
     }, [isApproved]);
@@ -44,7 +42,6 @@ const AppointmentApproval = () => {
                             colorClass="greendark"
                             placeClass="center"
                         />
-                        {/* TODO print appointment_code */}
                         {[appointmentID]?.map((item, index) => (
                             <React.Fragment key={index}>
                                 <Paragraph

@@ -26,11 +26,9 @@ export const therapyCostCalculation = ({
                 cost = cost * 0.9;
             }
             discount = discount + Number(therapist.attributes.session_cost);
-        } else {
-            if (numberOfDataSession >= 24) {
-                discount = cost * 0.1;
-                cost = cost * 0.9;
-            }
+        } else if (numberOfDataSession >= 24) {
+            discount = cost * 0.1;
+            cost = cost * 0.9;
         }
     });
     if (data?.workshop) {
@@ -38,7 +36,7 @@ export const therapyCostCalculation = ({
         numberOfDataSession = numberOfDataSession + 1;
     }
     if (data?.relative === 'promo') {
-        appointmentList?.find((appointment) => {
+        appointmentList?.forEach((appointment) => {
             if (
                 appointment?.attributes.appointment_code ===
                 data?.relativesCode?.toString().padStart(6, '0')

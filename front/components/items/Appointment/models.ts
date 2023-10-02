@@ -10,7 +10,7 @@ export type propsOfAppointments = {
     appointments: strapiAppointmentQuery[] | undefined;
 };
 
-export type propsOfReturnAppointmentByID = {
+export type propsOfFindMatchingAppointment = {
     dataAppointmentWithTherapist: strapiAppointmentQuery[] | undefined;
     chosenTherapist: number | undefined;
     chosenDate: Date | undefined;

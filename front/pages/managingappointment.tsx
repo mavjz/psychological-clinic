@@ -1,7 +1,7 @@
 import AppointmentApproval from 'components/items/AppointmentApproval';
 import React from 'react';
 
-const PolicyPrivacy = () => {
+const ManagingAppointment = () => {
     return (
         <React.Fragment>
             <AppointmentApproval />
@@ -9,4 +9,4 @@ const PolicyPrivacy = () => {
     );
 };
 
-export default PolicyPrivacy;
+export default ManagingAppointment;

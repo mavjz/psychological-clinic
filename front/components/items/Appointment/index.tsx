@@ -13,7 +13,7 @@ import { filters } from './models';
 import {
     formatDate,
     getDateOfAppointments,
-    returnAppointmentByID,
+    findMatchingAppointment,
     getTimeOfAppointments,
 } from './helper';
 import { AppointmentDataContext } from 'components/wrappers/AppointmentDataContext';
@@ -24,6 +24,7 @@ const Appointment = () => {
             $eq: false,
         },
     };
+    //const population = { populate: '*' };
     const router = useRouter();
     const { setAppointmentID } = useContext(AppointmentDataContext);
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
@@ -39,7 +40,7 @@ const Appointment = () => {
         strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
         });
-        strapiAppointmentGet({}, 'populate=*').then((res) => {
+        strapiAppointmentGet({ population: 'populate=*' }).then((res) => {
             setDataAppointmentWithTherapist(res.data.data);
             console.log(res.data.data);
         });
@@ -60,14 +61,14 @@ const Appointment = () => {
                 $eq: chosenTherapist,
             },
         };
-        strapiAppointmentGet(filters).then((res) => {
+        strapiAppointmentGet({ filters: filters }).then((res) => {
             setAppointments(res.data.data);
             setIsLoading(false);
         });
     }, [chosenDate || chosenTherapist || chosenTime]);
 
     useEffect(() => {
-        returnAppointmentByID({
+        findMatchingAppointment({
             dataAppointmentWithTherapist,
             chosenTherapist,
             chosenDate,
