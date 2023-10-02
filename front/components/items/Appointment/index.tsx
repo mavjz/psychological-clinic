@@ -18,6 +18,7 @@ import {
 } from './helper';
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 
+// TODO: optimize
 const Appointment = () => {
     const filters: filters = {
         is_booked: {
