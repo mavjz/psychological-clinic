@@ -24,7 +24,6 @@ const Appointment = () => {
             $eq: false,
         },
     };
-    //const population = { populate: '*' };
     const router = useRouter();
     const { setAppointmentID } = useAppointmentContext();
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
