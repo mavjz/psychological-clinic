@@ -11,13 +11,8 @@ export const strapiGet = async ({ req_url, filters, population }: StrapiCRUDType
     }
 
     if (filters) {
-        if (population) {
-            url += '?';
-        } else {
-            url += '/?';
-        }
-
-        url += qs.stringify({ filters });
+        const separator = population ? '&' : '?';
+        url += `${separator}${qs.stringify({ filters })}`;
     }
 
     return await axios.get(url);

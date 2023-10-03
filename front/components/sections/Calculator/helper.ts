@@ -15,7 +15,7 @@ export const therapyCostCalculation = ({
     if (data?.workshop) {
         numberOfDataSession = numberOfDataSession - 1;
     }
-    therapistList?.find((therapist) => {
+    therapistList?.forEach((therapist) => {
         if (therapist?.id !== Number(data?.therapist)) return;
 
         cost = Number(therapist.attributes.session_cost) * numberOfDataSession;
