@@ -16,33 +16,33 @@ export const therapyCostCalculation = ({
         numberOfDataSession = numberOfDataSession - 1;
     }
     therapistList?.forEach((therapist) => {
-        if (therapist?.id !== Number(data?.therapist)) return;
+        if (therapist.id !== Number(data?.therapist)) return;
 
         cost = Number(therapist.attributes.session_cost) * numberOfDataSession;
 
         if (data?.workshop) {
             if (numberOfDataSession + 1 >= 24) {
                 discount = cost * 0.1;
-                cost = cost * 0.9;
+                cost *= 0.9;
             }
-            discount = discount + Number(therapist.attributes.session_cost);
+            discount += Number(therapist.attributes.session_cost);
         } else if (numberOfDataSession >= 24) {
             discount = cost * 0.1;
-            cost = cost * 0.9;
+            cost *= 0.9;
         }
     });
     if (data?.workshop) {
-        cost = cost + 1300;
+        cost += 1300;
         numberOfDataSession = numberOfDataSession + 1;
     }
     if (data?.relative === 'promo') {
         appointmentList?.forEach((appointment) => {
             if (
-                appointment?.attributes.appointment_code ===
+                appointment.attributes.appointment_code ===
                 data?.relativesCode?.toString().padStart(6, '0')
             ) {
-                discount = discount + cost * 0.05;
-                cost = cost * 0.95;
+                discount += cost * 0.05;
+                cost *= 0.95;
             }
         });
     }
