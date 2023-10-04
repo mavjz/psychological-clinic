@@ -3,21 +3,28 @@ import { useFormik } from 'formik';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
-import { calculation } from './helper';
+import { therapyCostCalculation } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
+import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
+import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 
 const Calculator = () => {
+    // TODO yup validator
+    // TODO solve for/label problem
+    // TODO proper suffix for "złoty"
+    const [cost, setCost] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const [appointmentList, setAppointmentList] = useState<strapiAppointmentQuery[]>();
+    const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const formik = useFormik({
         initialValues: {
-            therapist: {
-                therapistName: '',
-            },
-            session: undefined,
+            therapist: '',
+            session: '',
             relative: '',
-            relativesCode: undefined,
+            relativesCode: '',
             workshop: false,
         },
         onSubmit: () => {
@@ -25,19 +32,26 @@ const Calculator = () => {
             setIsSubmit(true);
         },
     });
-    const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
+
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapistList(res.data.data);
         });
+        strapiAppointmentGet().then((res) => {
+            setAppointmentList(res.data.data);
+        });
     }, []);
-    const therapistNameList = therapistList?.map((therapist) => therapist.attributes.first_name);
-    const [cost, setCost] = useState(0);
-    const [discount, setDiscount] = useState(0);
+
     useEffect(() => {
-        setCost(calculation({ data, therapistList, cost, discount })?.cost);
-        setDiscount(calculation({ data, therapistList, cost, discount })?.discount);
+        setCost(
+            therapyCostCalculation({ data, therapistList, appointmentList, cost, discount })?.cost
+        );
+        setDiscount(
+            therapyCostCalculation({ data, therapistList, appointmentList, cost, discount })
+                ?.discount
+        );
     }, [data]);
+
     return (
         <WrapperWidth>
             {/* If above 24 sessions, 15% discount
@@ -56,9 +70,11 @@ const Calculator = () => {
                             <option disabled hidden value={'DEFAULT'}>
                                 Kliknij by rozwinąć listę
                             </option>
-                            {therapistNameList?.map((therapistName, index) => (
-                                <option value={formik.values.therapist.therapistName} key={index}>
-                                    {therapistName}
+                            {therapistList?.map((therapist, index) => (
+                                <option value={therapist.id} key={index}>
+                                    {therapist.attributes.first_name +
+                                        ' ' +
+                                        therapist.attributes.last_name}
                                 </option>
                             ))}
                         </select>
@@ -143,11 +159,9 @@ const Calculator = () => {
 export default Calculator;
 
 export type formData = {
-    therapist?: {
-        therapistName: string;
-    };
-    session: number | undefined;
+    therapist?: string;
+    session: string;
     relative?: string;
-    relativesCode?: number | undefined;
+    relativesCode?: string;
     workshop?: boolean;
 };

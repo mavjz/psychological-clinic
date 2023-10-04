@@ -1,4 +1,7 @@
+import { strapiTherapistsQuery } from '../therapists/queryType';
+
 export type strapiAppointmentQuery = {
+    id: string;
     attributes: {
         date: string;
         time: string;
@@ -6,5 +9,8 @@ export type strapiAppointmentQuery = {
         createdAt: string;
         updatedAt: string;
         id: number;
+        therapist: {
+            data: strapiTherapistsQuery;
+        };
     };
 };

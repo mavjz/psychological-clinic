@@ -4,32 +4,56 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
-import { filters, getDateOfAppointments, getTimeOfAppointments } from './helper';
 import Button from '../Button';
+import { useRouter } from 'next/router';
+import { filters } from './models';
+import {
+    formatDate,
+    getDateOfAppointments,
+    findMatchingAppointment,
+    getTimeOfAppointments,
+} from './helper';
+import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 
+// TODO: optimize
 const Appointment = () => {
-    const filters: filters = {};
+    const filters: filters = {
+        is_booked: {
+            $eq: false,
+        },
+    };
+    const router = useRouter();
+    const { setAppointmentID } = useAppointmentContext();
     const [therapists, setTherapists] = useState<strapiTherapistsQuery[]>();
     const [appointments, setAppointments] = useState<strapiAppointmentQuery[]>();
+    const [chosenTime, setChosenTime] = useState<string>();
+    const [dataAppointmentWithTherapist, setDataAppointmentWithTherapist] =
+        useState<strapiAppointmentQuery[]>();
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
     const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapists(res.data.data);
         });
+        strapiAppointmentGet({ population: 'populate=*' }).then((res) => {
+            setDataAppointmentWithTherapist(res.data.data);
+            console.log(res.data.data);
+        });
     }, []);
+
+    useEffect(() => {
+        setChosenTime(undefined);
+    }, [chosenDate]);
+
     useEffect(() => {
         if (chosenDate) {
-            // changing timezone by reducing by 2h (because of polish timezone (GMT+2))
-            const rightTime = new Date(chosenDate?.getTime() - (-120 * 60 * 1000));
-            // changing format of date to YYYY-MM-DD
-            const queryChosenDate = rightTime?.toISOString().slice(0, 10);
             filters.date = {
-                $eq: queryChosenDate,
+                $eq: formatDate({ chosenDate }),
             };
         }
         filters.therapist = {
@@ -37,16 +61,27 @@ const Appointment = () => {
                 $eq: chosenTherapist,
             },
         };
-        strapiAppointmentGet(filters).then((res) => {
+        strapiAppointmentGet({ filters: filters }).then((res) => {
             setAppointments(res.data.data);
             setIsLoading(false);
         });
-    }, [chosenDate || chosenTherapist]);
+    }, [chosenDate || chosenTherapist || chosenTime]);
+
+    useEffect(() => {
+        findMatchingAppointment({
+            dataAppointmentWithTherapist,
+            chosenTherapist,
+            chosenDate,
+            chosenTime,
+        })?.map((item) => setAppointmentID(item));
+    }, [chosenTime]);
+
     const isDayDisabled = (day: Date) => {
         return !getDateOfAppointments({ appointments })?.some((avaibleDay) =>
             isSameDay(day, avaibleDay)
         );
     };
+
     if (isLoading) {
         return (
             <WrapperWidth>
@@ -63,17 +98,22 @@ const Appointment = () => {
             </WrapperWidth>
         );
     }
+
     return (
         <WrapperWidth>
             <div className="appointment-content">
                 <div className="appointment-content__panel">
-                    <Button
+                    {/* TODO: Adding Names next to time of appointment */}
+                    {/* <Button
                         variant="h3"
                         text="Wszyscy terapeuci"
                         colorClass="greendark"
-                        onClick={() => setChosenTherapist(undefined)}
+                        onClick={() => {
+                            setChosenTherapist(undefined);
+                            setChosenDate(undefined);
+                        }}
                         className="appointment-content__panel--button"
-                    />
+                    /> */}
                     {therapists?.map((therapist, index) => (
                         <Button
                             key={index}
@@ -87,6 +127,7 @@ const Appointment = () => {
                             onClick={() => {
                                 setChosenTherapist(therapist.id);
                                 setChosenDate(undefined);
+                                setChosenTime(undefined);
                             }}
                             className="appointment-content__panel--button"
                         />
@@ -115,7 +156,22 @@ const Appointment = () => {
                         }
                     >
                         {getTimeOfAppointments({ appointments })?.map((item, index) => (
-                            <div key={index}>{item}</div>
+                            <div
+                                key={index}
+                                className="appointment-content__data--availabledates-item"
+                            >
+                                <div>{item}</div>
+                                <Button
+                                    colorClass="greendark"
+                                    className="appointment-content__data--availabledates-item__button"
+                                    variant="h4"
+                                    text="Umów wizytę"
+                                    onClick={() => {
+                                        setChosenTime(item);
+                                        router.push('/managingappointment');
+                                    }}
+                                />
+                            </div>
                         ))}
                     </div>
                 </div>

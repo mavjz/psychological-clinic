@@ -1,0 +1,13 @@
+.appointmentApproval {
+    @include sizes(100%, 100vh);
+    background-color: rgb(0, 0, 0, 0.6);
+    @include grid($place-items: center);
+    &-alert {
+        @include sizes(30rem, 20rem);
+        @include grid(row, 20px);
+        align-items: start;
+        align-content: start;
+        padding: 3rem;
+        background-color: $green-light;
+    }
+}

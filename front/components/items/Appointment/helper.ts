@@ -1,21 +1,17 @@
-import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
+import { propsOfAppointments, propsOfFormingDate, propsOfFindMatchingAppointment } from './models';
 
-export type filters = {
-    [Keys: string]: Object;
-};
-type props = {
-    appointments: strapiAppointmentQuery[] | undefined;
-};
+export const formatDate = ({ chosenDate }: propsOfFormingDate) =>
+    new Date(chosenDate?.getTime() - 60 * 1000 * -120).toISOString().slice(0, 10);
 
-export const getTimeOfAppointments = ({ appointments }: props) => {
+export const getTimeOfAppointments = ({ appointments }: propsOfAppointments) => {
     let allHours = appointments?.map((item) => item.attributes.time);
-    let sortedHours = allHours?.sort(function (a, b) {
-        return Number(a.replace(/:/g, "")) - Number(b.replace(/:/g, ""));
-    })
+    let sortedHours = allHours?.sort(
+        (a, b) => Number(a.replace(/:/g, '')) - Number(b.replace(/:/g, ''))
+    );
     return sortedHours?.map((item) => item.slice(0, 5));
 };
 
-export const getDateOfAppointments = ({ appointments }: props) => {
+export const getDateOfAppointments = ({ appointments }: propsOfAppointments) => {
     const allDates = appointments?.map((item) => item.attributes.date);
     // deleting repeated dates
     const stringDate = allDates?.filter((item, index) => {
@@ -28,3 +24,20 @@ export const getDateOfAppointments = ({ appointments }: props) => {
         }
     });
 };
+
+export const findMatchingAppointment = ({
+    dataAppointmentWithTherapist,
+    chosenTherapist,
+    chosenDate,
+    chosenTime,
+}: propsOfFindMatchingAppointment) =>
+    dataAppointmentWithTherapist?.filter((item) => {
+        if (
+            item.attributes.therapist.data.id === chosenTherapist &&
+            chosenDate &&
+            item.attributes.date === formatDate({ chosenDate }) &&
+            item.attributes.time.slice(0, 5) === chosenTime
+        ) {
+            return item;
+        }
+    });

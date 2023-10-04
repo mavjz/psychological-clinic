@@ -1,44 +1,60 @@
+import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { formData } from '.';
-import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
+import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 
-export function calculation({ data, therapistList, cost, discount }: props) {
+export const therapyCostCalculation = ({
+    data,
+    therapistList,
+    appointmentList,
+    cost,
+    discount,
+}: props) => {
     discount = 0;
     cost = 0;
+    let numberOfDataSession = Number(data?.session);
     if (data?.workshop) {
-        data.session = Number(data.session) - 1;
+        numberOfDataSession = numberOfDataSession - 1;
     }
-    for (let i = 0; i < Number(therapistList?.length); i++) {
-        if (therapistList?.[i].attributes.first_name === data?.therapist) {
-            cost = Number(therapistList?.[i].attributes.session_cost) * Number(data?.session);
-            if (data?.workshop) {
-                if (Number(data?.session) + 1 >= 24) {
-                    discount = cost * 0.1;
-                    cost = cost * 0.9;
-                }
-            } else {
-                if (Number(data?.session) >= 24) {
-                    discount = cost * 0.1;
-                    cost = cost * 0.9;
-                }
+    therapistList?.forEach((therapist) => {
+        if (therapist.id !== Number(data?.therapist)) return;
+
+        cost = Number(therapist.attributes.session_cost) * numberOfDataSession;
+
+        if (data?.workshop) {
+            if (numberOfDataSession + 1 >= 24) {
+                discount = cost * 0.1;
+                cost *= 0.9;
             }
+            discount += Number(therapist.attributes.session_cost);
+        } else if (numberOfDataSession >= 24) {
+            discount = cost * 0.1;
+            cost *= 0.9;
         }
-    }
+    });
     if (data?.workshop) {
-        cost = cost + 1300;
-        data.session = Number(data.session) + 1;
+        cost += 1300;
+        numberOfDataSession = numberOfDataSession + 1;
     }
     if (data?.relative === 'promo') {
-        discount = discount + cost * 0.05;
-        cost = cost * 0.95;
+        appointmentList?.forEach((appointment) => {
+            if (
+                appointment.attributes.appointment_code ===
+                data?.relativesCode?.toString().padStart(6, '0')
+            ) {
+                discount += cost * 0.05;
+                cost *= 0.95;
+            }
+        });
     }
     discount = Math.round(discount * 100) / 100;
     cost = Math.round(cost * 100) / 100;
     return { cost, discount };
-}
+};
 
 type props = {
     data: formData | undefined;
-    therapistList: strapiTherapistQuery[] | undefined;
+    therapistList: strapiTherapistsQuery[] | undefined;
+    appointmentList: strapiAppointmentQuery[] | undefined;
     cost: number;
     discount: number;
 };

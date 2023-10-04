@@ -1,4 +1,4 @@
-import { strapiGet } from "../strapiCRUD";
+import { strapiGet } from '../strapiCRUD';
 
 export const strapiTherapistsGet = async (filters?: Object) =>
-  await strapiGet({ req_url: "therapists", filters });
+    await strapiGet({ req_url: 'therapists', filters });
