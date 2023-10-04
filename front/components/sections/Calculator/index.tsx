@@ -37,7 +37,7 @@ const Calculator = () => {
         strapiTherapistsGet().then((res) => {
             setTherapistList(res.data.data);
         });
-        strapiAppointmentGet({}).then((res) => {
+        strapiAppointmentGet().then((res) => {
             setAppointmentList(res.data.data);
         });
     }, []);

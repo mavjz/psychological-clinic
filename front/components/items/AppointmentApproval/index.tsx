@@ -22,7 +22,7 @@ const AppointmentApproval = () => {
     };
 
     useEffect(() => {
-        strapiAppointmentGet({}).then((res) => {
+        strapiAppointmentGet().then((res) => {
             getAppointments(res.data.data);
         });
     }, [isApproved]);

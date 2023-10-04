@@ -4,5 +4,5 @@ type props = {
     population?: string;
 };
 
-export const strapiAppointmentGet = async ({ filters, population }: props) =>
+export const strapiAppointmentGet = async ({ filters, population }: props = {}) =>
     await strapiGet({ req_url: 'appointments', filters, population });

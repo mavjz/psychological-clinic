@@ -42,6 +42,7 @@ const Appointment = () => {
         });
         strapiAppointmentGet({ population: 'populate=*' }).then((res) => {
             setDataAppointmentWithTherapist(res.data.data);
+            console.log(res.data.data);
         });
     }, []);
 
