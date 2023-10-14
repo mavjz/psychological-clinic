@@ -51,10 +51,26 @@ export const therapyCostCalculation = ({
     return { cost, discount };
 };
 
+export const properSuffixForPrice = (price: number) => {
+    if (price) {
+        if (price % 10 === 1) {
+            return 'y';
+        }
+        if (price % 10 === 2 || price % 10 === 3 || price % 10 === 4) {
+            return 'e';
+        }
+        return 'ych';
+    }
+};
+
 type props = {
     data: formData | undefined;
     therapistList: strapiTherapistsQuery[] | undefined;
     appointmentList: strapiAppointmentQuery[] | undefined;
     cost: number;
     discount: number;
+};
+
+type propsOfProperSuffixForPrice = {
+    price?: number;
 };

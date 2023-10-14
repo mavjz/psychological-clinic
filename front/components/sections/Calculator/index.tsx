@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
-import { therapyCostCalculation } from './helper';
+import { properSuffixForPrice, therapyCostCalculation } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
@@ -148,7 +148,11 @@ const Calculator = () => {
                         size="big"
                         placeClass="center"
                         colorClass="black"
-                        text={`Łączny koszt wynosi ${cost} złotych. Udało Ci się zaoszczędzić ${discount} złotych`}
+                        text={`Łączny koszt wynosi ${cost} złot${properSuffixForPrice(
+                            cost
+                        )}. Udało Ci się zaoszczędzić ${discount} złot${properSuffixForPrice(
+                            discount
+                        )}.`}
                     />
                 )}
             </div>
