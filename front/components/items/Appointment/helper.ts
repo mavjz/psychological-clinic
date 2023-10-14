@@ -1,4 +1,9 @@
-import { propsOfAppointments, propsOfFormingDate, propsOfFindMatchingAppointment } from './models';
+import {
+    propsOfAppointments,
+    propsOfFormingDate,
+    propsOfFindMatchingAppointment,
+    propsOfSetFirstAvaibleAppointmentDate,
+} from './models';
 
 export const formatDate = ({ chosenDate }: propsOfFormingDate) =>
     new Date(chosenDate?.getTime() - 60 * 1000 * -120).toISOString().slice(0, 10);
@@ -41,3 +46,21 @@ export const findMatchingAppointment = ({
             return item;
         }
     });
+
+export const setFirstAvaibleAppointmentDate = ({
+    chosenTherapist,
+    dataAppointmentWithTherapist,
+}: propsOfSetFirstAvaibleAppointmentDate) => {
+    if (dataAppointmentWithTherapist && chosenTherapist) {
+        const filteringByTherapist = dataAppointmentWithTherapist?.filter(
+            (item) => item.attributes.therapist.data.id === chosenTherapist
+        );
+        if (filteringByTherapist.length !== 0) {
+            const datesToNumber = filteringByTherapist?.map((item) =>
+                Number(new Date(item.attributes.date))
+            );
+            return new Date(Math.min(...datesToNumber));
+        }
+    }
+    return new Date();
+};

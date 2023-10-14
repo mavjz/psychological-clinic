@@ -15,6 +15,7 @@ import {
     getDateOfAppointments,
     findMatchingAppointment,
     getTimeOfAppointments,
+    setFirstAvaibleAppointmentDate,
 } from './helper';
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 
@@ -137,7 +138,10 @@ const Appointment = () => {
                         <DayPicker
                             showOutsideDays
                             ISOWeek
-                            fromMonth={new Date()}
+                            month={setFirstAvaibleAppointmentDate({
+                                chosenTherapist,
+                                dataAppointmentWithTherapist,
+                            })}
                             disabled={isDayDisabled}
                             modifiersClassNames={{
                                 disabled: 'appointment-content__data--calendar-disabled',

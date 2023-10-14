@@ -16,3 +16,8 @@ export type propsOfFindMatchingAppointment = {
     chosenDate: Date | undefined;
     chosenTime: string | undefined;
 };
+
+export type propsOfSetFirstAvaibleAppointmentDate = {
+    dataAppointmentWithTherapist: strapiAppointmentQuery[] | undefined;
+    chosenTherapist: number | undefined;
+};
