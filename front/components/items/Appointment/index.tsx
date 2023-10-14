@@ -18,6 +18,8 @@ import {
     setFirstAvaibleAppointmentDate,
 } from './helper';
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
+import Paragraph from '../Paragraph';
+import { delay } from 'framer-motion';
 
 // TODO: optimize
 const Appointment = () => {
@@ -37,6 +39,17 @@ const Appointment = () => {
     const [chosenDate, setChosenDate] = useState<Date>();
     const [latestAppointmentMonth, setLatestAppointmentMonth] = useState(new Date());
     const [isLoading, setIsLoading] = useState(true);
+    const [availableTherapist, setAvailableTherapist] = useState(true);
+
+    // TODO how to refresh chosenTherapist after or simultaneously
+    const isTherapistAvaible = () => {
+        if (getDateOfAppointments({ appointments })?.length === 0) {
+            setAvailableTherapist(false);
+        } else {
+            setAvailableTherapist(true);
+        }
+        console.log(availableTherapist);
+    };
 
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
@@ -135,6 +148,7 @@ const Appointment = () => {
                                 setChosenTherapist(therapist.id);
                                 setChosenDate(undefined);
                                 setChosenTime(undefined);
+                                isTherapistAvaible();
                             }}
                             className="appointment-content__panel--button"
                         />
@@ -158,6 +172,9 @@ const Appointment = () => {
                             onSelect={setChosenDate}
                         />
                     </div>
+                    {!availableTherapist && (
+                        <Paragraph size="big" text="Brak dostępnych terminów" />
+                    )}
                     <div
                         className={
                             chosenDate ? 'appointment-content__data--availabledates' : 'hidden'
