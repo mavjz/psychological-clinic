@@ -6,17 +6,24 @@
     &-content {
         &__panel {
             @include flex(row, wrap, 1vw, 1vw);
-            @media screen and (max-width: $width-tablet){
+            @media screen and (max-width: $width-tablet) {
                 @include grid(row, $row-gap: 1vw);
             }
             &--button {
                 padding: 0.1em 1em;
                 border: solid 2px $green-dark;
                 border-radius: 0.1em;
+                &:active,
+                &:focus {
+                    background-color: $green;
+                    h3 {
+                        color: $white !important;
+                    }
+                }
             }
         }
         &__data {
-            @media screen and (max-width: $width-tablet){
+            @media screen and (max-width: $width-tablet) {
                 @include grid(row, 2vw);
             }
             @include grid(column, $column-gap: 8rem);

@@ -35,6 +35,7 @@ const Appointment = () => {
         useState<strapiAppointmentQuery[]>();
     const [chosenTherapist, setChosenTherapist] = useState<number>();
     const [chosenDate, setChosenDate] = useState<Date>();
+    const [latestAppointmentMonth, setLatestAppointmentMonth] = useState(new Date());
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -51,6 +52,12 @@ const Appointment = () => {
     }, [chosenDate]);
 
     useEffect(() => {
+        setLatestAppointmentMonth(
+            setFirstAvaibleAppointmentDate({
+                chosenTherapist,
+                dataAppointmentWithTherapist,
+            })
+        );
         if (chosenDate) {
             filters.date = {
                 $eq: formatDate({ chosenDate }),
@@ -138,10 +145,8 @@ const Appointment = () => {
                         <DayPicker
                             showOutsideDays
                             ISOWeek
-                            month={setFirstAvaibleAppointmentDate({
-                                chosenTherapist,
-                                dataAppointmentWithTherapist,
-                            })}
+                            month={latestAppointmentMonth}
+                            onMonthChange={setLatestAppointmentMonth}
                             disabled={isDayDisabled}
                             modifiersClassNames={{
                                 disabled: 'appointment-content__data--calendar-disabled',

@@ -1,5 +1,7 @@
 // jak działamy (godziny, liczba pacjentów)
 import Appointment from 'components/items/Appointment';
+import Headline from 'components/items/Headline';
+import Paragraph from 'components/items/Paragraph';
 import Article from 'components/sections/Article';
 import CEOProfile from 'components/sections/CEOProfile';
 import Welcome from 'components/sections/Welcome';
@@ -42,6 +44,19 @@ const Contact = () => {
                     ]}
                 />
             </WrapperWidth>
+            <Headline
+                variant="h1"
+                text="Odkryj nową drogę do równowagi i harmonii"
+                colorClass="greendark"
+                placeClass="center"
+                isUppercase
+            />
+            <Headline
+                variant="h3"
+                text="Umów dokładny termin wizyty u psychoterapeuty"
+                colorClass="black"
+                placeClass="center"
+            />
             <Appointment />
             <CEOProfile
                 photo="/images/meeting.jpg"
