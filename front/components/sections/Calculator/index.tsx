@@ -11,7 +11,7 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import * as Yup from 'yup';
 
 const Calculator = () => {
-    // TODO yup validator
+    // TODO yup 6 digits counts also 0
     // TODO solve for/label problem
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
@@ -19,7 +19,7 @@ const Calculator = () => {
     const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
-    const idOfTherapists = therapistList?.map((item) => item.id.toString()) as string[];
+    const idOfTherapists = therapistList?.map((item) => item.id.toString());
     const formik = useFormik({
         initialValues: {
             therapist: '',
@@ -31,19 +31,28 @@ const Calculator = () => {
         onSubmit: () => {
             setData(formik.values);
             setIsSubmit(true);
+            console.log(formik.values);
         },
         validationSchema: Yup.object().shape({
-            therapist: Yup.string().required('Wybierz terapeutę').oneOf(idOfTherapists),
+            therapist: Yup.string()
+                .required('Wymagane')
+                .oneOf(idOfTherapists || []),
             session: Yup.string()
                 .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
-                .required('Podaj liczbę spotkań'),
-            relative: Yup.string()
-                .matches(/(promo | regular)/)
-                .required('Zaznacz jedną z opcji'),
+                .required('Wymagane'),
+            relative: Yup.string().required('Zaznacz jedną z opcji'),
             relativesCode: Yup.string()
-                .min(6, 'Wpisz 6 cyfr kodu')
-                .max(6, 'Wpisz 6 cyfr kodu')
-                .matches(/^[0-9]+$/, 'Podaj kod w cyfrach'),
+                .matches(/^([0-9]{6})$/, 'Podaj kod w cyfrach')
+                .length(6, 'Wpisz 6 cyfr kodu')
+                .required('Wymagane'),
+            // .when('relative', {
+            //     is: (relative: string) => relative === 'promo',
+            //     then: () =>
+            //         Yup.string()
+            //             .length(6, 'Wpisz 6 cyfr kodu')
+            //             .matches(/^[0-9]+/gi, 'Podaj kod w cyfrach')
+            //             .required('Wymagane'),
+            // }),
             workshop: Yup.boolean(),
         }),
     });
@@ -93,8 +102,10 @@ const Calculator = () => {
                                 </option>
                             ))}
                         </select>
-                        {formik.errors.therapist && <div>{formik.errors.therapist}</div>}
                     </div>
+                    {formik.errors.therapist && (
+                        <Paragraph text={formik.errors.therapist} size="small" colorClass="red" />
+                    )}
                     <div className="calculator-form__question">
                         <label htmlFor="session">Podaj liczbę wizyt, które planujesz odbyć</label>
                         <input
@@ -104,8 +115,10 @@ const Calculator = () => {
                             name="session"
                             placeholder="np. 12"
                         />
-                        {formik.errors.session && <div>{formik.errors.session}</div>}
                     </div>
+                    {formik.errors.session && (
+                        <Paragraph text={formik.errors.session} size="small" colorClass="red" />
+                    )}
                     <div className="calculator-form__relatives">
                         <label>Czy ktoś z Twoich bliskich korzystał z usług HumanHealth.com?</label>
                         <div className="calculator-form__relatives--answer">
@@ -129,8 +142,14 @@ const Calculator = () => {
                                 />
                                 <label htmlFor="relative">Nie</label>
                             </div>
-                            {formik.errors.relative && <div>{formik.errors.relative}</div>}
                         </div>
+                        {formik.errors.relative && (
+                            <Paragraph
+                                text={formik.errors.relative}
+                                size="small"
+                                colorClass="red"
+                            />
+                        )}
                         <div className="calculator-form__question">
                             <label htmlFor="relativesCode">
                                 Podaj kod wizyty bliskiej osoby (opcjonalne)
@@ -142,10 +161,14 @@ const Calculator = () => {
                                 name="relativesCode"
                                 placeholder="np. 000024"
                             />
-                            {formik.errors.relativesCode && (
-                                <div>{formik.errors.relativesCode}</div>
-                            )}
                         </div>
+                        {formik.errors.relativesCode && (
+                            <Paragraph
+                                text={formik.errors.relativesCode}
+                                size="small"
+                                colorClass="red"
+                            />
+                        )}
                     </div>
                     <div className="calculator-form__question">
                         <input
@@ -155,8 +178,10 @@ const Calculator = () => {
                             onChange={formik.handleChange}
                         />
                         <label htmlFor="workshop">Warsztaty z pewności siebie</label>
-                        {formik.errors.relativesCode && <div>{formik.errors.workshop}</div>}
                     </div>
+                    {formik.errors.workshop && (
+                        <Paragraph text={formik.errors.workshop} size="small" colorClass="red" />
+                    )}
                     <Button
                         variant="h3"
                         colorClass="greendark"

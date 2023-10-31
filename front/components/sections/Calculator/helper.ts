@@ -61,6 +61,7 @@ export const properSuffixForPrice = (price: number) => {
         }
         return 'ych';
     }
+    return 'y';
 };
 
 type props = {
