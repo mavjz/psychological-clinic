@@ -4,7 +4,7 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import Button from '../Button';
@@ -19,7 +19,6 @@ import {
 } from './helper';
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 import Paragraph from '../Paragraph';
-import { delay } from 'framer-motion';
 
 // TODO: optimize
 const Appointment = () => {
@@ -148,7 +147,6 @@ const Appointment = () => {
                                 setChosenTherapist(therapist.id);
                                 setChosenDate(undefined);
                                 setChosenTime(undefined);
-                                isTherapistAvaible();
                             }}
                             className="appointment-content__panel--button"
                         />
@@ -172,9 +170,14 @@ const Appointment = () => {
                             onSelect={setChosenDate}
                         />
                     </div>
-                    {!availableTherapist && (
-                        <Paragraph size="big" text="Brak dostępnych terminów" />
-                    )}
+                    {
+                        `${availableTherapist}`
+                        // ? (
+                        //     ''
+                        // ) : (
+                        //     <Paragraph size="big" text="Brak dostępnych terminów" />
+                        // )
+                    }
                     <div
                         className={
                             chosenDate ? 'appointment-content__data--availabledates' : 'hidden'

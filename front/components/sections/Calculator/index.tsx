@@ -1,5 +1,5 @@
 import Paragraph from 'components/items/Paragraph';
-import { useFormik } from 'formik';
+import { ErrorMessage, useFormik } from 'formik';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
+import * as Yup from 'yup';
 
 const Calculator = () => {
     // TODO yup validator
@@ -18,6 +19,7 @@ const Calculator = () => {
     const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
+    const idOfTherapists = therapistList?.map((item) => item.id.toString()) as string[];
     const formik = useFormik({
         initialValues: {
             therapist: '',
@@ -30,6 +32,20 @@ const Calculator = () => {
             setData(formik.values);
             setIsSubmit(true);
         },
+        validationSchema: Yup.object().shape({
+            therapist: Yup.string().required('Wybierz terapeutę').oneOf(idOfTherapists),
+            session: Yup.string()
+                .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
+                .required('Podaj liczbę spotkań'),
+            relative: Yup.string()
+                .matches(/(promo | regular)/)
+                .required('Zaznacz jedną z opcji'),
+            relativesCode: Yup.string()
+                .min(6, 'Wpisz 6 cyfr kodu')
+                .max(6, 'Wpisz 6 cyfr kodu')
+                .matches(/^[0-9]+$/, 'Podaj kod w cyfrach'),
+            workshop: Yup.boolean(),
+        }),
     });
 
     useEffect(() => {
@@ -77,6 +93,7 @@ const Calculator = () => {
                                 </option>
                             ))}
                         </select>
+                        {formik.errors.therapist && <div>{formik.errors.therapist}</div>}
                     </div>
                     <div className="calculator-form__question">
                         <label htmlFor="session">Podaj liczbę wizyt, które planujesz odbyć</label>
@@ -87,6 +104,7 @@ const Calculator = () => {
                             name="session"
                             placeholder="np. 12"
                         />
+                        {formik.errors.session && <div>{formik.errors.session}</div>}
                     </div>
                     <div className="calculator-form__relatives">
                         <label>Czy ktoś z Twoich bliskich korzystał z usług HumanHealth.com?</label>
@@ -111,6 +129,7 @@ const Calculator = () => {
                                 />
                                 <label htmlFor="relative">Nie</label>
                             </div>
+                            {formik.errors.relative && <div>{formik.errors.relative}</div>}
                         </div>
                         <div className="calculator-form__question">
                             <label htmlFor="relativesCode">
@@ -123,6 +142,9 @@ const Calculator = () => {
                                 name="relativesCode"
                                 placeholder="np. 000024"
                             />
+                            {formik.errors.relativesCode && (
+                                <div>{formik.errors.relativesCode}</div>
+                            )}
                         </div>
                     </div>
                     <div className="calculator-form__question">
@@ -133,6 +155,7 @@ const Calculator = () => {
                             onChange={formik.handleChange}
                         />
                         <label htmlFor="workshop">Warsztaty z pewności siebie</label>
+                        {formik.errors.relativesCode && <div>{formik.errors.workshop}</div>}
                     </div>
                     <Button
                         variant="h3"
