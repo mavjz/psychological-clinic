@@ -20,6 +20,38 @@ const Calculator = () => {
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const idOfTherapists = therapistList?.map((item) => item.id.toString());
+    const validationSchema = Yup.object().shape({
+        therapist: Yup.string().required('Wymagane'),
+        // @ts-ignore
+        // .oneOf(idOfTherapists),
+        session: Yup.string()
+            .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
+            .required('Wymagane'),
+        relative: Yup.string().required('Zaznacz jedną z opcji'),
+        relativesCode: Yup.string()
+            // .matches(/^(0\d{5}|[1-9]\d{5})$/, 'Wymagana określona długość kodu')
+            .test(
+                'len',
+                'Parametr musi zawierać dokładnie 6 cyfr, włączając w to początkowe zera',
+                (value) => {
+                    if (value) {
+                        const numDigits = value.replace(/^0+/, '').length;
+                        return numDigits === 6;
+                    }
+                    return false;
+                }
+            )
+            .required('Wymagane'),
+        // .when('relative', {
+        //     is: (relative: string) => relative === 'promo',
+        //     then: () =>
+        //         Yup.string()
+        //             .length(6, 'Wpisz 6 cyfr kodu')
+        //             .matches(/^[0-9]+/gi, 'Podaj kod w cyfrach')
+        //             .required('Wymagane'),
+        // }),
+        workshop: Yup.boolean(),
+    });
     const formik = useFormik({
         initialValues: {
             therapist: '',
@@ -28,33 +60,12 @@ const Calculator = () => {
             relativesCode: '',
             workshop: false,
         },
+        validationSchema: validationSchema,
         onSubmit: () => {
             setData(formik.values);
             setIsSubmit(true);
             console.log(formik.values);
         },
-        validationSchema: Yup.object().shape({
-            therapist: Yup.string()
-                .required('Wymagane')
-                .oneOf(idOfTherapists || []),
-            session: Yup.string()
-                .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
-                .required('Wymagane'),
-            relative: Yup.string().required('Zaznacz jedną z opcji'),
-            relativesCode: Yup.string()
-                .matches(/^([0-9]{6})$/, 'Podaj kod w cyfrach')
-                .length(6, 'Wpisz 6 cyfr kodu')
-                .required('Wymagane'),
-            // .when('relative', {
-            //     is: (relative: string) => relative === 'promo',
-            //     then: () =>
-            //         Yup.string()
-            //             .length(6, 'Wpisz 6 cyfr kodu')
-            //             .matches(/^[0-9]+/gi, 'Podaj kod w cyfrach')
-            //             .required('Wymagane'),
-            // }),
-            workshop: Yup.boolean(),
-        }),
     });
 
     useEffect(() => {
@@ -75,6 +86,25 @@ const Calculator = () => {
                 ?.discount
         );
     }, [data]);
+
+    // useEffect(() => {
+    //     const validateField = (fieldName: keyof typeof formik.values, value: string | boolean) => {
+    //         validationSchema.validateAt(fieldName, { [fieldName]: value }).then(() => {
+    //             console.log(`${fieldName} is valid`);
+    //         });
+    //     };
+    //     const fieldsToValidate: Array<keyof typeof formik.values> = [
+    //         'therapist',
+    //         'session',
+    //         'relative',
+    //         'relativesCode',
+    //         'workshop',
+    //     ];
+
+    //     fieldsToValidate.forEach((fieldName) => {
+    //         validateField(fieldName, formik.values[fieldName]);
+    //     });
+    // }, [formik.values]);
 
     return (
         <WrapperWidth>
@@ -103,7 +133,7 @@ const Calculator = () => {
                             ))}
                         </select>
                     </div>
-                    {formik.errors.therapist && (
+                    {formik.errors.therapist && formik.touched.therapist && (
                         <Paragraph text={formik.errors.therapist} size="small" colorClass="red" />
                     )}
                     <div className="calculator-form__question">
@@ -116,7 +146,7 @@ const Calculator = () => {
                             placeholder="np. 12"
                         />
                     </div>
-                    {formik.errors.session && (
+                    {formik.errors.session && formik.touched.session && (
                         <Paragraph text={formik.errors.session} size="small" colorClass="red" />
                     )}
                     <div className="calculator-form__relatives">
@@ -143,7 +173,7 @@ const Calculator = () => {
                                 <label htmlFor="relative">Nie</label>
                             </div>
                         </div>
-                        {formik.errors.relative && (
+                        {formik.errors.relative && formik.touched.relative && (
                             <Paragraph
                                 text={formik.errors.relative}
                                 size="small"
@@ -162,7 +192,7 @@ const Calculator = () => {
                                 placeholder="np. 000024"
                             />
                         </div>
-                        {formik.errors.relativesCode && (
+                        {formik.errors.relativesCode && formik.touched.relativesCode && (
                             <Paragraph
                                 text={formik.errors.relativesCode}
                                 size="small"
@@ -179,7 +209,7 @@ const Calculator = () => {
                         />
                         <label htmlFor="workshop">Warsztaty z pewności siebie</label>
                     </div>
-                    {formik.errors.workshop && (
+                    {formik.errors.workshop && formik.touched.workshop && (
                         <Paragraph text={formik.errors.workshop} size="small" colorClass="red" />
                     )}
                     <Button

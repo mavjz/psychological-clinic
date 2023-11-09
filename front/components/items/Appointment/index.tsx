@@ -41,12 +41,10 @@ const Appointment = () => {
     const [availableTherapist, setAvailableTherapist] = useState(true);
 
     // TODO how to refresh chosenTherapist after or simultaneously
-    const isTherapistAvaible = () => {
-        if (getDateOfAppointments({ appointments })?.length === 0) {
-            setAvailableTherapist(false);
-        } else {
-            setAvailableTherapist(true);
-        }
+    const isTherapistAvailable = () => {
+        const x = getDateOfAppointments({ appointments })?.length === 0;
+        setAvailableTherapist(!x);
+
         console.log(availableTherapist);
     };
 
@@ -58,6 +56,10 @@ const Appointment = () => {
             setDataAppointmentWithTherapist(res.data.data);
         });
     }, []);
+
+    useEffect(() => {
+        isTherapistAvailable();
+    }, [appointments]);
 
     useEffect(() => {
         setChosenTime(undefined);
@@ -170,14 +172,11 @@ const Appointment = () => {
                             onSelect={setChosenDate}
                         />
                     </div>
-                    {
-                        `${availableTherapist}`
-                        // ? (
-                        //     ''
-                        // ) : (
-                        //     <Paragraph size="big" text="Brak dostępnych terminów" />
-                        // )
-                    }
+                    {availableTherapist ? (
+                        ''
+                    ) : (
+                        <Paragraph size="big" text="Brak dostępnych terminów" />
+                    )}
                     <div
                         className={
                             chosenDate ? 'appointment-content__data--availabledates' : 'hidden'
