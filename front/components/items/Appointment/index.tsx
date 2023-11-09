@@ -40,7 +40,6 @@ const Appointment = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [availableTherapist, setAvailableTherapist] = useState(true);
 
-    // TODO how to refresh chosenTherapist after or simultaneously
     const isTherapistAvailable = () => {
         const x = getDateOfAppointments({ appointments })?.length === 0;
         setAvailableTherapist(!x);

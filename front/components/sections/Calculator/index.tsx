@@ -11,7 +11,6 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import * as Yup from 'yup';
 
 const Calculator = () => {
-    // TODO yup 6 digits counts also 0
     // TODO solve for/label problem
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
@@ -19,37 +18,23 @@ const Calculator = () => {
     const [therapistList, setTherapistList] = useState<strapiTherapistsQuery[]>();
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isRelativeChecked, setIsRelativeChecked] = useState(false);
     const idOfTherapists = therapistList?.map((item) => item.id.toString());
     const validationSchema = Yup.object().shape({
         therapist: Yup.string().required('Wymagane'),
-        // @ts-ignore
         // .oneOf(idOfTherapists),
         session: Yup.string()
             .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
             .required('Wymagane'),
         relative: Yup.string().required('Zaznacz jedną z opcji'),
-        relativesCode: Yup.string()
-            // .matches(/^(0\d{5}|[1-9]\d{5})$/, 'Wymagana określona długość kodu')
-            .test(
-                'len',
-                'Parametr musi zawierać dokładnie 6 cyfr, włączając w to początkowe zera',
-                (value) => {
-                    if (value) {
-                        const numDigits = value.replace(/^0+/, '').length;
-                        return numDigits === 6;
-                    }
-                    return false;
-                }
-            )
-            .required('Wymagane'),
-        // .when('relative', {
-        //     is: (relative: string) => relative === 'promo',
-        //     then: () =>
-        //         Yup.string()
-        //             .length(6, 'Wpisz 6 cyfr kodu')
-        //             .matches(/^[0-9]+/gi, 'Podaj kod w cyfrach')
-        //             .required('Wymagane'),
-        // }),
+        relativesCode: Yup.string().when('relative', {
+            is: (relative: string) => relative === 'promo',
+            then: () =>
+                Yup.string()
+                    .length(6, 'Wpisz 6 cyfr kodu')
+                    .matches(/^[0-9]*$/, 'Podaj kod w cyfrach')
+                    .required('Wymagane'),
+        }),
         workshop: Yup.boolean(),
     });
     const formik = useFormik({
@@ -78,6 +63,11 @@ const Calculator = () => {
     }, []);
 
     useEffect(() => {
+        if (formik.values.relative === 'promo') setIsRelativeChecked(true);
+        else setIsRelativeChecked(false);
+    }, [formik.values.relative]);
+
+    useEffect(() => {
         setCost(
             therapyCostCalculation({ data, therapistList, appointmentList, cost, discount })?.cost
         );
@@ -86,25 +76,6 @@ const Calculator = () => {
                 ?.discount
         );
     }, [data]);
-
-    // useEffect(() => {
-    //     const validateField = (fieldName: keyof typeof formik.values, value: string | boolean) => {
-    //         validationSchema.validateAt(fieldName, { [fieldName]: value }).then(() => {
-    //             console.log(`${fieldName} is valid`);
-    //         });
-    //     };
-    //     const fieldsToValidate: Array<keyof typeof formik.values> = [
-    //         'therapist',
-    //         'session',
-    //         'relative',
-    //         'relativesCode',
-    //         'workshop',
-    //     ];
-
-    //     fieldsToValidate.forEach((fieldName) => {
-    //         validateField(fieldName, formik.values[fieldName]);
-    //     });
-    // }, [formik.values]);
 
     return (
         <WrapperWidth>
@@ -185,11 +156,12 @@ const Calculator = () => {
                                 Podaj kod wizyty bliskiej osoby (opcjonalne)
                             </label>
                             <input
-                                type="number"
+                                type="string"
                                 value={formik.values.relativesCode}
                                 onChange={formik.handleChange}
                                 name="relativesCode"
                                 placeholder="np. 000024"
+                                disabled={!isRelativeChecked}
                             />
                         </div>
                         {formik.errors.relativesCode && formik.touched.relativesCode && (
