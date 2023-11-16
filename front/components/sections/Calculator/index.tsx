@@ -19,7 +19,7 @@ const Calculator = () => {
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const [isRelativeChecked, setIsRelativeChecked] = useState(false);
-    const onlyNumberInput = useRef(null);
+    const onlyNumberInput = useRef<HTMLInputElement>(null);
     const idOfTherapists = therapistList ? therapistList?.map((item) => item.id.toString()) : [];
 
     const formik = useFormik({
