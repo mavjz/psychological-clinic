@@ -2,7 +2,7 @@ import Paragraph from 'components/items/Paragraph';
 import { ErrorMessage, useFormik } from 'formik';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { properSuffixForPrice, therapyCostCalculation } from './helper';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Button from 'components/items/Button';
@@ -20,23 +20,8 @@ const Calculator = () => {
     const [isSubmit, setIsSubmit] = useState(false);
     const [isRelativeChecked, setIsRelativeChecked] = useState(false);
     const idOfTherapists = therapistList?.map((item) => item.id.toString());
-    const validationSchema = Yup.object().shape({
-        therapist: Yup.string().required('Wymagane'),
-        // .oneOf(idOfTherapists),
-        session: Yup.string()
-            .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
-            .required('Wymagane'),
-        relative: Yup.string().required('Zaznacz jedną z opcji'),
-        relativesCode: Yup.string().when('relative', {
-            is: (relative: string) => relative === 'promo',
-            then: () =>
-                Yup.string()
-                    .length(6, 'Wpisz 6 cyfr kodu')
-                    .matches(/^[0-9]*$/, 'Podaj kod w cyfrach')
-                    .required('Wymagane'),
-        }),
-        workshop: Yup.boolean(),
-    });
+    const onlyNumberInput = useRef(null);
+
     const formik = useFormik({
         initialValues: {
             therapist: '',
@@ -45,11 +30,26 @@ const Calculator = () => {
             relativesCode: '',
             workshop: false,
         },
-        validationSchema: validationSchema,
+        validationSchema: Yup.object().shape({
+            therapist: Yup.string().required('Wymagane'),
+            // .oneOf(idOfTherapists),
+            session: Yup.string()
+                .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
+                .required('Wymagane'),
+            relative: Yup.string().required('Zaznacz jedną z opcji'),
+            relativesCode: Yup.string().when('relative', {
+                is: (relative: string) => relative === 'promo',
+                then: () =>
+                    Yup.string()
+                        .length(6, 'Wpisz 6 cyfr kodu')
+                        .matches(/^[0-9]*$/, 'Podaj kod w cyfrach')
+                        .required('Wymagane'),
+            }),
+            workshop: Yup.boolean(),
+        }),
         onSubmit: () => {
             setData(formik.values);
             setIsSubmit(true);
-            console.log(formik.values);
         },
     });
 
@@ -61,6 +61,12 @@ const Calculator = () => {
             setAppointmentList(res.data.data);
         });
     }, []);
+
+    const validateNumericInput = () => {
+        if (onlyNumberInput.current) {
+            onlyNumberInput.current.value = onlyNumberInput.current.value.replace(/[^0-9]/g, '');
+        }
+    };
 
     useEffect(() => {
         if (formik.values.relative === 'promo') setIsRelativeChecked(true);
@@ -76,6 +82,8 @@ const Calculator = () => {
                 ?.discount
         );
     }, [data]);
+
+    // console.log(onlyNumberInput.current.value);
 
     return (
         <WrapperWidth>
@@ -156,12 +164,15 @@ const Calculator = () => {
                                 Podaj kod wizyty bliskiej osoby (opcjonalne)
                             </label>
                             <input
-                                type="string"
+                                ref={onlyNumberInput}
+                                type="text"
                                 value={formik.values.relativesCode}
                                 onChange={formik.handleChange}
+                                pattern="\d*"
                                 name="relativesCode"
                                 placeholder="np. 000024"
                                 disabled={!isRelativeChecked}
+                                onInput={validateNumericInput}
                             />
                         </div>
                         {formik.errors.relativesCode && formik.touched.relativesCode && (
