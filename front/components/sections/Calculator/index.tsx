@@ -96,6 +96,7 @@ const Calculator = () => {
                             onChange={formik.handleChange}
                             name="therapist"
                             defaultValue={'DEFAULT'}
+                            id="therapist"
                         >
                             <option disabled hidden value={'DEFAULT'}>
                                 Kliknij by rozwinąć listę
@@ -115,6 +116,7 @@ const Calculator = () => {
                     <div className="calculator-form__question">
                         <label htmlFor="session">Podaj liczbę wizyt, które planujesz odbyć</label>
                         <input
+                            id="session"
                             type="number"
                             value={formik.values.session}
                             onChange={formik.handleChange}
@@ -130,23 +132,25 @@ const Calculator = () => {
                         <div className="calculator-form__relatives--answer">
                             <div className="calculator-form__question">
                                 <input
+                                    id="relative_yes"
                                     type="radio"
                                     name="relative"
                                     value="promo"
                                     checked={formik.values.relative === 'promo'}
                                     onChange={formik.handleChange}
                                 />
-                                <label htmlFor="relative">Tak</label>
+                                <label htmlFor="relative_yes">Tak</label>
                             </div>
                             <div className="calculator-form__question">
                                 <input
+                                    id="relative_no"
                                     type="radio"
                                     name="relative"
                                     value="regular"
                                     checked={formik.values.relative === 'regular'}
                                     onChange={formik.handleChange}
                                 />
-                                <label htmlFor="relative">Nie</label>
+                                <label htmlFor="relative_no">Nie</label>
                             </div>
                         </div>
                         {formik.errors.relative && formik.touched.relative && (
@@ -161,6 +165,7 @@ const Calculator = () => {
                                 Podaj kod wizyty bliskiej osoby (opcjonalne)
                             </label>
                             <input
+                                id="relativesCode"
                                 ref={onlyNumberInput}
                                 type="text"
                                 value={formik.values.relativesCode}
@@ -182,6 +187,7 @@ const Calculator = () => {
                     </div>
                     <div className="calculator-form__question">
                         <input
+                            id="workshop"
                             type="checkbox"
                             name="workshop"
                             value={formik.values.workshop}
