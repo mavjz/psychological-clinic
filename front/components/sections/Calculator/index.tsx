@@ -19,8 +19,8 @@ const Calculator = () => {
     const [data, setData] = useState<formData>();
     const [isSubmit, setIsSubmit] = useState(false);
     const [isRelativeChecked, setIsRelativeChecked] = useState(false);
-    const idOfTherapists = therapistList?.map((item) => item.id.toString());
     const onlyNumberInput = useRef(null);
+    const idOfTherapists = therapistList ? therapistList?.map((item) => item.id.toString()) : [];
 
     const formik = useFormik({
         initialValues: {
@@ -31,8 +31,7 @@ const Calculator = () => {
             workshop: false,
         },
         validationSchema: Yup.object().shape({
-            therapist: Yup.string().required('Wymagane'),
-            // .oneOf(idOfTherapists),
+            therapist: Yup.string().required('Wymagane').oneOf(idOfTherapists),
             session: Yup.string()
                 .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
                 .required('Wymagane'),
@@ -53,6 +52,12 @@ const Calculator = () => {
         },
     });
 
+    const validateNumericInput = () => {
+        if (onlyNumberInput.current) {
+            onlyNumberInput.current.value = onlyNumberInput.current.value.replace(/[^0-9]/g, '');
+        }
+    };
+
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
             setTherapistList(res.data.data);
@@ -61,12 +66,6 @@ const Calculator = () => {
             setAppointmentList(res.data.data);
         });
     }, []);
-
-    const validateNumericInput = () => {
-        if (onlyNumberInput.current) {
-            onlyNumberInput.current.value = onlyNumberInput.current.value.replace(/[^0-9]/g, '');
-        }
-    };
 
     useEffect(() => {
         if (formik.values.relative === 'promo') setIsRelativeChecked(true);
@@ -82,8 +81,6 @@ const Calculator = () => {
                 ?.discount
         );
     }, [data]);
-
-    // console.log(onlyNumberInput.current.value);
 
     return (
         <WrapperWidth>
