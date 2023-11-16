@@ -11,7 +11,6 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import * as Yup from 'yup';
 
 const Calculator = () => {
-    // TODO solve for/label problem
     const [cost, setCost] = useState(0);
     const [discount, setDiscount] = useState(0);
     const [appointmentList, setAppointmentList] = useState<strapiAppointmentQuery[]>();
@@ -53,9 +52,8 @@ const Calculator = () => {
     });
 
     const validateNumericInput = () => {
-        if (onlyNumberInput.current) {
+        if (onlyNumberInput.current)
             onlyNumberInput.current.value = onlyNumberInput.current.value.replace(/[^0-9]/g, '');
-        }
     };
 
     useEffect(() => {
