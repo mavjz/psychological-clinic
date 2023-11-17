@@ -1,5 +1,5 @@
 import Paragraph from 'components/items/Paragraph';
-import { ErrorMessage, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { strapiTherapistsGet } from 'lib/strapi/therapists/get';
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState, useRef } from 'react';
@@ -128,7 +128,7 @@ const Calculator = () => {
                     <div className="calculator-form__relatives">
                         <label>Czy ktoś z Twoich bliskich korzystał z usług HumanHealth.com?</label>
                         <div className="calculator-form__relatives--answer">
-                            <div className="calculator-form__question">
+                            <div className="calculator-form__questionYesNo">
                                 <input
                                     id="relative_yes"
                                     type="radio"
@@ -139,7 +139,7 @@ const Calculator = () => {
                                 />
                                 <label htmlFor="relative_yes">Tak</label>
                             </div>
-                            <div className="calculator-form__question">
+                            <div className="calculator-form__questionYesNo">
                                 <input
                                     id="relative_no"
                                     type="radio"
@@ -183,7 +183,7 @@ const Calculator = () => {
                             />
                         )}
                     </div>
-                    <div className="calculator-form__question">
+                    <div className="calculator-form__questionYesNo">
                         <input
                             id="workshop"
                             type="checkbox"
