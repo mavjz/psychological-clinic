@@ -15,7 +15,7 @@ import {
     getDateOfAppointments,
     findMatchingAppointment,
     getTimeOfAppointments,
-    setFirstAvaibleAppointmentDate,
+    placeFirstAvailableAppointmentDate,
 } from './helper';
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 import Paragraph from '../Paragraph';
@@ -40,12 +40,8 @@ const Appointment = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [availableTherapist, setAvailableTherapist] = useState(true);
 
-    const isTherapistAvailable = () => {
-        const x = getDateOfAppointments({ appointments })?.length === 0;
-        setAvailableTherapist(!x);
-
-        console.log(availableTherapist);
-    };
+    const isTherapistAvailable = () =>
+        setAvailableTherapist(!(getDateOfAppointments({ appointments })?.length === 0));
 
     useEffect(() => {
         strapiTherapistsGet().then((res) => {
@@ -66,7 +62,7 @@ const Appointment = () => {
 
     useEffect(() => {
         setLatestAppointmentMonth(
-            setFirstAvaibleAppointmentDate({
+            placeFirstAvailableAppointmentDate({
                 chosenTherapist,
                 dataAppointmentWithTherapist,
             })
@@ -171,9 +167,7 @@ const Appointment = () => {
                             onSelect={setChosenDate}
                         />
                     </div>
-                    {availableTherapist ? (
-                        ''
-                    ) : (
+                    {availableTherapist ? null : (
                         <Paragraph size="big" text="Brak dostępnych terminów" />
                     )}
                     <div
