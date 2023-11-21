@@ -19,7 +19,7 @@ const Calculator = () => {
     const [isSubmit, setIsSubmit] = useState(false);
     const [isRelativeChecked, setIsRelativeChecked] = useState(false);
     const onlyNumberInput = useRef<HTMLInputElement>(null);
-    const idOfTherapists = therapistList ? therapistList?.map((item) => item.id.toString()) : [];
+    const therapistsIds = therapistList ? therapistList?.map((item) => item.id.toString()) : [];
 
     const formik = useFormik({
         initialValues: {
@@ -30,7 +30,7 @@ const Calculator = () => {
             workshop: false,
         },
         validationSchema: Yup.object().shape({
-            therapist: Yup.string().required('Wymagane').oneOf(idOfTherapists),
+            therapist: Yup.string().required('Wymagane').oneOf(therapistsIds),
             session: Yup.string()
                 .matches(/^[0-9]+$/, 'Podaj liczbę spotkań w cyfrach')
                 .required('Wymagane'),

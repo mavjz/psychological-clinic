@@ -1,6 +1,4 @@
-import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
-import { formData } from '.';
-import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
+import { propsOfTherapyCostCalculation } from './models';
 
 export const therapyCostCalculation = ({
     data,
@@ -8,7 +6,7 @@ export const therapyCostCalculation = ({
     appointmentList,
     cost,
     discount,
-}: props) => {
+}: propsOfTherapyCostCalculation) => {
     discount = 0;
     cost = 0;
     let numberOfDataSession = Number(data?.session);
@@ -56,22 +54,10 @@ export const properSuffixForPrice = (price: number) => {
         if (price % 10 === 1) {
             return 'y';
         }
-        if (price % 10 === 2 || price % 10 === 3 || price % 10 === 4) {
+        if (price % 10 >= 2 && price % 10 <= 4) {
             return 'e';
         }
         return 'ych';
     }
     return 'y';
-};
-
-type props = {
-    data: formData | undefined;
-    therapistList: strapiTherapistsQuery[] | undefined;
-    appointmentList: strapiAppointmentQuery[] | undefined;
-    cost: number;
-    discount: number;
-};
-
-type propsOfProperSuffixForPrice = {
-    price?: number;
 };
