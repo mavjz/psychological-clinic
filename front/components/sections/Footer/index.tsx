@@ -8,7 +8,7 @@ import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PolicyIcon from '@mui/icons-material/Policy';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { FooterType } from './helper';
+import { FooterType } from './models';
 import { useMedia } from 'use-media';
 
 const Footer = ({ sites }: FooterType) => {

@@ -1,7 +1,7 @@
 import Benefit from 'components/items/Benefit';
 import React from 'react';
 import Article from '../Article';
-import { BenefitsInDetailType } from './helper';
+import { BenefitsInDetailType } from './models';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const BenefitsInDetail = ({

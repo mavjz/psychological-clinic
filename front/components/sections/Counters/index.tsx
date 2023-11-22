@@ -1,7 +1,7 @@
 import Counter from 'components/items/Counter';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import React from 'react';
-import { CountersType } from './helper';
+import { CountersType } from './models';
 
 const Counters = ({ items }: CountersType) => {
     return (

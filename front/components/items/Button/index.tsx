@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { ButtonType } from './helper';
+import { ButtonType } from './models';
 import Headline from '../Headline';
 
 const Button = ({

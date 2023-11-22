@@ -1,6 +1,6 @@
 import Profile from 'components/items/Profile';
 import React from 'react';
-import { ProfilesType } from './helper';
+import { ProfilesType } from './models';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Profiles = ({ items }: ProfilesType) => {

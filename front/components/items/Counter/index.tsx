@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import CountUp from 'react-countup';
-import { CounterType } from './helper';
+import { CounterType } from './models';
 import Headline from '../Headline';
 
 const Counter = ({ headline, number, text, isPlus }: CounterType) => {

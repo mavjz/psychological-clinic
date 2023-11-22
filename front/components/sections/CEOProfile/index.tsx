@@ -2,7 +2,7 @@ import WrapperWidth from 'components/wrappers/WrapperWidth';
 import Image from 'next/image';
 import React from 'react';
 import Article from '../Article';
-import { CEOProfileType } from './helper';
+import { CEOProfileType } from './models';
 
 const CEOProfile = ({ photo, headline, texts }: CEOProfileType) => {
     return (

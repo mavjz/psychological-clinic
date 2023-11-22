@@ -3,7 +3,7 @@ import Paragraph from 'components/items/Paragraph';
 import Image from 'next/image';
 import React from 'react';
 import { useMedia } from 'use-media';
-import { WelcomeType } from './helper';
+import { WelcomeType } from './models';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Welcome = ({ image, headline, text }: WelcomeType) => {

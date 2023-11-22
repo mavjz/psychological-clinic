@@ -1,7 +1,7 @@
 import Button from 'components/items/Button';
 import React, { useState } from 'react';
 import { useMedia } from 'use-media';
-import { NavbarType } from './helper';
+import { NavbarType } from './models';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';

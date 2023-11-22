@@ -1,7 +1,7 @@
 import Headline from 'components/items/Headline';
 import Paragraph from 'components/items/Paragraph';
 import React from 'react';
-import { ArticleType } from './helper';
+import { ArticleType } from './models';
 
 const Article = ({ headline, texts }: ArticleType) => {
     return (

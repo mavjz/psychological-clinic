@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { ProfileType } from './helper';
+import { ProfileType } from './models';
 import Headline from '../Headline';
 import Paragraph from '../Paragraph';
 

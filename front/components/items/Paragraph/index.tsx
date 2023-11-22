@@ -1,5 +1,5 @@
 import React from 'react';
-import { ParagraphType } from './helper';
+import { ParagraphType } from './models';
 
 const Paragraph = ({ size, text, placeClass = 'left', colorClass = 'green' }: ParagraphType) => {
     colorClass = 'text'.concat(colorClass.toLowerCase());

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeadlineType } from './helper';
+import { HeadlineType } from './models';
 
 const Headline = ({
     variant = 'h6',

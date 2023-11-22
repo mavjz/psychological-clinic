@@ -7,7 +7,7 @@ import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import Headline from '../Headline';
 import Paragraph from '../Paragraph';
-import { BenefitType } from './helper';
+import { BenefitType } from './models';
 
 const Benefit = ({
     isCouple,

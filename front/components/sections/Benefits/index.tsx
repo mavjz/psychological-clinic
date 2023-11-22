@@ -1,7 +1,7 @@
 import Benefit from 'components/items/Benefit';
 import Headline from 'components/items/Headline';
 import React from 'react';
-import { BenefitsType } from './helper';
+import { BenefitsType } from './models';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
 
 const Benefits = ({ items, headline }: BenefitsType) => {
