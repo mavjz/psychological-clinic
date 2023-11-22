@@ -1,6 +1,6 @@
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
-export type filters = {
+export type filtersIsBooked = {
     [Keys: string]: Object;
 };
 export type propsOfFormingDate = {

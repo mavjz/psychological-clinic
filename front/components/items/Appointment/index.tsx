@@ -9,7 +9,7 @@ import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import Button from '../Button';
 import { useRouter } from 'next/router';
-import { filters } from './models';
+import { filtersIsBooked } from './models';
 import {
     formatDate,
     getDateOfAppointments,
@@ -21,7 +21,7 @@ import { useAppointmentContext } from 'components/wrappers/AppointmentDataContex
 import Paragraph from '../Paragraph';
 
 const Appointment = () => {
-    const filters: filters = {
+    const filters: filtersIsBooked = {
         is_booked: {
             $eq: false,
         },

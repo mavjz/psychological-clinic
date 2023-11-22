@@ -1,4 +1,5 @@
 import Appointment from 'components/items/Appointment';
+import FindAppointment from 'components/items/FindAppointment';
 import Headline from 'components/items/Headline';
 import CEOProfile from 'components/sections/CEOProfile';
 import Welcome from 'components/sections/Welcome';
@@ -42,6 +43,7 @@ const Services = () => {
                 placeClass="center"
                 isUppercase
             />
+            <FindAppointment />
             <Headline
                 variant="h3"
                 text="Odwołaj wizytę u psychoterapeuty"
