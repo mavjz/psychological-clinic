@@ -56,9 +56,10 @@ export const placeFirstAvailableAppointmentDate = ({
         (item) => item.attributes.therapist.data.id === chosenTherapist
     );
     if (filteringByTherapist.length > 0) {
-        return new Date(
+        const latestDate = new Date(
             Math.min(...filteringByTherapist?.map((item) => Number(new Date(item.attributes.date))))
         );
+        if (latestDate > new Date()) return latestDate;
     }
     return new Date();
 };

@@ -167,32 +167,37 @@ const Appointment = () => {
                             onSelect={setChosenDate}
                         />
                     </div>
-                    {availableTherapist ? null : (
-                        <Paragraph size="big" text="Brak dostępnych terminów" />
-                    )}
                     <div
                         className={
-                            chosenDate ? 'appointment-content__data--availabledates' : 'hidden'
+                            chosenDate || !availableTherapist
+                                ? 'appointment-content__data--availabledates'
+                                : 'hidden'
                         }
                     >
-                        {getTimeOfAppointments({ appointments })?.map((item, index) => (
-                            <div
-                                key={index}
-                                className="appointment-content__data--availabledates-item"
-                            >
-                                <div>{item}</div>
-                                <Button
-                                    colorClass="greendark"
-                                    className="appointment-content__data--availabledates-item__button"
-                                    variant="h4"
-                                    text="Umów wizytę"
-                                    onClick={() => {
-                                        setChosenTime(item);
-                                        router.push('/managingappointment');
-                                    }}
-                                />
+                        {chosenDate &&
+                            getTimeOfAppointments({ appointments })?.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="appointment-content__data--availabledates-item"
+                                >
+                                    <div>{item}</div>
+                                    <Button
+                                        colorClass="greendark"
+                                        className="appointment-content__data--availabledates-item__button"
+                                        variant="h4"
+                                        text="Umów wizytę"
+                                        onClick={() => {
+                                            setChosenTime(item);
+                                            router.push('/managingappointment');
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        {availableTherapist ? null : (
+                            <div className="appointment-content__data--availabledates-item">
+                                <Paragraph size="big" text="Brak dostępnych terminów" />
                             </div>
-                        ))}
+                        )}
                     </div>
                 </div>
             </div>
