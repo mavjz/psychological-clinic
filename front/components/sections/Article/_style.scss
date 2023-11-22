@@ -6,8 +6,11 @@
     &-text {
         @include grid(row);
         place-self: center;
-        width: 95%;
+        padding-left: 2rem;
         line-height: 30px;
         margin-top: 0.5vh;
+        @media screen and (max-width: $width-tablet) {
+            padding-left: 0rem;
+        }
     }
 }
