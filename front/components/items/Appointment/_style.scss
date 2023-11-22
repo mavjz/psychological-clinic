@@ -4,6 +4,7 @@
         margin: 5vh 0;
     }
     &-content {
+        margin-top: 1.5rem;
         &__panel {
             @include flex(row, wrap, 1vw, 1vw);
             @media screen and (max-width: $width-tablet) {
