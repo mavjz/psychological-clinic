@@ -20,7 +20,6 @@ import {
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 import Paragraph from '../Paragraph';
 
-// TODO: optimize
 const Appointment = () => {
     const filters: filters = {
         is_booked: {
