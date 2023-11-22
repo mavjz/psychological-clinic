@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Paragraph from '../Paragraph';
 import Button from '../Button';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
-import { filtersAppointmentCode } from './helper';
+import { filtersAppointmentCode } from './models';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 const FindAppointment = () => {
