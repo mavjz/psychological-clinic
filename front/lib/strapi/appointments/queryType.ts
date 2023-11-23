@@ -6,6 +6,7 @@ export type strapiAppointmentQuery = {
         date: string;
         time: string;
         appointment_code?: number;
+        is_booked?: boolean;
         createdAt: string;
         updatedAt: string;
         id: number;

@@ -1,4 +1,5 @@
 import Appointment from 'components/items/Appointment';
+// import CancelAppointment from 'components/items/CancelAppointment';
 import FindAppointment from 'components/items/FindAppointment';
 import Headline from 'components/items/Headline';
 import CEOProfile from 'components/sections/CEOProfile';
@@ -50,6 +51,7 @@ const Services = () => {
                 colorClass="black"
                 placeClass="center"
             />
+            {/* <CancelAppointment /> */}
         </React.Fragment>
     );
 };

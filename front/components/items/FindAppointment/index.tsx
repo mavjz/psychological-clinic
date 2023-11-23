@@ -40,10 +40,19 @@ const FindAppointment = () => {
     };
 
     useEffect(() => {
-        strapiAppointmentGet({ filters: filters }).then((res) => {
+        strapiAppointmentGet({ filters: filters, population: 'populate=*' }).then((res) => {
             setFoundAppoinment(res.data.data);
         });
     }, [isSubmited]);
+
+    foundAppointment?.map((item) => {
+        return `Wizyta odbędzie się w dniu ${item.attributes.date
+            .split('-')
+            .reverse()
+            .join('.')} o godzinie ${item.attributes.time.slice(0, 5)} u ${
+            item.attributes.therapist.data.attributes.first_name
+        } ${item.attributes.therapist.data.attributes.last_name}`;
+    });
 
     return (
         <WrapperWidth>
@@ -67,7 +76,17 @@ const FindAppointment = () => {
                 <Paragraph
                     text={
                         foundAppointment && foundAppointment?.length > 0
-                            ? `${foundAppointment}`
+                            ? foundAppointment?.map((item) => {
+                                  return `Wizyta odbędzie się w dniu ${item.attributes.date
+                                      .split('-')
+                                      .reverse()
+                                      .join('.')}r. o godzinie ${item.attributes.time.slice(
+                                      0,
+                                      5
+                                  )} u ${item.attributes.therapist.data.attributes.first_name} ${
+                                      item.attributes.therapist.data.attributes.last_name
+                                  }`;
+                              })
                             : 'Brak wizyty o takim kodzie'
                     }
                     size="small"
