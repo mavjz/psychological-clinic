@@ -10,11 +10,11 @@ import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
 
 const FindOrCancelAppointment = () => {
-    // TODO: refresh annoucement
     const [data, setData] = useState<string>();
     const [isSubmited, setIsSubmited] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
     const [isCanceling, setIsCanceling] = useState(false);
+    const [isCancelingProperlyDone, setIsCancelingProperlyDone] = useState<string>();
     const properCodeInput = useRef<HTMLInputElement>(null);
     const [foundAppointment, setFoundAppoinment] = useState<strapiAppointmentQuery[]>();
     const filters: filtersAppointmentCode = {
@@ -32,13 +32,15 @@ const FindOrCancelAppointment = () => {
             is_booked: false,
         },
     };
-    const canceledAppointmentId =
-        isCanceling &&
-        foundAppointment
-            ?.map((item) => {
-                return item.id;
-            })
-            .toString();
+    const canceledAppointmentId = () => {
+        if (foundAppointment?.length === 1 && isCanceling) {
+            return foundAppointment
+                .map((item) => {
+                    return item.id;
+                })
+                .toString();
+        }
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -50,15 +52,20 @@ const FindOrCancelAppointment = () => {
                 .matches(/^[0-9]*$/, 'Podaj kod w cyfrach')
                 .required('Wymagane'),
         }),
-        onSubmit: () => {
+        onSubmit: async () => {
             setData(formik.values.code);
-            console.log(formik.values.code);
             formik.resetForm({ values: { code: '' } });
             setIsSubmited(true);
-            isCanceling &&
-                canceledAppointmentId &&
-                strapiAppointmentPut(canceledAppointmentId, canceledAppointment);
-            console.log(foundAppointment);
+            if (isSubmited && isCanceling && typeof canceledAppointmentId() === 'string') {
+                try {
+                    await strapiAppointmentPut(canceledAppointmentId(), canceledAppointment);
+                    setIsCancelingProperlyDone('Wizyta została odwołana');
+                } catch {
+                    setIsCancelingProperlyDone(
+                        'Nastąpił błąd systemu. Wizyta nie została odwołana'
+                    );
+                }
+            }
         },
     });
 
@@ -66,16 +73,7 @@ const FindOrCancelAppointment = () => {
         strapiAppointmentGet({ filters: filters, population: 'populate=*' }).then((res) => {
             setFoundAppoinment(res.data.data);
         });
-    }, [data || filters || isSubmited]);
-
-    foundAppointment?.map((item) => {
-        return `Wizyta odbędzie się w dniu ${item.attributes.date
-            .split('-')
-            .reverse()
-            .join('.')} o godzinie ${item.attributes.time.slice(0, 5)} u ${
-            item.attributes.therapist.data.attributes.first_name
-        } ${item.attributes.therapist.data.attributes.last_name}`;
-    });
+    }, [data || isSubmited]);
 
     return (
         <WrapperWidth>
@@ -85,7 +83,10 @@ const FindOrCancelAppointment = () => {
                 text="Wyszukaj"
                 onClick={() => {
                     setIsSearching(true);
+                    setData(undefined);
+                    setFoundAppoinment(undefined);
                     setIsCanceling(false);
+                    setIsSubmited(false);
                 }}
             />
             <Button
@@ -94,7 +95,10 @@ const FindOrCancelAppointment = () => {
                 text="Odwołaj"
                 onClick={() => {
                     setIsSearching(false);
+                    setData(undefined);
+                    setFoundAppoinment(undefined);
                     setIsCanceling(true);
+                    setIsSubmited(false);
                 }}
             />
             <form onSubmit={formik.handleSubmit}>
@@ -118,17 +122,19 @@ const FindOrCancelAppointment = () => {
                     <Paragraph
                         text={
                             foundAppointment && foundAppointment?.length > 0
-                                ? foundAppointment?.map((item) => {
-                                      return `Wizyta odbędzie się w dniu ${item.attributes.date
-                                          .split('-')
-                                          .reverse()
-                                          .join('.')}r. o godzinie ${item.attributes.time.slice(
-                                          0,
-                                          5
-                                      )} u ${
-                                          item.attributes.therapist.data.attributes.first_name
-                                      } ${item.attributes.therapist.data.attributes.last_name}`;
-                                  })
+                                ? foundAppointment
+                                      ?.map((item) => {
+                                          return `Wizyta odbędzie się w dniu ${item.attributes.date
+                                              .split('-')
+                                              .reverse()
+                                              .join('.')}r. o godzinie ${item.attributes.time.slice(
+                                              0,
+                                              5
+                                          )} u ${
+                                              item.attributes.therapist.data.attributes.first_name
+                                          } ${item.attributes.therapist.data.attributes.last_name}`;
+                                      })
+                                      .toString()
                                 : 'Brak wizyty o podanym kodzie'
                         }
                         size="small"
@@ -139,8 +145,10 @@ const FindOrCancelAppointment = () => {
                 <div className={!isSubmited ? 'nonedisplay' : undefined}>
                     <Paragraph
                         text={
-                            foundAppointment && foundAppointment?.length > 0
-                                ? 'Wizyta została odwołana'
+                            isCancelingProperlyDone &&
+                            foundAppointment &&
+                            foundAppointment?.length > 0
+                                ? isCancelingProperlyDone
                                 : 'Brak wizyty o podanym kodzie'
                         }
                         size="small"
