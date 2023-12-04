@@ -130,7 +130,7 @@ const AppointmentApproval = () => {
                             colorClass="greendark"
                             text="Umów wizytę"
                             isLink
-                            link="/contact"
+                            link="/services"
                         />
                     </React.Fragment>
                 )}

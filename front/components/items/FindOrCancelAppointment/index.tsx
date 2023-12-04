@@ -88,6 +88,22 @@ const FindOrCancelAppointment = () => {
 
     return (
         <WrapperWidth>
+            <form onSubmit={formik.handleSubmit}>
+                <label id="code">Podaj kod wizyty</label>
+                <input
+                    id="code"
+                    ref={properCodeInput}
+                    type="text"
+                    value={formik.values.code}
+                    onChange={formik.handleChange}
+                    placeholder="np. 000122"
+                    onInput={validateCode}
+                />
+                {formik.errors.code && formik.touched.code && (
+                    <Paragraph text={formik.errors.code} size="small" colorClass="red" />
+                )}
+                <Button variant="h3" colorClass="greendark" text="Sprawdź" type="submit" />
+            </form>
             <Button
                 variant="h3"
                 colorClass="greendark"
@@ -112,22 +128,6 @@ const FindOrCancelAppointment = () => {
                     setIsSubmited(false);
                 }}
             />
-            <form onSubmit={formik.handleSubmit}>
-                <label id="code">Podaj kod wizyty</label>
-                <input
-                    id="code"
-                    ref={properCodeInput}
-                    type="text"
-                    value={formik.values.code}
-                    onChange={formik.handleChange}
-                    placeholder="np. 000122"
-                    onInput={validateCode}
-                />
-                {formik.errors.code && formik.touched.code && (
-                    <Paragraph text={formik.errors.code} size="small" colorClass="red" />
-                )}
-                <Button variant="h3" colorClass="greendark" text="Sprawdź" type="submit" />
-            </form>
             {isSearching && (
                 <div className={!isSubmited ? 'nonedisplay' : undefined}>
                     <Paragraph

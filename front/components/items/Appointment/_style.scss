@@ -11,9 +11,10 @@
                 @include grid(row, $row-gap: 1vw);
             }
             &--button {
+                background-color: $yellow-light;
                 padding: 0.1em 1em;
                 border: solid 2px $green-dark;
-                border-radius: 0.1em;
+                border-radius: 2rem;
                 &:active,
                 &:focus {
                     background-color: $green;

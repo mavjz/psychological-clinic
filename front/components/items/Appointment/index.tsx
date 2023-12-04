@@ -104,7 +104,7 @@ const Appointment = () => {
                     <Grid
                         height="100"
                         width="100"
-                        color="#3C493F"
+                        color="#594f4b"
                         ariaLabel="grid-loading"
                         radius="12.5"
                         visible={true}
