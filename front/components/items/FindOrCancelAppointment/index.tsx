@@ -54,18 +54,9 @@ const FindOrCancelAppointment = () => {
         }),
         onSubmit: async () => {
             setData(formik.values.code);
+            canceledAppointmentId();
             formik.resetForm({ values: { code: '' } });
             setIsSubmited(true);
-            if (isSubmited && isCanceling && typeof canceledAppointmentId() === 'string') {
-                try {
-                    await strapiAppointmentPut(canceledAppointmentId(), canceledAppointment);
-                    setIsCancelingProperlyDone('Wizyta została odwołana');
-                } catch {
-                    setIsCancelingProperlyDone(
-                        'Nastąpił błąd systemu. Wizyta nie została odwołana'
-                    );
-                }
-            }
         },
     });
 
@@ -74,6 +65,26 @@ const FindOrCancelAppointment = () => {
             setFoundAppoinment(res.data.data);
         });
     }, [data || isSubmited]);
+
+    useEffect(() => {
+        const canceledAppointmentIdResult = canceledAppointmentId();
+        console.log(foundAppointment);
+        console.log(canceledAppointmentIdResult);
+        console.log(canceledAppointmentIdResult !== undefined);
+        const cancellingAppointment = async () => {
+            if (isCanceling && canceledAppointmentIdResult !== undefined) {
+                try {
+                    await strapiAppointmentPut(canceledAppointmentIdResult, canceledAppointment);
+                    setIsCancelingProperlyDone('Wizyta została odwołana');
+                } catch {
+                    setIsCancelingProperlyDone(
+                        'Nastąpił błąd systemu. Wizyta nie została odwołana'
+                    );
+                }
+            }
+        };
+        cancellingAppointment();
+    });
 
     return (
         <WrapperWidth>
