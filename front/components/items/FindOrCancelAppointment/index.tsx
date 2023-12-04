@@ -1,4 +1,3 @@
-import WrapperWidth from 'components/wrappers/WrapperWidth';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
@@ -8,6 +7,7 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { filtersAppointmentCode } from './models';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiAppointmentPut } from 'lib/strapi/appointments/put';
+import WrapperColumn from 'components/wrappers/WrapperColumn';
 
 const FindOrCancelAppointment = () => {
     const [data, setData] = useState<string>();
@@ -87,86 +87,112 @@ const FindOrCancelAppointment = () => {
     });
 
     return (
-        <WrapperWidth>
-            <form onSubmit={formik.handleSubmit}>
-                <label id="code">Podaj kod wizyty</label>
-                <input
-                    id="code"
-                    ref={properCodeInput}
-                    type="text"
-                    value={formik.values.code}
-                    onChange={formik.handleChange}
-                    placeholder="np. 000122"
-                    onInput={validateCode}
-                />
-                {formik.errors.code && formik.touched.code && (
-                    <Paragraph text={formik.errors.code} size="small" colorClass="red" />
+        <WrapperColumn>
+            <div className="findorcancelappointment">
+                <div className="findorcancelappointment-buttons">
+                    <Button
+                        variant="h3"
+                        colorClass="greendark"
+                        text="Wyszukaj"
+                        onClick={() => {
+                            setIsSearching(true);
+                            setData(undefined);
+                            setFoundAppoinment(undefined);
+                            setIsCanceling(false);
+                            setIsSubmited(false);
+                        }}
+                        className={`findorcancelappointment-buttons__button${
+                            isSearching ? '--active' : ''
+                        }`}
+                    />
+                    <Button
+                        variant="h3"
+                        colorClass="greendark"
+                        text="Odwołaj"
+                        onClick={() => {
+                            setIsSearching(false);
+                            setData(undefined);
+                            setFoundAppoinment(undefined);
+                            setIsCanceling(true);
+                            setIsSubmited(false);
+                        }}
+                        className={`findorcancelappointment-buttons__button${
+                            isCanceling ? '--active' : ''
+                        }`}
+                    />
+                </div>
+                <form onSubmit={formik.handleSubmit} className="findorcancelappointment-form">
+                    <label id="code">Podaj kod wizyty</label>
+                    <div>
+                        <input
+                            id="code"
+                            ref={properCodeInput}
+                            type="text"
+                            value={formik.values.code}
+                            onChange={formik.handleChange}
+                            placeholder="np. 000122"
+                            onInput={validateCode}
+                        />
+                        {formik.errors.code && formik.touched.code && (
+                            <Paragraph text={formik.errors.code} size="small" colorClass="red" />
+                        )}
+                    </div>
+                    <Button
+                        variant="h3"
+                        colorClass="greendark"
+                        text="Sprawdź"
+                        type="submit"
+                        className="findorcancelappointment-form__button"
+                    />
+                </form>
+                {isSearching && (
+                    <div className={!isSubmited ? 'nonedisplay' : undefined}>
+                        <Paragraph
+                            text={
+                                foundAppointment && foundAppointment?.length > 0
+                                    ? foundAppointment
+                                          ?.map((item) => {
+                                              return `Wizyta odbędzie się w dniu ${item.attributes.date
+                                                  .split('-')
+                                                  .reverse()
+                                                  .join(
+                                                      '.'
+                                                  )}r. o godzinie ${item.attributes.time.slice(
+                                                  0,
+                                                  5
+                                              )} u ${
+                                                  item.attributes.therapist.data.attributes
+                                                      .first_name
+                                              } ${
+                                                  item.attributes.therapist.data.attributes
+                                                      .last_name
+                                              }`;
+                                          })
+                                          .toString()
+                                    : 'Brak wizyty o podanym kodzie'
+                            }
+                            size="small"
+                            colorClass="greendark"
+                        />
+                    </div>
                 )}
-                <Button variant="h3" colorClass="greendark" text="Sprawdź" type="submit" />
-            </form>
-            <Button
-                variant="h3"
-                colorClass="greendark"
-                text="Wyszukaj"
-                onClick={() => {
-                    setIsSearching(true);
-                    setData(undefined);
-                    setFoundAppoinment(undefined);
-                    setIsCanceling(false);
-                    setIsSubmited(false);
-                }}
-            />
-            <Button
-                variant="h3"
-                colorClass="greendark"
-                text="Odwołaj"
-                onClick={() => {
-                    setIsSearching(false);
-                    setData(undefined);
-                    setFoundAppoinment(undefined);
-                    setIsCanceling(true);
-                    setIsSubmited(false);
-                }}
-            />
-            {isSearching && (
-                <div className={!isSubmited ? 'nonedisplay' : undefined}>
-                    <Paragraph
-                        text={
-                            foundAppointment && foundAppointment?.length > 0
-                                ? foundAppointment
-                                      ?.map((item) => {
-                                          return `Wizyta odbędzie się w dniu ${item.attributes.date
-                                              .split('-')
-                                              .reverse()
-                                              .join('.')}r. o godzinie ${item.attributes.time.slice(
-                                              0,
-                                              5
-                                          )} u ${
-                                              item.attributes.therapist.data.attributes.first_name
-                                          } ${item.attributes.therapist.data.attributes.last_name}`;
-                                      })
-                                      .toString()
-                                : 'Brak wizyty o podanym kodzie'
-                        }
-                        size="small"
-                    />
-                </div>
-            )}
-            {isCanceling && (
-                <div className={!isSubmited ? 'nonedisplay' : undefined}>
-                    <Paragraph
-                        text={
-                            isCancelingProperlyDone &&
-                            foundAppointment &&
-                            foundAppointment?.length > 0
-                                ? isCancelingProperlyDone
-                                : 'Brak wizyty o podanym kodzie'
-                        }
-                        size="small"
-                    />
-                </div>
-            )}
-        </WrapperWidth>
+                {isCanceling && (
+                    <div className={!isSubmited ? 'nonedisplay' : undefined}>
+                        <Paragraph
+                            text={
+                                isCancelingProperlyDone &&
+                                foundAppointment &&
+                                foundAppointment?.length > 0
+                                    ? isCancelingProperlyDone
+                                    : 'Brak wizyty o podanym kodzie'
+                            }
+                            size="small"
+                            colorClass="greendark"
+                        />
+                    </div>
+                )}
+            </div>
+        </WrapperColumn>
     );
 };
 

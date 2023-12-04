@@ -43,13 +43,13 @@ const Services = () => {
                 placeClass="center"
                 isUppercase
             />
-            <FindOrCancelAppointment />
             <Headline
                 variant="h3"
-                text="Odwołaj wizytę u psychoterapeuty"
+                text="Już Ci nie pasuje? Odwołaj wizytę u psychoterapeuty"
                 colorClass="black"
                 placeClass="center"
             />
+            <FindOrCancelAppointment />
         </React.Fragment>
     );
 };
