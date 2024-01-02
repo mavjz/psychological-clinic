@@ -9,7 +9,6 @@ import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 const AppointmentApproval = () => {
-    // TODO body.style.overflow.hidden
     const [isDeclined, setIsDeclined] = useState(false);
     const [isApproved, setIsApproved] = useState(false);
     const [appointments, getAppointments] = useState<strapiAppointmentQuery[]>();
@@ -57,6 +56,7 @@ const AppointmentApproval = () => {
                                         item?.attributes.time.slice(0, 5)
                                     }
                                     colorClass="greendark"
+                                    placeClass="center"
                                 />
                                 <Paragraph
                                     size="medium"
@@ -74,6 +74,7 @@ const AppointmentApproval = () => {
                                             'zł. Płatność przed wizytą gotówką lub kartą'
                                     }`}
                                     colorClass="greendark"
+                                    placeClass="center"
                                 />
                             </React.Fragment>
                         ))}
@@ -91,6 +92,7 @@ const AppointmentApproval = () => {
                                             );
                                             setIsApproved(true);
                                         }}
+                                        className="appointmentApproval-alert__buttons--button"
                                     />
                                     <Button
                                         variant="h3"
@@ -99,6 +101,7 @@ const AppointmentApproval = () => {
                                         onClick={() => {
                                             setIsDeclined(true);
                                         }}
+                                        className="appointmentApproval-alert__buttons--button"
                                     />
                                 </React.Fragment>
                             ) : (
@@ -108,6 +111,7 @@ const AppointmentApproval = () => {
                                     text="Powrót do strony głównej"
                                     isLink
                                     link="/"
+                                    className="appointmentApproval-alert__buttons--button"
                                 />
                             )}
                         </div>
@@ -122,7 +126,7 @@ const AppointmentApproval = () => {
                         />
                         <Paragraph
                             size="medium"
-                            text="Nie martw się! Będziesz mógł tu wrócić, gdy zarezerwujesz wizytę u swojego terapuety."
+                            text="Nie martw się! Będziesz mógł tu wrócić, gdy zarezerwujesz wizytę u swojego terapeuty."
                             colorClass="greendark"
                         />
                         <Button
@@ -131,6 +135,7 @@ const AppointmentApproval = () => {
                             text="Umów wizytę"
                             isLink
                             link="/services"
+                            className="appointmentApproval-alert__buttons--button"
                         />
                     </React.Fragment>
                 )}
