@@ -16,12 +16,16 @@ const Layout = ({ children }: WrapperType) => {
                         link: '/purposes',
                     },
                     {
-                        name: 'Kontakt',
-                        link: '/contact',
+                        name: 'Cennik',
+                        link: '/prices',
                     },
                     {
-                        name: 'Źródła',
-                        link: '/sources',
+                        name: 'Oferta',
+                        link: '/services',
+                    },
+                    {
+                        name: 'Kontakt',
+                        link: '/contact',
                     },
                 ]}
                 sitesMobile={[
