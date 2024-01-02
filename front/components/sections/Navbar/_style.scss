@@ -8,33 +8,40 @@
     position: sticky;
     top: 0;
     z-index: 1;
+
     &-desktop {
         margin: 0 3rem;
         @include grid(column);
         width: calc(100vw - 6rem);
         justify-content: space-between;
+
         &__items {
             @include grid(column, $column-gap: 1.5rem);
+
             :hover {
                 transition: color 0.3s ease-in-out;
                 color: $green-light;
             }
         }
     }
+
     &-mobile {
         @include flex(row);
         justify-content: space-between;
         align-content: center;
+
         &__button {
             border: none;
             background: none;
         }
+
         &__open {
             position: absolute;
             background-color: $white;
             @include sizes(100%, 95vh);
             margin-top: 2rem;
             padding-top: 2rem;
+
             &--items {
                 margin-left: 2rem;
                 @include grid(row, 2rem);

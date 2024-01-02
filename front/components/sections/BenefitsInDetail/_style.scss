@@ -1,6 +1,7 @@
 .benefitsindetail {
     @include grid(column, $place-items: center);
     grid-template-columns: 20% 80%;
+
     @media screen and (max-width: $width-tablet) {
         @include grid(row);
         grid-template-columns: 100%;

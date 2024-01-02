@@ -5,35 +5,44 @@
     padding: 2rem 4rem;
     margin: 2rem 0;
     border-radius: 1rem;
+
     @media screen and (max-width: $width-tablet) {
         padding: 2rem;
     }
+
     &-form {
         @include grid(column, $column-gap: 2rem);
         place-items: center;
+
         @media screen and (max-width: $width-tablet) {
             @include grid(row, 0.5rem);
         }
+
         &__button {
             background-color: $yellow-light;
             padding: 0.1em 1rem;
             border: solid 2px $green-dark;
         }
+
         label {
             color: $green-dark-mid;
         }
     }
+
     &-buttons {
         @include grid(column, $column-gap: 2rem);
         justify-content: center;
+
         &__button {
             @include sizes(fit-content, fit-content);
             background-color: $yellow-light;
             padding: 0.1em 4rem;
             border: solid 2px $green-dark;
+
             @media screen and (max-width: $width-tablet) {
                 padding: 0.1em 1rem;
             }
+
             &--active {
                 @extend .findorcancelappointment-buttons__button;
                 background-color: $green;
