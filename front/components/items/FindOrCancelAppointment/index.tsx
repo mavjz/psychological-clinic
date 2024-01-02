@@ -36,7 +36,7 @@ const FindOrCancelAppointment = () => {
         },
     };
 
-    const canceledAppointmentId = () => {
+    const getCanceledAppointmentId = () => {
         if (foundAppointment?.length === 1 && isCanceling) {
             return foundAppointment[0].id.toString();
         }
@@ -48,13 +48,13 @@ const FindOrCancelAppointment = () => {
         },
         validationSchema: Yup.object().shape({
             code: Yup.string()
-                .length(6, 'Kod powinien posuadać 6 cyfr')
+                .length(6, 'Kod powinien posiadać 6 cyfr')
                 .matches(/^[0-9]*$/, 'Podaj kod w cyfrach')
                 .required('Wymagane'),
         }),
         onSubmit: async () => {
             setData(formik.values.code);
-            canceledAppointmentId();
+            getCanceledAppointmentId();
             formik.resetForm({ values: { code: '' } });
             setIsSubmited(true);
         },
@@ -67,18 +67,17 @@ const FindOrCancelAppointment = () => {
     }, [data || isSubmited]);
 
     useEffect(() => {
-        const canceledAppointmentIdResult = canceledAppointmentId();
+        const canceledAppointmentId = getCanceledAppointmentId();
 
         const cancellingAppointment = async () => {
-            if (isCanceling && canceledAppointmentIdResult) {
-                try {
-                    await strapiAppointmentPut(canceledAppointmentIdResult, canceledAppointment);
-                    setMessageOfCancelingProperlyDone('Wizyta została odwołana');
-                } catch {
-                    setMessageOfCancelingProperlyDone(
-                        'Nastąpił błąd systemu. Wizyta nie została odwołana'
-                    );
-                }
+            if (!isCanceling || !canceledAppointmentId) return;
+            try {
+                await strapiAppointmentPut(canceledAppointmentId, canceledAppointment);
+                setMessageOfCancelingProperlyDone('Wizyta została odwołana');
+            } catch {
+                setMessageOfCancelingProperlyDone(
+                    'Nastąpił błąd systemu. Wizyta nie została odwołana. Spróbuj ponownie później'
+                );
             }
         };
 
@@ -145,7 +144,7 @@ const FindOrCancelAppointment = () => {
                     />
                 </form>
                 {isSearching && (
-                    <div className={!isSubmited ? 'nonedisplay' : undefined}>
+                    <div className={!isSubmited ? 'noneDisplay' : undefined}>
                         <Paragraph
                             text={
                                 foundAppointment && foundAppointment?.length > 0
@@ -176,7 +175,7 @@ const FindOrCancelAppointment = () => {
                     </div>
                 )}
                 {isCanceling && (
-                    <div className={!isSubmited ? 'nonedisplay' : undefined}>
+                    <div className={!isSubmited ? 'noneDisplay' : undefined}>
                         <Paragraph
                             text={
                                 messageOfCancelingProperlyDone &&

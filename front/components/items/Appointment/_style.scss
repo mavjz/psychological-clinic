@@ -62,7 +62,7 @@
             }
         }
     }
-    &-availabledates {
+    &-availableDates {
         @include sizes(fit-content, fit-content);
         @include grid(row, 1rem);
         @media screen and (max-width: $width-tablet) {

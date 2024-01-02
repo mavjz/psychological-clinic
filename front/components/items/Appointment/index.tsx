@@ -139,7 +139,7 @@ const Appointment = () => {
                         />
                     ))}
                 </div>
-                <div className={chosenTherapist ? 'appointment-data' : 'nonedisplay'}>
+                <div className={chosenTherapist ? 'appointment-data' : 'noneDisplay'}>
                     <Headline text="2. Wybierz dzień" variant="h3" />
                     <div className="appointment-data__calendar">
                         <DayPicker
@@ -162,13 +162,13 @@ const Appointment = () => {
                 <div
                     className={
                         (chosenTherapist && !availableTherapist) || chosenDate
-                            ? 'appointment-availabledates'
-                            : 'nonedisplay'
+                            ? 'appointment-availableDates'
+                            : 'noneDisplay'
                     }
                 >
                     <Headline text="3. Wybierz godzinę" variant="h3" />
-                    {availableTherapist ? null : (
-                        <div className="appointment-availabledates__item">
+                    {!availableTherapist && (
+                        <div className="appointment-availableDates__item">
                             <Paragraph size="big" text="Brak dostępnych terminów" />
                         </div>
                     )}
@@ -176,13 +176,13 @@ const Appointment = () => {
                         <div
                             key={index}
                             className={
-                                chosenDate ? 'appointment-availabledates__item' : 'nonedisplay'
+                                chosenDate ? 'appointment-availableDates__item' : 'noneDisplay'
                             }
                         >
                             <div>{item}</div>
                             <Button
                                 colorClass="greendark"
-                                className="appointment-availabledates__item--button"
+                                className="appointment-availableDates__item--button"
                                 variant="h4"
                                 text="Umów wizytę"
                                 onClick={() => {
