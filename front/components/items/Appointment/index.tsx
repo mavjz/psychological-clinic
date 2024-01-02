@@ -159,13 +159,7 @@ const Appointment = () => {
                         />
                     </div>
                 </div>
-                <div
-                    className={
-                        chosenDate || !availableTherapist
-                            ? 'appointment-availabledates'
-                            : 'nonedisplay'
-                    }
-                >
+                <div className={chosenDate ? 'appointment-availabledates' : 'nonedisplay'}>
                     <Headline text="3. Wybierz godzinę" variant="h3" />
                     {availableTherapist ? null : (
                         <div className="appointment-availabledates__item">

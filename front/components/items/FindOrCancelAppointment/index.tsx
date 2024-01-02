@@ -14,31 +14,31 @@ const FindOrCancelAppointment = () => {
     const [isSubmited, setIsSubmited] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
     const [isCanceling, setIsCanceling] = useState(false);
-    const [isCancelingProperlyDone, setIsCancelingProperlyDone] = useState<string>();
+    const [messageOfCancelingProperlyDone, setMessageOfCancelingProperlyDone] = useState<string>();
     const properCodeInput = useRef<HTMLInputElement>(null);
     const [foundAppointment, setFoundAppoinment] = useState<strapiAppointmentQuery[]>();
+
     const filters: filtersAppointmentCode = {
         appointment_code: {
             $eq: data,
         },
     };
+
     const validateCode = () => {
         if (properCodeInput.current)
             properCodeInput.current.value = properCodeInput.current.value.replace(/[^0-9]/g, '');
     };
+
     const canceledAppointment = {
         data: {
             appointment_code: null,
             is_booked: false,
         },
     };
+
     const canceledAppointmentId = () => {
         if (foundAppointment?.length === 1 && isCanceling) {
-            return foundAppointment
-                .map((item) => {
-                    return item.id;
-                })
-                .toString();
+            return foundAppointment[0].id.toString();
         }
     };
 
@@ -68,21 +68,20 @@ const FindOrCancelAppointment = () => {
 
     useEffect(() => {
         const canceledAppointmentIdResult = canceledAppointmentId();
-        console.log(foundAppointment);
-        console.log(canceledAppointmentIdResult);
-        console.log(canceledAppointmentIdResult !== undefined);
+
         const cancellingAppointment = async () => {
-            if (isCanceling && canceledAppointmentIdResult !== undefined) {
+            if (isCanceling && canceledAppointmentIdResult) {
                 try {
                     await strapiAppointmentPut(canceledAppointmentIdResult, canceledAppointment);
-                    setIsCancelingProperlyDone('Wizyta została odwołana');
+                    setMessageOfCancelingProperlyDone('Wizyta została odwołana');
                 } catch {
-                    setIsCancelingProperlyDone(
+                    setMessageOfCancelingProperlyDone(
                         'Nastąpił błąd systemu. Wizyta nie została odwołana'
                     );
                 }
             }
         };
+
         cancellingAppointment();
     });
 
@@ -151,20 +150,20 @@ const FindOrCancelAppointment = () => {
                             text={
                                 foundAppointment && foundAppointment?.length > 0
                                     ? foundAppointment
-                                          ?.map((item) => {
-                                              return `Wizyta odbędzie się w dniu ${item.attributes.date
+                                          .map((appointment) => {
+                                              return `Wizyta odbędzie się w dniu ${appointment.attributes.date
                                                   .split('-')
                                                   .reverse()
                                                   .join(
                                                       '.'
-                                                  )}r. o godzinie ${item.attributes.time.slice(
+                                                  )}r. o godzinie ${appointment.attributes.time.slice(
                                                   0,
                                                   5
                                               )} u ${
-                                                  item.attributes.therapist.data.attributes
+                                                  appointment.attributes.therapist.data.attributes
                                                       .first_name
                                               } ${
-                                                  item.attributes.therapist.data.attributes
+                                                  appointment.attributes.therapist.data.attributes
                                                       .last_name
                                               }`;
                                           })
@@ -180,10 +179,10 @@ const FindOrCancelAppointment = () => {
                     <div className={!isSubmited ? 'nonedisplay' : undefined}>
                         <Paragraph
                             text={
-                                isCancelingProperlyDone &&
+                                messageOfCancelingProperlyDone &&
                                 foundAppointment &&
                                 foundAppointment?.length > 0
-                                    ? isCancelingProperlyDone
+                                    ? messageOfCancelingProperlyDone
                                     : 'Brak wizyty o podanym kodzie'
                             }
                             size="small"
