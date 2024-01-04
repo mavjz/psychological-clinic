@@ -27,9 +27,9 @@ learning asynchronous functions which turns out to be nessesery to work with fet
 
 ## How to reach me
 
-[**gmail**](maja.miaskiewicz@gmail.com)
-[**linkedin**](https://www.linkedin.com/in/maja-mi%C4%85skiewicz/)
-[**github**](https://github.com/mavjz28)
++ [**gmail**](maja.miaskiewicz@gmail.com)
++ [**linkedin**](https://www.linkedin.com/in/maja-mi%C4%85skiewicz/)
++ [**github**](https://github.com/mavjz28)
 
 ****
 
