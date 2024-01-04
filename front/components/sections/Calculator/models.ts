@@ -1,5 +1,4 @@
 import { strapiTherapistsQuery } from 'lib/strapi/therapists/queryType';
-import { formData } from '.';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 
 export type propsOfTherapyCostCalculation = {
@@ -8,4 +7,12 @@ export type propsOfTherapyCostCalculation = {
     appointmentList: strapiAppointmentQuery[] | undefined;
     cost: number;
     discount: number;
+};
+
+export type formData = {
+    therapist?: string;
+    session: string;
+    relative?: string;
+    relativesCode?: string;
+    workshop?: boolean;
 };

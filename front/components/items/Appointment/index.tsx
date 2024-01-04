@@ -9,7 +9,7 @@ import { DayPicker } from 'react-day-picker';
 import { Grid } from 'react-loader-spinner';
 import Button from '../Button';
 import { useRouter } from 'next/router';
-import { filters } from './models';
+import { filtersIsBooked } from './models';
 import {
     formatDate,
     getDateOfAppointments,
@@ -19,10 +19,10 @@ import {
 } from './helper';
 import { useAppointmentContext } from 'components/wrappers/AppointmentDataContext';
 import Paragraph from '../Paragraph';
+import Headline from '../Headline';
 
-// TODO: optimize
 const Appointment = () => {
-    const filters: filters = {
+    const filters: filtersIsBooked = {
         is_booked: {
             $eq: false,
         },
@@ -105,7 +105,7 @@ const Appointment = () => {
                     <Grid
                         height="100"
                         width="100"
-                        color="#3C493F"
+                        color="#594f4b"
                         ariaLabel="grid-loading"
                         radius="12.5"
                         visible={true}
@@ -117,19 +117,9 @@ const Appointment = () => {
 
     return (
         <WrapperWidth>
-            <div className="appointment-content">
-                <div className="appointment-content__panel">
-                    {/* TODO: Adding Names next to time of appointment */}
-                    {/* <Button
-                        variant="h3"
-                        text="Wszyscy terapeuci"
-                        colorClass="greendark"
-                        onClick={() => {
-                            setChosenTherapist(undefined);
-                            setChosenDate(undefined);
-                        }}
-                        className="appointment-content__panel--button"
-                    /> */}
+            <div className="appointment">
+                <div className="appointment-panel">
+                    <Headline text="1. Wybierz terapeutę" variant="h3" />
                     {therapists?.map((therapist, index) => (
                         <Button
                             key={index}
@@ -145,12 +135,13 @@ const Appointment = () => {
                                 setChosenDate(undefined);
                                 setChosenTime(undefined);
                             }}
-                            className="appointment-content__panel--button"
+                            className="appointment-panel__button"
                         />
                     ))}
                 </div>
-                <div className="appointment-content__data">
-                    <div className="appointment-content__data--calendar">
+                <div className={chosenTherapist ? 'appointment-data' : 'noneDisplay'}>
+                    <Headline text="2. Wybierz dzień" variant="h3" />
+                    <div className="appointment-data__calendar">
                         <DayPicker
                             showOutsideDays
                             ISOWeek
@@ -158,50 +149,49 @@ const Appointment = () => {
                             onMonthChange={setLatestAppointmentMonth}
                             disabled={isDayDisabled}
                             modifiersClassNames={{
-                                disabled: 'appointment-content__data--calendar-disabled',
-                                selected: 'appointment-content__data--calendar-selected',
-                                today: 'appointment-content__data--calendar-today',
+                                disabled: 'appointment-data__calendar--disabled',
+                                selected: 'appointment-data__calendar--selected',
+                                today: 'appointment-data__calendar--today',
                             }}
                             mode="single"
                             selected={chosenDate}
                             onSelect={setChosenDate}
                         />
                     </div>
-                    <div
-                        className={
-                            chosenDate || !availableTherapist
-                                ? 'appointment-content__data--availabledates'
-                                : 'hidden'
-                        }
-                    >
-                        {availableTherapist ? null : (
-                            <div className="appointment-content__data--availabledates-item">
-                                <Paragraph size="big" text="Brak dostępnych terminów" />
-                            </div>
-                        )}
-                        {getTimeOfAppointments({ appointments })?.map((item, index) => (
-                            <div
-                                key={index}
-                                className={
-                                    chosenDate
-                                        ? 'appointment-content__data--availabledates-item'
-                                        : 'nonedisplay'
-                                }
-                            >
-                                <div>{item}</div>
-                                <Button
-                                    colorClass="greendark"
-                                    className="appointment-content__data--availabledates-item__button"
-                                    variant="h4"
-                                    text="Umów wizytę"
-                                    onClick={() => {
-                                        setChosenTime(item);
-                                        router.push('/managingappointment');
-                                    }}
-                                />
-                            </div>
-                        ))}
-                    </div>
+                </div>
+                <div
+                    className={
+                        (chosenTherapist && !availableTherapist) || chosenDate
+                            ? 'appointment-availableDates'
+                            : 'noneDisplay'
+                    }
+                >
+                    <Headline text="3. Wybierz godzinę" variant="h3" />
+                    {!availableTherapist && (
+                        <div className="appointment-availableDates__item">
+                            <Paragraph size="big" text="Brak dostępnych terminów" />
+                        </div>
+                    )}
+                    {getTimeOfAppointments({ appointments })?.map((item, index) => (
+                        <div
+                            key={index}
+                            className={
+                                chosenDate ? 'appointment-availableDates__item' : 'noneDisplay'
+                            }
+                        >
+                            <div>{item}</div>
+                            <Button
+                                colorClass="greendark"
+                                className="appointment-availableDates__item--button"
+                                variant="h4"
+                                text="Umów wizytę"
+                                onClick={() => {
+                                    setChosenTime(item);
+                                    router.push('/managingappointment');
+                                }}
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
         </WrapperWidth>

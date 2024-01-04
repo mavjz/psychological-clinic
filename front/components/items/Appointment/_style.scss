@@ -1,69 +1,92 @@
 .appointment {
+    margin-top: 1.5rem;
+    @include grid(column);
+    align-items: flex-start;
+    justify-content: space-around;
+    background-color: $white;
+    padding: 2rem 0;
+    border-radius: 1rem;
+
+    @media screen and (max-width: $width-tablet) {
+        @include grid(row, 3rem);
+        justify-content: center;
+    }
+
     &-loading {
         @include grid($justify-content: center);
         margin: 5vh 0;
     }
-    &-content {
-        margin-top: 1.5rem;
-        &__panel {
-            @include flex(row, wrap, 1vw, 1vw);
-            @media screen and (max-width: $width-tablet) {
-                @include grid(row, $row-gap: 1vw);
-            }
-            &--button {
-                padding: 0.1em 1em;
-                border: solid 2px $green-dark;
-                border-radius: 0.1em;
-                &:active,
-                &:focus {
-                    background-color: $green;
-                    h3 {
-                        color: $white;
-                    }
+
+    &-panel {
+        @include flex(column, wrap, 1vw, 1vw);
+
+        @media screen and (max-width: $width-tablet) {
+            @include grid(row, $row-gap: 1vw);
+        }
+
+        &__button {
+            @include sizes(stretch, fit-content, 20rem);
+            background-color: $yellow-light;
+            padding: 0.1em 1em;
+            border: solid 2px $green-dark;
+            border-radius: 2rem;
+
+            &:active,
+            &:focus {
+                background-color: $green;
+                h3 {
+                    color: $white;
                 }
             }
         }
-        &__data {
-            @media screen and (max-width: $width-tablet) {
-                @include grid(row, 2vw);
-            }
-            @include grid(column, $column-gap: 8rem);
+    }
+
+    &-data {
+        @media screen and (max-width: $width-tablet) {
+            @include grid(row, 2vw);
+            justify-self: center;
+        }
+
+        @include sizes(fit-content, fit-content);
+
+        &__calendar {
             @include sizes(fit-content, fit-content);
-            position: relative;
-            &--calendar {
-                &-disabled {
-                    font-size: 75%;
-                    opacity: 80%;
-                }
-                &-selected {
-                    background-color: $green;
+            &--disabled {
+                font-size: 75%;
+                opacity: 80%;
+            }
+
+            &--selected {
+                background-color: $green;
+                color: $white;
+                border-radius: 100%;
+                border: 2px $green-dark solid;
+
+                &:hover {
                     color: $white;
-                    border-radius: 100%;
-                    border: 2px $green-dark solid;
-                    &:hover {
-                        color: $white;
-                        background-color: $green;
-                    }
-                }
-                &-today {
-                    font-weight: 700;
-                    font-size: 90%;
+                    background-color: $green;
                 }
             }
-            &--availabledates {
-                @include sizes(fit-content, fit-content);
-                @include grid(row, 3vh);
-                padding-top: 4rem;
-                @media screen and (max-width: $width-tablet) {
-                    padding-top: 1rem;
-                    justify-self: center;
-                }
-                &-item {
-                    @include grid(column, $column-gap: 1rem);
-                    &__button {
-                        padding: 0 0.5rem;
-                    }
-                }
+
+            &-today {
+                font-weight: 700;
+                font-size: 90%;
+            }
+        }
+    }
+    &-availableDates {
+        @include sizes(fit-content, fit-content);
+        @include grid(row, 1rem);
+        @media screen and (max-width: $width-tablet) {
+            justify-self: center;
+        }
+
+        &__item {
+            @include grid(column, $column-gap: 1rem);
+            justify-content: left;
+
+            &--button {
+                padding: 0 0.5rem;
             }
         }
     }
@@ -71,4 +94,8 @@
 
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
     background-color: $green-light !important;
+}
+
+.rdp {
+    margin: 0em !important;
 }

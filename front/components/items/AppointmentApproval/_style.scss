@@ -2,6 +2,7 @@
     @include sizes(100%, 100vh);
     background-color: rgb(0, 0, 0, 0.6);
     @include grid($place-items: center);
+
     &-alert {
         @include sizes(30rem, 20rem);
         @include grid(row, 20px);
@@ -9,5 +10,31 @@
         align-content: start;
         padding: 3rem;
         background-color: $green-light;
+
+        @media screen and (max-width: $width-tablet) {
+            @include sizes(20rem, 20rem);
+            padding: 1rem;
+        }
+
+        &__buttons {
+            @include sizes(30rem, 20rem);
+            @include grid(column);
+            justify-content: space-around;
+
+            @media screen and (max-width: $width-tablet) {
+                @include sizes(20rem, 20rem);
+            }
+
+            &--button {
+                padding: 0.2rem 1rem;
+                background-color: $white;
+                border: solid 2px $green-dark;
+                border-radius: 2rem;
+
+                &-a {
+                    @extend .appointmentApproval-alert__buttons--button;
+                }
+            }
+        }
     }
 }

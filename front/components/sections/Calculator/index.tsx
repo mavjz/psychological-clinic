@@ -9,6 +9,7 @@ import Button from 'components/items/Button';
 import { strapiAppointmentQuery } from 'lib/strapi/appointments/queryType';
 import { strapiAppointmentGet } from 'lib/strapi/appointments/get';
 import * as Yup from 'yup';
+import { formData } from './models';
 
 const Calculator = () => {
     const [cost, setCost] = useState(0);
@@ -222,11 +223,3 @@ const Calculator = () => {
 };
 
 export default Calculator;
-
-export type formData = {
-    therapist?: string;
-    session: string;
-    relative?: string;
-    relativesCode?: string;
-    workshop?: boolean;
-};

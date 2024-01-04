@@ -1,6 +1,7 @@
 .benefits {
     @include grid($row-gap: 3rem);
     margin-bottom: 4rem;
+
     &-items {
         @include flex(row, wrap);
         justify-content: space-around;

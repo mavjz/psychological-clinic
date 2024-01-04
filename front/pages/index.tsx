@@ -113,7 +113,7 @@ export default function Home() {
                     Prowadzę warsztaty na których pracujemy z pacjentami nad pewnością siebie. Świadczymy także indywidualne sesje psychoterapeutyczne online.`,
                     },
                     {
-                        text: `Więcej informacji o naszej ofercie znajduje się w zakładce Kontakt. Zapraszamy! `,
+                        text: `Więcej informacji o naszej ofercie znajduje się w zakładce Oferta. Zapraszamy! `,
                     },
                 ]}
             />

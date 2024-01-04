@@ -23,18 +23,12 @@ const Benefit = ({
         <div className="benefit">
             <div className="benefit-icon">
                 <div className="benefit-icon__border">
-                    {isCouple ? (
-                        <EscalatorWarningIcon className="benefit-icon__border--image" />
-                    ) : null}
-                    {isLoupe ? <SearchIcon className="benefit-icon__border--image" /> : null}
-                    {isAnalized ? (
-                        <PersonSearchIcon className="benefit-icon__border--image" />
-                    ) : null}
-                    {isPerson ? <PersonIcon className="benefit-icon__border--image" /> : null}
-                    {isLove ? (
-                        <VolunteerActivismIcon className="benefit-icon__border--image" />
-                    ) : null}
-                    {isLovePrice ? <LoyaltyIcon className="benefit-icon__border--image" /> : null}
+                    {isCouple && <EscalatorWarningIcon className="benefit-icon__border--image" />}
+                    {isLoupe && <SearchIcon className="benefit-icon__border--image" />}
+                    {isAnalized && <PersonSearchIcon className="benefit-icon__border--image" />}
+                    {isPerson && <PersonIcon className="benefit-icon__border--image" />}
+                    {isLove && <VolunteerActivismIcon className="benefit-icon__border--image" />}
+                    {isLovePrice && <LoyaltyIcon className="benefit-icon__border--image" />}
                 </div>
             </div>
             <Headline variant="h2" placeClass="center" text={headline} colorClass="greendark" />
