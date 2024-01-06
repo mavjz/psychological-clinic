@@ -27,7 +27,7 @@ learning asynchronous functions which turns out to be nessesery to work with fet
 
 ## Setup
 
-Required version of Node.js: v18.16.0
+Required version of Node.js: v18.16.0.
 To run this project, install it locally using yarn:
 
 ```
