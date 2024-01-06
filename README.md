@@ -5,7 +5,7 @@ Psychological Clinic
 
 As it is said it's a website for psychological clinic, which is a **business card-style website**. 
 You could **schedule appointments** with your preferred therapists and **calculate the cost** for your entire healing journey including (promos in it :D). 
-All content on the website is in Polish.
+All content on the website is available in Polish.
 
 ****
 
@@ -17,11 +17,17 @@ The main features this project has are
 
 ****
 
-## Technologies I used
+## Architecture 
 
-For this project I use **React 18.2** library with **NextJS 13** and **TS 4.9** frameworks. For styling I depends on **SASS** language. 
-Also it was my first time using **REST API** what was quite a challenge early on. In same time in make myself 
-learning asynchronous functions which turns out to be nessesery to work with fetching data.
+This application is made of 2 services. Frontend is in *front* service and backend is in *back* service. They are connected by **REST API**. I use **TypeScript 4.9** as static types to maintain clear coding.
+
+### Frontend
+
+For this project I use **React 18.2** library with **NextJS 13** to have Single Page Application. Used technology are **SASS**, formik, yup, MUI icon, axios, qs and other minor tools.
+
+### Backend
+
+My backend depends on Strapi CMS. It has 2 ences (Appointments and Therapists).
 
 ****
 
