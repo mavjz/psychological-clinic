@@ -19,20 +19,32 @@ The main features this project has are
 
 ## Technologies I used
 
-For this project I use React library with **NextJS** and **TS** frameworks. For styling I depends on **SASS** language. 
+For this project I use **React 18.2** library with **NextJS 13** and **TS 4.9** frameworks. For styling I depends on **SASS** language. 
 Also it was my first time using **REST API** what was quite a challenge early on. In same time in make myself 
 learning asynchronous functions which turns out to be nessesery to work with fetching data.
 
 ****
 
-## How to reach me
+## Setup
 
-+ [**gmail**](maja.miaskiewicz@gmail.com)
-+ [**linkedin**](https://www.linkedin.com/in/maja-mi%C4%85skiewicz/)
-+ [**github**](https://github.com/mavjz28)
+Required version of Node.js: v18.16.0
+To run this project, install it locally using yarn:
+
+```
+$ cd front
+$ yarn install
+$ yarn run dev
+```
+
+and on another console
+
+```
+$ cd back
+$ yarn install
+$ yarn run develop
+```
 
 ****
-
 ### License
 
 MIT License
