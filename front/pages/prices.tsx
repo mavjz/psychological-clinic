@@ -3,8 +3,6 @@ import Article from 'components/sections/Article';
 import Calculator from 'components/sections/Calculator';
 import Welcome from 'components/sections/Welcome';
 import WrapperColumn from 'components/wrappers/WrapperColumn';
-import { strapiTherapistGet } from 'lib/strapi/therapists/get';
-import { strapiTherapistQuery } from 'lib/strapi/therapists/queryType';
 import React, { useEffect, useState } from 'react';
 
 const Prices = () => {
