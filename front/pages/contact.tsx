@@ -1,4 +1,5 @@
 import Headline from 'components/items/Headline';
+import TagsSEO from 'components/items/TagsSEO';
 import Article from 'components/sections/Article';
 import Welcome from 'components/sections/Welcome';
 import WrapperWidth from 'components/wrappers/WrapperWidth';
@@ -7,6 +8,7 @@ import React from 'react';
 const Contact = () => {
     return (
         <React.Fragment>
+            <TagsSEO subpage="Kontakt" />
             <Welcome
                 image="/images/visit.jpg"
                 headline="Skontaktuj się"

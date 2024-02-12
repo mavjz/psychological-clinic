@@ -1,4 +1,5 @@
 import Button from 'components/items/Button';
+import TagsSEO from 'components/items/TagsSEO';
 import Article from 'components/sections/Article';
 import Benefits from 'components/sections/Benefits';
 import CEOProfile from 'components/sections/CEOProfile';
@@ -10,6 +11,7 @@ import React from 'react';
 export default function Home() {
     return (
         <React.Fragment>
+            <TagsSEO subpage="Strona główna" />
             <Welcome
                 image="/images/room.jpg"
                 headline="Bądź najlepszą wersją siebie"

@@ -1,6 +1,7 @@
 import Appointment from 'components/items/Appointment';
 import FindOrCancelAppointment from 'components/items/FindOrCancelAppointment';
 import Headline from 'components/items/Headline';
+import TagsSEO from 'components/items/TagsSEO';
 import CEOProfile from 'components/sections/CEOProfile';
 import Welcome from 'components/sections/Welcome';
 import React from 'react';
@@ -8,6 +9,7 @@ import React from 'react';
 const Services = () => {
     return (
         <React.Fragment>
+            <TagsSEO subpage="Umów wizytę" />
             <Welcome
                 image="/images/visit.jpg"
                 headline="Umów się na wizytę"

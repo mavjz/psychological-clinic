@@ -1,4 +1,5 @@
 import Headline from 'components/items/Headline';
+import TagsSEO from 'components/items/TagsSEO';
 import Article from 'components/sections/Article';
 import Calculator from 'components/sections/Calculator';
 import Welcome from 'components/sections/Welcome';
@@ -17,6 +18,7 @@ const Prices = () => {
     // );
     return (
         <React.Fragment>
+            <TagsSEO subpage="Cennik" />
             <Welcome
                 image="/images/notes.jpg"
                 headline="Cennik"
