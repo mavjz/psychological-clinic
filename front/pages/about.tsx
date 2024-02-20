@@ -1,6 +1,7 @@
 // O nas, krótka historia założenia (inspiracja)
 
 import Headline from 'components/items/Headline';
+import TagsSEO from 'components/items/TagsSEO';
 import Article from 'components/sections/Article';
 import CEOProfile from 'components/sections/CEOProfile';
 import Profiles from 'components/sections/Profiles';
@@ -10,6 +11,7 @@ import React from 'react';
 const About = () => {
     return (
         <React.Fragment>
+            <TagsSEO subpage="Zespół terapeutów" />
             <Welcome
                 image="/images/help.jpg"
                 headline="Poznajcie nas"

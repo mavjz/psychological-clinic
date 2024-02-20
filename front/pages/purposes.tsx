@@ -1,4 +1,5 @@
 //  cele terapii, podstawowe założenia
+import TagsSEO from 'components/items/TagsSEO';
 import BenefitsInDetail from 'components/sections/BenefitsInDetail';
 import Welcome from 'components/sections/Welcome';
 import React from 'react';
@@ -6,6 +7,7 @@ import React from 'react';
 const Purposes = () => {
     return (
         <React.Fragment>
+            <TagsSEO subpage="Co nas wyróżnia" />
             <Welcome
                 image="/images/values.jpg"
                 headline="Czym się wyróżniamy?"
